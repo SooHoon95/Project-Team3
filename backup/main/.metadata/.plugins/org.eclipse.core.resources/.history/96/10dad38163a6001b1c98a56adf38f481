@@ -1,0 +1,85 @@
+package com.javalec.user;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class UserMain extends JDialog {
+
+	private final JPanel contentPanel = new JPanel();
+	private JPanel panel;
+	private JButton btnCProfile;
+	private JButton btnCMbti;
+	private JButton btnCQuiz;
+	private JButton btnStatistic;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			UserMain dialog = new UserMain();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public UserMain() {
+		setBounds(100, 100, 720, 480);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		contentPanel.add(getPanel());
+		contentPanel.add(getBtnCProfile());
+		contentPanel.add(getBtnCMbti());
+		contentPanel.add(getBtnCQuiz());
+		contentPanel.add(getBtnStatistic());
+	}
+	private JPanel getPanel() {
+		if (panel == null) {
+			panel = new JPanel();
+			panel.setBounds(180, 10, 500, 420);
+		}
+		return panel;
+	}
+	private JButton getBtnCProfile() {
+		if (btnCProfile == null) {
+			btnCProfile = new JButton("프로필");
+			btnCProfile.setBounds(30, 60, 120, 35);
+		}
+		return btnCProfile;
+	}
+	private JButton getBtnCMbti() {
+		if (btnCMbti == null) {
+			btnCMbti = new JButton("MBTI");
+			btnCMbti.setBounds(30, 155, 120, 35);
+		}
+		return btnCMbti;
+	}
+	private JButton getBtnCQuiz() {
+		if (btnCQuiz == null) {
+			btnCQuiz = new JButton("적성검사");
+			btnCQuiz.setBounds(30, 250, 120, 35);
+		}
+		return btnCQuiz;
+	}
+	private JButton getBtnStatistic() {
+		if (btnStatistic == null) {
+			btnStatistic = new JButton("통계");
+			btnStatistic.setBounds(30, 345, 120, 35);
+		}
+		return btnStatistic;
+	}
+}

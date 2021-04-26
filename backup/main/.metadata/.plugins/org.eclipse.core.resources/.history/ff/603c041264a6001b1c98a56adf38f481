@@ -1,0 +1,126 @@
+package com.javalec.user;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class UserMain extends JDialog {
+
+	private final JPanel contentPanel = new JPanel();
+	private JPanel panelCPrifile;
+	private JButton btnCProfile;
+	private JButton btnCMbti;
+	private JButton btnCQuiz;
+	private JButton btnCStatistic;
+	private JPanel panelCMbti;
+	private JPanel panelCQuiz;
+	private JPanel panelCStatistic;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			UserMain dialog = new UserMain();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public UserMain() {
+		setBounds(100, 100, 720, 480);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		contentPanel.add(getPanelCPrifile());
+		contentPanel.add(getBtnCProfile());
+		contentPanel.add(getBtnCMbti());
+		contentPanel.add(getBtnCQuiz());
+		contentPanel.add(getBtnCStatistic());
+		contentPanel.add(getPanelCMbti());
+		contentPanel.add(getPanelCQuiz());
+		contentPanel.add(getPanelCStatistic());
+	}
+	private JPanel getPanelCPrifile() {
+		if (panelCPrifile == null) {
+			panelCPrifile = new JPanel();
+			panelCPrifile.setBounds(180, 10, 500, 420);
+			panelCPrifile.setVisible(false);
+		}
+		return panelCPrifile;
+	}
+	private JPanel getPanelCMbti() {
+		if (panelCMbti == null) {
+			panelCMbti = new JPanel();
+			panelCMbti.setBounds(180, 10, 500, 420);
+			panelCMbti.setVisible(false);
+		}
+		return panelCMbti;
+	}
+	private JPanel getPanelCQuiz() {
+		if (panelCQuiz == null) {
+			panelCQuiz = new JPanel();
+			panelCQuiz.setBounds(180, 10, 500, 420);
+			panelCQuiz.setVisible(false);
+		}
+		return panelCQuiz;
+	}
+	private JPanel getPanelCStatistic() {
+		if (panelCStatistic == null) {
+			panelCStatistic = new JPanel();
+			panelCStatistic.setBounds(180, 10, 500, 420);
+			panelCStatistic.setVisible(false);
+		}
+		return panelCStatistic;
+	}
+	private JButton getBtnCProfile() {
+		if (btnCProfile == null) {
+			btnCProfile = new JButton("프로필");
+			btnCProfile.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					panelCPrifile.setVisible(true);
+				}
+			});
+			btnCProfile.setBounds(30, 60, 120, 35);
+		}
+		return btnCProfile;
+	}
+	private JButton getBtnCMbti() {
+		if (btnCMbti == null) {
+			btnCMbti = new JButton("MBTI");
+			btnCMbti.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					panelCMbti.setVisible(false);
+				}
+			});
+			btnCMbti.setBounds(30, 155, 120, 35);
+		}
+		return btnCMbti;
+	}
+	private JButton getBtnCQuiz() {
+		if (btnCQuiz == null) {
+			btnCQuiz = new JButton("적성검사");
+			btnCQuiz.setBounds(30, 250, 120, 35);
+		}
+		return btnCQuiz;
+	}
+	private JButton getBtnCStatistic() {
+		if (btnCStatistic == null) {
+			btnCStatistic = new JButton("통계");
+			btnCStatistic.setBounds(30, 345, 120, 35);
+		}
+		return btnCStatistic;
+	}
+}
