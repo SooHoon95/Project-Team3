@@ -178,7 +178,8 @@ public class LoginMain extends JFrame {
 				loginLabelClick.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						JOptionPane.showMessageDialog(null,  "회원가입 다이얼로그");
+						SignUp signup = new SignUp();
+						signup.setVisible(true);
 					}
 					@Override // 마우스 가져다 댈 때 이벤트 
 					public void mouseEntered(MouseEvent e) {
