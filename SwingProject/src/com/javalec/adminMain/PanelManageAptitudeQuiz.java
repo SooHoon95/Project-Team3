@@ -10,8 +10,9 @@ public class PanelManageAptitudeQuiz extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelManageAptitudeQuiz() {
-		setBounds(new Rectangle(180, 70, 370, 350));
+		setBounds(new Rectangle(65, 57, 370, 350));
 		setLayout(null);
+		setVisible(false);
 	}
 
 }

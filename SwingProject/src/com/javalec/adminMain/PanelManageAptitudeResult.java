@@ -12,6 +12,7 @@ public class PanelManageAptitudeResult extends JPanel {
 	public PanelManageAptitudeResult() {
 		setBounds(new Rectangle(180, 70, 370, 350));
 		setLayout(null);
+		setVisible(false);
 	}
 
 }

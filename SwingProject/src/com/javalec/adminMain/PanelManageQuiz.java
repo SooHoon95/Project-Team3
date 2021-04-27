@@ -10,8 +10,8 @@ import java.awt.event.ActionEvent;
 public class PanelManageQuiz extends JPanel {
 	private JButton btnManageMbtiQuiz;
 	private JButton btnManageAptitudeQuiz;
-	PanelManageAptitudeQuiz panelManageAptitudeQuiz = new PanelManageAptitudeQuiz();
 	PanelManageMbtiQuiz panelManageMbtiQuiz = new PanelManageMbtiQuiz();
+	PanelManageAptitudeQuiz panelManageAptitudeQuiz = new PanelManageAptitudeQuiz();
 	
 	/**
 	 * Create the panel.
@@ -19,8 +19,11 @@ public class PanelManageQuiz extends JPanel {
 	public PanelManageQuiz() {
 		setBounds(new Rectangle(180, 10, 500, 420));
 		setLayout(null);
+		setVisible(false);
 		add(getBtnManageMbtiQuiz());
 		add(getBtnManageAptitudeQuiz());
+		add(panelManageMbtiQuiz);
+		add(panelManageMbtiQuiz);
 	}
 
 	private JButton getBtnManageMbtiQuiz() {
@@ -28,6 +31,7 @@ public class PanelManageQuiz extends JPanel {
 			btnManageMbtiQuiz = new JButton("MBTI문제");
 			btnManageMbtiQuiz.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					ResetQuizpanel();
 					panelManageAptitudeQuiz.setVisible(false);
 					panelManageMbtiQuiz.setVisible(true);
 				}
@@ -41,6 +45,7 @@ public class PanelManageQuiz extends JPanel {
 			btnManageAptitudeQuiz = new JButton("적성문제");
 			btnManageAptitudeQuiz.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					ResetQuizpanel();
 					panelManageAptitudeQuiz.setVisible(true);
 					panelManageMbtiQuiz.setVisible(false);
 				}
@@ -50,4 +55,15 @@ public class PanelManageQuiz extends JPanel {
 		}
 		return btnManageAptitudeQuiz;
 	}
-}
+	
+	public void ResetQuizpanel() {
+		panelManageAptitudeQuiz.setVisible(false);
+		panelManageMbtiQuiz.setVisible(false);
+	}
+	
+	
+	
+	
+	
+	
+}//=========================

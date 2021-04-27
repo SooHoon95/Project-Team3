@@ -10,25 +10,28 @@ import java.awt.event.ActionEvent;
 public class PanelManageResult extends JPanel {
 	private JButton btnManageMbtiResult;
 	private JButton btnManageAptitudeResult;
-	PanelManageAptitudeResult panelManageAptitudeResult = new PanelManageAptitudeResult();
 	PanelManageMbtiResult panelManageMbtiResult = new PanelManageMbtiResult();
-
+	PanelManageAptitudeResult panelManageAptitudeResult = new PanelManageAptitudeResult();
 	/**
 	 * Create the panel.
 	 */
 	public PanelManageResult() {
 		setBounds(new Rectangle(180, 10, 500, 420));
 		setLayout(null);
+		setVisible(false);
 		add(getBtnManageMbtiResult());
 		add(getBtnManageAptitudeResult());
+		add(panelManageMbtiResult);
+		add(panelManageAptitudeResult);
 	}
 	private JButton getBtnManageMbtiResult() {
 		if (btnManageMbtiResult == null) {
-			btnManageMbtiResult = new JButton("MBTI문제");
+			btnManageMbtiResult = new JButton("MBTI 결과");
 			btnManageMbtiResult.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					panelManageAptitudeResult.setVisible(false);
+					ResetReulstPanel();
 					panelManageMbtiResult.setVisible(true);
+					panelManageAptitudeResult.setVisible(false);
 				}
 			});
 			btnManageMbtiResult.setBounds(86, 10, 120, 35);
@@ -37,15 +40,27 @@ public class PanelManageResult extends JPanel {
 	}
 	private JButton getBtnManageAptitudeResult() {
 		if (btnManageAptitudeResult == null) {
-			btnManageAptitudeResult = new JButton("적성문제");
+			btnManageAptitudeResult = new JButton("적성 결과");
 			btnManageAptitudeResult.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					panelManageAptitudeResult.setVisible(true);
+					ResetReulstPanel();
 					panelManageMbtiResult.setVisible(false);
+					panelManageAptitudeResult.setVisible(true);
 				}
 			});
 			btnManageAptitudeResult.setBounds(300, 10, 120, 35);
 		}
 		return btnManageAptitudeResult;
 	}
-}
+	
+	public void ResetReulstPanel() {
+		panelManageMbtiResult.setVisible(false);
+		panelManageAptitudeResult.setVisible(false);
+	}
+	
+	
+	
+	
+	
+	
+}//====================

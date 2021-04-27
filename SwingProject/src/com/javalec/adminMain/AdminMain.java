@@ -17,12 +17,10 @@ public class AdminMain extends JDialog {
 	private JButton btnManageUser;
 	private JButton btnManageQuiz;
 	private JButton btnManageResult;
-	private JButton btnManageStatistic;
 	
 	PanelManageUser panelManageUser = new PanelManageUser();
 	PanelManageQuiz panelManageQuiz = new PanelManageQuiz();
 	PanelManageResult panelManageResult = new PanelManageResult();
-	PanelManageStatistic panelManageStatistic = new PanelManageStatistic();
  
 
 	/**
@@ -42,7 +40,7 @@ public class AdminMain extends JDialog {
 	 * Create the dialog.
 	 */
 	public AdminMain() {
-		initialize();
+		initialize(); 
 	}
 		private void initialize() {
 			frame = new JFrame();
@@ -53,12 +51,11 @@ public class AdminMain extends JDialog {
 			frame.getContentPane().add(getBtnManageUser());
 			frame.getContentPane().add(getBtnManageQuiz());
 			frame.getContentPane().add(getBtnManageResult());
-			frame.getContentPane().add(getBtnManageStatistic());
+			panelManageUser.setBounds(180, 10, 512, 420);
 			
 			frame.getContentPane().add(panelManageUser);
 			frame.getContentPane().add(panelManageQuiz); 
 			frame.getContentPane().add(panelManageResult); 
-			frame.getContentPane().add(panelManageStatistic);
 	}
 
 	
@@ -74,12 +71,12 @@ public class AdminMain extends JDialog {
 					
 				}
 			});
-			btnManageUser.setBounds(30, 60, 120, 35);
+			btnManageUser.setBounds(30, 84, 120, 35);
 		}
 		return btnManageUser;
 	}
 	private JButton getBtnManageQuiz() {
-		if (btnManageQuiz == null) {
+		if (btnManageQuiz == null) { 
 			btnManageQuiz = new JButton("문제관리");
 			btnManageQuiz.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -88,7 +85,7 @@ public class AdminMain extends JDialog {
 				
 				}
 			});
-			btnManageQuiz.setBounds(30, 155, 120, 35);
+			btnManageQuiz.setBounds(30, 203, 120, 35);
 		}
 		return btnManageQuiz;
 	}
@@ -103,28 +100,17 @@ public class AdminMain extends JDialog {
 
 				}
 			});
-			btnManageResult.setBounds(30, 250, 120, 35);
+			btnManageResult.setBounds(30, 322, 120, 35);
 		}
 		return btnManageResult;
-	}
-	private JButton getBtnManageStatistic() {
-		if (btnManageStatistic == null) {
-			btnManageStatistic = new JButton("통계");
-			btnManageStatistic.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					RestPanel();
-					panelManageStatistic.setVisible(true);
-				}
-			});
-			btnManageStatistic.setBounds(30, 345, 120, 35);
-		}
-		return btnManageStatistic;
 	}
 	private void RestPanel() {
 		panelManageUser.setVisible(false);
 		panelManageQuiz.setVisible(false);
 		panelManageResult.setVisible(false);
-		panelManageStatistic.setVisible(false);
+		
+		panelManageQuiz.ResetQuizpanel();
+		panelManageResult.ResetReulstPanel();
 		 
 	}
 }
