@@ -1,30 +1,30 @@
-package com.javalec.search;
+package com.javalec.loginSearch;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.Font;
 
-public class SearchId extends JDialog {
+public class SearchPW extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblProjectName;
 	private JTextField tfUserId;
 	private JTextField tfUserEmail;
-	private JLabel lblSearchId;
+	private JLabel lblSearchPW;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			SearchId dialog = new SearchId();
+			SearchPW dialog = new SearchPW();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -35,7 +35,7 @@ public class SearchId extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public SearchId() {
+	public SearchPW() {
 		setBounds(100, 100, 400, 480);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -48,9 +48,9 @@ public class SearchId extends JDialog {
 			contentPanel.add(lblProjectSimbol);
 		}
 		{
-			JLabel lblUserName = new JLabel("이름");
-			lblUserName.setBounds(20, 233, 61, 16);
-			contentPanel.add(lblUserName);
+			JLabel lblUserID = new JLabel("ID");
+			lblUserID.setBounds(20, 233, 61, 16);
+			contentPanel.add(lblUserID);
 		}
 		{
 			JLabel lblUserEmail = new JLabel("E-mail");
@@ -77,7 +77,6 @@ public class SearchId extends JDialog {
 			}
 		}
 	}
-	
 	private JLabel getLblProjectName() {
 		if (lblProjectName == null) {
 			lblProjectName = new JLabel("프로젝트이름");
@@ -102,12 +101,11 @@ public class SearchId extends JDialog {
 		return tfUserEmail;
 	}
 	private JLabel getLabel_1() {
-		if (lblSearchId == null) {
-			lblSearchId = new JLabel("아이디 찾기");
-			lblSearchId.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-			lblSearchId.setBounds(139, 159, 147, 36);
+		if (lblSearchPW == null) {
+			lblSearchPW = new JLabel("비밀번호 찾기");
+			lblSearchPW.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+			lblSearchPW.setBounds(139, 159, 147, 36);
 		}
-		return lblSearchId;
+		return lblSearchPW;
 	}
-
 }
