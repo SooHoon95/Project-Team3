@@ -5,16 +5,20 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class AdminMain extends JDialog {
+	
+	private JFrame frame;
 	private JButton btnManageUser;
 	private JButton btnManageQuiz;
 	private JButton btnManageResult;
 	private JButton btnManageStatistic;
+	
 	PanelManageUser panelManageUser = new PanelManageUser();
 	PanelManageQuiz panelManageQuiz = new PanelManageQuiz();
 	PanelManageResult panelManageResult = new PanelManageResult();
@@ -27,8 +31,8 @@ public class AdminMain extends JDialog {
 	public static void main(String[] args) {
 		try {
 			AdminMain dialog = new AdminMain();
+			dialog.frame.setVisible(true);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -38,14 +42,27 @@ public class AdminMain extends JDialog {
 	 * Create the dialog.
 	 */
 	public AdminMain() {
-		setBounds(100, 100, 720, 480);
-		getContentPane().setLayout(null);
-		getContentPane().setLayout(null);
-		getContentPane().add(getBtnManageUser());
-		getContentPane().add(getBtnManageQuiz());
-		getContentPane().add(getBtnManageResult());
-		getContentPane().add(getBtnManageStatistic());
+		initialize();
 	}
+		private void initialize() {
+			frame = new JFrame();
+			
+			frame.setBounds(100, 100, 720, 480);
+			frame.getContentPane().setLayout(null);
+			
+			frame.getContentPane().add(getBtnManageUser());
+			frame.getContentPane().add(getBtnManageQuiz());
+			frame.getContentPane().add(getBtnManageResult());
+			frame.getContentPane().add(getBtnManageStatistic());
+			
+			frame.getContentPane().add(panelManageUser);
+			frame.getContentPane().add(panelManageQuiz); 
+			frame.getContentPane().add(panelManageResult); 
+			frame.getContentPane().add(panelManageStatistic);
+	}
+
+	
+	
 
 	private JButton getBtnManageUser() {
 		if (btnManageUser == null) {
@@ -53,7 +70,7 @@ public class AdminMain extends JDialog {
 			btnManageUser.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					RestPanel();
-					panelManageUser.setVisible(false);
+					panelManageUser.setVisible(true);
 					
 				}
 			});

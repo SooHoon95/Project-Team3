@@ -50,12 +50,6 @@ public class UserMain extends JDialog {
 	
 	private void initialize() {
 		frame = new JFrame();
-//		setBounds(100, 100, 720, 480);
-//		getContentPane().setLayout(null);
-//		getContentPane().add(getBtnUserProfile());
-//		getContentPane().add(getBtnUserMbti());
-//		getContentPane().add(getBtnUserAptitudeQuiz());
-//		getContentPane().add(getBtnUserStatistic());
 		
 		frame.setBounds(100, 100, 720, 480);
 		frame.getContentPane().setLayout(null);
@@ -65,11 +59,11 @@ public class UserMain extends JDialog {
 		frame.getContentPane().add(getBtnUserAptitudeQuiz());
 		frame.getContentPane().add(getBtnUserStatistic());
 		
-		////////////////////////////@@@@@@@@@@@@@@@@@@@@@@@
 		frame.getContentPane().add(panelUserPrifile);
 		frame.getContentPane().add(panelUserMbti); 
 		frame.getContentPane().add(panelUserAptitudeQuiz); 
-		frame.getContentPane().add(panelUserStatistic); 
+		frame.getContentPane().add(panelUserStatistic);
+		
 	}
 	
 	private JButton getBtnUserProfile() {
