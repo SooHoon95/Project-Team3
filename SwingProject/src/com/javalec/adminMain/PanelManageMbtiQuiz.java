@@ -33,15 +33,18 @@ public class PanelManageMbtiQuiz extends JPanel {
 	private JScrollPane scrollPane_AdUser;
 	private JLabel lblAdMBTIGroup;
 	private JComboBox comboBox;
+	private JLabel lblAdMBTIAnswer1_1;
+	private JLabel lblAdMBTIAnswer2_1;
+	private JComboBox cbMBTIAnswer1Score;
+	private JComboBox cbMBTIAnswer2Score;
 
 	/**
 	 * Create the panel.
 	 */
 	public PanelManageMbtiQuiz() {
 		setBackground(Color.BLUE);
-		setBounds(new Rectangle(65, 57, 370, 350));
+		setBounds(new Rectangle(180, 70, 370, 350));
 		setLayout(null);
-		
 		add(getScrollPane_AdMBTIQA());
 		add(getLblAdMBTIQANum());
 		add(getLblAdMBTIQA());
@@ -56,6 +59,10 @@ public class PanelManageMbtiQuiz extends JPanel {
 		add(getTfAdMBTIAnswer2());
 		add(getLblAdMBTIGroup());
 		add(getComboBox());
+		add(getLblAdMBTIAnswer1_1());
+		add(getLblAdMBTIAnswer2_1());
+		add(getCbMBTIAnswer1Score());
+		add(getCbMBTIAnswer2Score());
 
 	}
 
@@ -159,7 +166,7 @@ public class PanelManageMbtiQuiz extends JPanel {
 		if (tfAdMBTIAnswer1 == null) {
 			tfAdMBTIAnswer1 = new JTextField();
 			tfAdMBTIAnswer1.setColumns(10);
-			tfAdMBTIAnswer1.setBounds(93, 258, 165, 26);
+			tfAdMBTIAnswer1.setBounds(93, 258, 122, 26);
 		}
 		return tfAdMBTIAnswer1;
 	}
@@ -167,28 +174,28 @@ public class PanelManageMbtiQuiz extends JPanel {
 		if (tfAdMBTIAnswer2 == null) {
 			tfAdMBTIAnswer2 = new JTextField();
 			tfAdMBTIAnswer2.setColumns(10);
-			tfAdMBTIAnswer2.setBounds(93, 292, 165, 26);
+			tfAdMBTIAnswer2.setBounds(93, 292, 122, 26);
 		}
 		return tfAdMBTIAnswer2;
 	}
 	private JButton getBtnAdMBTIQACreate() {
 		if (btnAdMBTIQACreate == null) {
 			btnAdMBTIQACreate = new JButton("생성");
-			btnAdMBTIQACreate.setBounds(20, 320, 60, 27);
+			btnAdMBTIQACreate.setBounds(20, 320, 60, 29);
 		}
 		return btnAdMBTIQACreate;
 	}
 	private JButton getBtnAdMBTIQAEdit() {
 		if (btnAdMBTIQAEdit == null) {
 			btnAdMBTIQAEdit = new JButton("수정");
-			btnAdMBTIQAEdit.setBounds(155, 320, 60, 27);
+			btnAdMBTIQAEdit.setBounds(155, 320, 60, 29);
 		}
 		return btnAdMBTIQAEdit;
 	}
 	private JButton getBtnAdMBTIQARemove() {
 		if (btnAdMBTIQARemove == null) {
 			btnAdMBTIQARemove = new JButton("삭제");
-			btnAdMBTIQARemove.setBounds(290, 320, 60, 27);
+			btnAdMBTIQARemove.setBounds(290, 320, 60, 29);
 		}
 		return btnAdMBTIQARemove;
 	}
@@ -206,5 +213,33 @@ public class PanelManageMbtiQuiz extends JPanel {
 			comboBox.setBounds(253, 189, 105, 26);
 		}
 		return comboBox;
+	}
+	private JLabel getLblAdMBTIAnswer1_1() {
+		if (lblAdMBTIAnswer1_1 == null) {
+			lblAdMBTIAnswer1_1 = new JLabel("답1 점수");
+			lblAdMBTIAnswer1_1.setBounds(223, 266, 61, 16);
+		}
+		return lblAdMBTIAnswer1_1;
+	}
+	private JLabel getLblAdMBTIAnswer2_1() {
+		if (lblAdMBTIAnswer2_1 == null) {
+			lblAdMBTIAnswer2_1 = new JLabel("답2 점수");
+			lblAdMBTIAnswer2_1.setBounds(223, 300, 61, 16);
+		}
+		return lblAdMBTIAnswer2_1;
+	}
+	private JComboBox getCbMBTIAnswer1Score() {
+		if (cbMBTIAnswer1Score == null) {
+			cbMBTIAnswer1Score = new JComboBox();
+			cbMBTIAnswer1Score.setBounds(296, 258, 62, 26);
+		}
+		return cbMBTIAnswer1Score;
+	}
+	private JComboBox getCbMBTIAnswer2Score() {
+		if (cbMBTIAnswer2Score == null) {
+			cbMBTIAnswer2Score = new JComboBox();
+			cbMBTIAnswer2Score.setBounds(297, 292, 61, 26);
+		}
+		return cbMBTIAnswer2Score;
 	}
 }//-----------------------------------
