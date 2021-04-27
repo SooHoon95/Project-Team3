@@ -26,6 +26,7 @@ public class PanelManageMbtiResult extends JPanel {
 	private JButton btnAdMBTIResultRemove;
 	private JLabel lblAdMBTIResultNum;
 	private JTextField tfAdMBTIResultNum;
+	private JPanel panelAdMBTIimage;
 
 	/**
 	 * Create the panel.
@@ -44,6 +45,7 @@ public class PanelManageMbtiResult extends JPanel {
 		add(getBtnAdMBTIResultRemove());
 		add(getLblAdMBTIResultNum());
 		add(getTfAdMBTIResultNum());
+		add(getPanelAdMBTIimage());
 		
 		
 
@@ -51,7 +53,7 @@ public class PanelManageMbtiResult extends JPanel {
 	private JScrollPane getScrollPane_AdMBTIResult() {
 		if (scrollPane_AdMBTIResult == null) {
 			scrollPane_AdMBTIResult = new JScrollPane();
-			scrollPane_AdMBTIResult.setBounds(20, 17, 496, 156);
+			scrollPane_AdMBTIResult.setBounds(20, 17, 220, 156);
 			scrollPane_AdMBTIResult.setViewportView(getInner_table_AdMBTIResult());
 		}
 		return scrollPane_AdMBTIResult;
@@ -98,14 +100,14 @@ public class PanelManageMbtiResult extends JPanel {
 	private JLabel getLblAdMBTIResultName() {
 		if (lblAdMBTIResultName == null) {
 			lblAdMBTIResultName = new JLabel("MBTI이름");
-			lblAdMBTIResultName.setBounds(20, 211, 61, 16);
+			lblAdMBTIResultName.setBounds(20, 230, 61, 16);
 		}
 		return lblAdMBTIResultName;
 	}
 	private JLabel getlblAdMBTIResultExplanation() {
 		if (lblAdMBTIResultExplanation == null) {
 			lblAdMBTIResultExplanation = new JLabel("MBTI설명");
-			lblAdMBTIResultExplanation.setBounds(20, 250, 61, 16);
+			lblAdMBTIResultExplanation.setBounds(20, 263, 61, 16);
 		}
 		return lblAdMBTIResultExplanation;
 	}
@@ -113,7 +115,7 @@ public class PanelManageMbtiResult extends JPanel {
 	private JTextField getTfAdMBTIResultName() {
 		if (tfAdMBTIResultName == null) {
 			tfAdMBTIResultName = new JTextField();
-			tfAdMBTIResultName.setBounds(93, 206, 423, 26);
+			tfAdMBTIResultName.setBounds(93, 225, 265, 26);
 			tfAdMBTIResultName.setColumns(10);
 		}
 		return tfAdMBTIResultName;
@@ -122,7 +124,7 @@ public class PanelManageMbtiResult extends JPanel {
 		if (tfAdMBTIResultExplanation == null) {
 			tfAdMBTIResultExplanation = new JTextField();
 			tfAdMBTIResultExplanation.setColumns(10);
-			tfAdMBTIResultExplanation.setBounds(93, 244, 423, 105);
+			tfAdMBTIResultExplanation.setBounds(93, 258, 265, 54);
 		}
 		return tfAdMBTIResultExplanation;
 	}
@@ -130,28 +132,28 @@ public class PanelManageMbtiResult extends JPanel {
 	private JButton getBtnAdMBTIResultCreate() {
 		if (btnAdMBTIQResultCreate == null) {
 			btnAdMBTIQResultCreate = new JButton("생성");
-			btnAdMBTIQResultCreate.setBounds(20, 361, 117, 29);
+			btnAdMBTIQResultCreate.setBounds(20, 320, 60, 29);
 		}
 		return btnAdMBTIQResultCreate;
 	}
 	private JButton getBtnAdMBTIResultEdit() {
 		if (btnAdMBTIResultEdit == null) {
 			btnAdMBTIResultEdit = new JButton("수정");
-			btnAdMBTIResultEdit.setBounds(209, 361, 117, 29);
+			btnAdMBTIResultEdit.setBounds(155, 320, 60, 29);
 		}
 		return btnAdMBTIResultEdit;
 	}
 	private JButton getBtnAdMBTIResultRemove() {
 		if (btnAdMBTIResultRemove == null) {
 			btnAdMBTIResultRemove = new JButton("삭제");
-			btnAdMBTIResultRemove.setBounds(399, 361, 117, 29);
+			btnAdMBTIResultRemove.setBounds(290, 320, 60, 29);
 		}
 		return btnAdMBTIResultRemove;
 	}
 	private JLabel getLblAdMBTIResultNum() {
 		if (lblAdMBTIResultNum == null) {
 			lblAdMBTIResultNum = new JLabel("번호");
-			lblAdMBTIResultNum.setBounds(20, 185, 61, 16);
+			lblAdMBTIResultNum.setBounds(20, 194, 61, 16);
 		}
 		return lblAdMBTIResultNum;
 	}
@@ -159,8 +161,15 @@ public class PanelManageMbtiResult extends JPanel {
 		if (tfAdMBTIResultNum == null) {
 			tfAdMBTIResultNum = new JTextField();
 			tfAdMBTIResultNum.setColumns(10);
-			tfAdMBTIResultNum.setBounds(93, 180, 423, 26);
+			tfAdMBTIResultNum.setBounds(93, 189, 60, 26);
 		}
 		return tfAdMBTIResultNum;
+	}
+	private JPanel getPanelAdMBTIimage() {
+		if (panelAdMBTIimage == null) {
+			panelAdMBTIimage = new JPanel();
+			panelAdMBTIimage.setBounds(252, 17, 106, 156);
+		}
+		return panelAdMBTIimage;
 	}
 }//---------------------------------
