@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
@@ -15,25 +16,26 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 
 public class UserMain extends JDialog {
+	
+	private JFrame frame;
 	private JButton btnUserProfile;
 	private JButton btnUserMbti;
 	private JButton btnUserAptitudeQuiz;
 	private JButton btnUserStatistic;
+	
 	PanelUserProfile panelUserPrifile = new PanelUserProfile();
 	PanelUserMbti panelUserMbti = new PanelUserMbti();
 	PanelUserAptitudeQuiz panelUserAptitudeQuiz = new PanelUserAptitudeQuiz();
 	PanelUserStatistic panelUserStatistic = new PanelUserStatistic();
 	
-	
-
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
 			UserMain dialog = new UserMain();
+			dialog.frame.setVisible(true);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -43,13 +45,33 @@ public class UserMain extends JDialog {
 	 * Create the dialog.
 	 */
 	public UserMain() {
-		setBounds(100, 100, 720, 480);
-		getContentPane().setLayout(null);
-		getContentPane().add(getBtnUserProfile());
-		getContentPane().add(getBtnUserMbti());
-		getContentPane().add(getBtnUserAptitudeQuiz());
-		getContentPane().add(getBtnUserStatistic());
+		initialize();
 	}
+	
+	private void initialize() {
+		frame = new JFrame();
+//		setBounds(100, 100, 720, 480);
+//		getContentPane().setLayout(null);
+//		getContentPane().add(getBtnUserProfile());
+//		getContentPane().add(getBtnUserMbti());
+//		getContentPane().add(getBtnUserAptitudeQuiz());
+//		getContentPane().add(getBtnUserStatistic());
+		
+		frame.setBounds(100, 100, 720, 480);
+		frame.getContentPane().setLayout(null);
+		
+		frame.getContentPane().add(getBtnUserProfile());
+		frame.getContentPane().add(getBtnUserMbti());
+		frame.getContentPane().add(getBtnUserAptitudeQuiz());
+		frame.getContentPane().add(getBtnUserStatistic());
+		
+		////////////////////////////@@@@@@@@@@@@@@@@@@@@@@@
+		frame.getContentPane().add(panelUserPrifile);
+		frame.getContentPane().add(panelUserMbti); 
+		frame.getContentPane().add(panelUserAptitudeQuiz); 
+		frame.getContentPane().add(panelUserStatistic); 
+	}
+	
 	private JButton getBtnUserProfile() {
 		if (btnUserProfile == null) {
 			btnUserProfile = new JButton("프로필");
