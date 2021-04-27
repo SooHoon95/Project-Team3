@@ -5,12 +5,18 @@ import java.awt.Rectangle;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.ButtonGroup;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelUserMbti extends JPanel {
-	private JLabel lbMbtiQuiz;
-	private JLabel lbMbtiResult1;
-	private JLabel lbMbtiResult2;
 	private JButton btnMbtiNext;
+	private JRadioButton rbMbtiResult1;
+	private JRadioButton rbMbtiResult2;
+	private JTextField tfMbitQuiz;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Create the panel.
@@ -18,38 +24,44 @@ public class PanelUserMbti extends JPanel {
 	public PanelUserMbti() {
 		setBounds(new Rectangle(180, 10, 500, 420));
 		setLayout(null);
-		add(getLbMbtiQuiz());
-		add(getLbMbtiResult1());
-		add(getLbMbtiResult2());
 		add(getBtnMbtiNext());
-	}
-
-	private JLabel getLbMbtiQuiz() {
-		if (lbMbtiQuiz == null) {
-			lbMbtiQuiz = new JLabel("New label");
-			lbMbtiQuiz.setBounds(35, 40, 368, 105);
-		}
-		return lbMbtiQuiz;
-	}
-	private JLabel getLbMbtiResult1() {
-		if (lbMbtiResult1 == null) {
-			lbMbtiResult1 = new JLabel("New label");
-			lbMbtiResult1.setBounds(93, 207, 57, 15);
-		}
-		return lbMbtiResult1;
-	}
-	private JLabel getLbMbtiResult2() {
-		if (lbMbtiResult2 == null) {
-			lbMbtiResult2 = new JLabel("New label");
-			lbMbtiResult2.setBounds(93, 251, 57, 15);
-		}
-		return lbMbtiResult2;
+		add(getRbMbtiResult1());
+		add(getRbMbtiResult2());
+		add(getTfMbitQuiz());
 	}
 	private JButton getBtnMbtiNext() {
 		if (btnMbtiNext == null) {
-			btnMbtiNext = new JButton("확인");
-			btnMbtiNext.setBounds(358, 340, 97, 23);
+			btnMbtiNext = new JButton("다음");
+			btnMbtiNext.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			btnMbtiNext.setBounds(356, 319, 97, 23);
 		}
 		return btnMbtiNext;
+	}
+	private JRadioButton getRbMbtiResult1() {
+		if (rbMbtiResult1 == null) {
+			rbMbtiResult1 = new JRadioButton("New radio button");
+			buttonGroup.add(rbMbtiResult1);
+			rbMbtiResult1.setBounds(98, 204, 280, 23);
+		}
+		return rbMbtiResult1;
+	}
+	private JRadioButton getRbMbtiResult2() {
+		if (rbMbtiResult2 == null) {
+			rbMbtiResult2 = new JRadioButton("New radio button");
+			buttonGroup.add(rbMbtiResult2);
+			rbMbtiResult2.setBounds(98, 248, 280, 23);
+		}
+		return rbMbtiResult2;
+	}
+	private JTextField getTfMbitQuiz() {
+		if (tfMbitQuiz == null) {
+			tfMbitQuiz = new JTextField();
+			tfMbitQuiz.setBounds(40, 65, 414, 113);
+			tfMbitQuiz.setColumns(10);
+		}
+		return tfMbitQuiz;
 	}
 }

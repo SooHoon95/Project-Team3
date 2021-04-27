@@ -63,7 +63,7 @@ public class UserMain extends JDialog {
 		frame.getContentPane().add(panelUserMbti); 
 		frame.getContentPane().add(panelUserAptitudeQuiz); 
 		frame.getContentPane().add(panelUserStatistic);
-		
+		RestPanel();
 	}
 	
 	private JButton getBtnUserProfile() {
