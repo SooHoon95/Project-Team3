@@ -39,7 +39,8 @@ public class PanelManageMbtiQuiz extends JPanel {
 	 */
 	public PanelManageMbtiQuiz() {
 		setBackground(Color.BLUE);
-		setBounds(new Rectangle(180, 70, 370, 350));
+		setBounds(new Rectangle(65, 57, 370, 350));
+		setVisible(false);
 		setLayout(null);
 		add(getScrollPane_AdMBTIQA());
 		add(getLblAdMBTIQANum());
@@ -173,21 +174,21 @@ public class PanelManageMbtiQuiz extends JPanel {
 	private JButton getBtnAdMBTIQACreate() {
 		if (btnAdMBTIQACreate == null) {
 			btnAdMBTIQACreate = new JButton("생성");
-			btnAdMBTIQACreate.setBounds(20, 320, 60, 29);
+			btnAdMBTIQACreate.setBounds(47, 326, 60, 23);
 		}
 		return btnAdMBTIQACreate;
 	}
 	private JButton getBtnAdMBTIQAEdit() {
 		if (btnAdMBTIQAEdit == null) {
 			btnAdMBTIQAEdit = new JButton("수정");
-			btnAdMBTIQAEdit.setBounds(155, 320, 60, 29);
+			btnAdMBTIQAEdit.setBounds(154, 326, 60, 23);
 		}
 		return btnAdMBTIQAEdit;
 	}
 	private JButton getBtnAdMBTIQARemove() {
 		if (btnAdMBTIQARemove == null) {
 			btnAdMBTIQARemove = new JButton("삭제");
-			btnAdMBTIQARemove.setBounds(290, 320, 60, 29);
+			btnAdMBTIQARemove.setBounds(261, 326, 60, 23);
 		}
 		return btnAdMBTIQARemove;
 	}

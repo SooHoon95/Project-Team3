@@ -60,7 +60,7 @@ public class PanelManageUser extends JPanel {
 	private JScrollPane getScrollPane_AdUser() {
 		if (scrollPane_AdUser == null) {
 			scrollPane_AdUser = new JScrollPane();
-			scrollPane_AdUser.setBounds(20, 17, 496, 156);
+			scrollPane_AdUser.setBounds(20, 17, 476, 156);
 			scrollPane_AdUser.setViewportView(getInner_table_AdUser());
 		}
 		return scrollPane_AdUser;
@@ -147,7 +147,7 @@ public class PanelManageUser extends JPanel {
 	private JTextField getTfAdUserNum() {
 		if (tfAdUserNum == null) {
 			tfAdUserNum = new JTextField();
-			tfAdUserNum.setBounds(93, 189, 423, 26);
+			tfAdUserNum.setBounds(93, 189, 403, 26);
 			tfAdUserNum.setColumns(10);
 		}
 		return tfAdUserNum;
@@ -156,7 +156,7 @@ public class PanelManageUser extends JPanel {
 		if (tfAdUserName == null) {
 			tfAdUserName = new JTextField();
 			tfAdUserName.setColumns(10);
-			tfAdUserName.setBounds(93, 225, 423, 26);
+			tfAdUserName.setBounds(93, 225, 403, 26);
 		}
 		return tfAdUserName;
 	}
@@ -164,7 +164,7 @@ public class PanelManageUser extends JPanel {
 		if (tfAdUserId == null) {
 			tfAdUserId = new JTextField();
 			tfAdUserId.setColumns(10);
-			tfAdUserId.setBounds(93, 258, 423, 26);
+			tfAdUserId.setBounds(93, 258, 403, 26);
 		}
 		return tfAdUserId;
 	}
@@ -172,28 +172,28 @@ public class PanelManageUser extends JPanel {
 		if (tfAdUserPw == null) {
 			tfAdUserPw = new JTextField();
 			tfAdUserPw.setColumns(10);
-			tfAdUserPw.setBounds(93, 292, 423, 26);
+			tfAdUserPw.setBounds(93, 292, 403, 26);
 		}
 		return tfAdUserPw;
 	}
 	private JButton getBtnAdUserCreate() {
 		if (btnAdUserCreate == null) {
 			btnAdUserCreate = new JButton("생성");
-			btnAdUserCreate.setBounds(20, 361, 117, 29);
+			btnAdUserCreate.setBounds(52, 361, 97, 29);
 		}
 		return btnAdUserCreate;
 	}
 	private JButton getBtnAdUserEdit() {
 		if (btnAdUserEdit == null) {
 			btnAdUserEdit = new JButton("수정");
-			btnAdUserEdit.setBounds(209, 361, 117, 29);
+			btnAdUserEdit.setBounds(201, 361, 97, 29);
 		}
 		return btnAdUserEdit;
 	}
 	private JButton getBtnAdUserRemove() {
 		if (btnAdUserRemove == null) {
 			btnAdUserRemove = new JButton("삭제");
-			btnAdUserRemove.setBounds(399, 361, 117, 29);
+			btnAdUserRemove.setBounds(350, 361, 97, 29);
 		}
 		return btnAdUserRemove;
 	}
@@ -208,7 +208,7 @@ public class PanelManageUser extends JPanel {
 		if (tfAdUserEmail == null) {
 			tfAdUserEmail = new JTextField();
 			tfAdUserEmail.setColumns(10);
-			tfAdUserEmail.setBounds(93, 323, 423, 26);
+			tfAdUserEmail.setBounds(93, 323, 403, 26);
 		}
 		return tfAdUserEmail;
 	}
