@@ -35,7 +35,7 @@ public class PanelManageMbtiQuiz extends JPanel {
 	 */
 	public PanelManageMbtiQuiz() {
 		setBackground(Color.BLUE);
-		setBounds(new Rectangle(180, 10, 500, 420));
+		setBounds(new Rectangle(180, 70, 370, 350));
 		setLayout(null);
 		add(getScrollPane_AdMBTIQA());
 		add(getLblAdMBTIQANum());

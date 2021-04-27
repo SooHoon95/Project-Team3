@@ -1,21 +1,25 @@
 package com.javalec.adminMain;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AdminMain extends JDialog {
 	private JButton btnManageUser;
-	private JButton btnManageMbtiQuiz;
-	private JButton btnManageAptitudeQuiz;
-	private JButton btnManageMbtiResults;
+	private JButton btnManageQuiz;
+	private JButton btnManageResult;
+	private JButton btnManageStatistic;
 	PanelManageUser panelManageUser = new PanelManageUser();
-	PanelManageMbtiResult panelManageMbtiResult = new PanelManageMbtiResult();
-	PanelManageMbtiQuiz panelManageMbtiQuiz = new PanelManageMbtiQuiz();
-	PanelManageAptitudeQuiz panelManageAptitudeQuiz = new PanelManageAptitudeQuiz();
-	
+	PanelManageQuiz panelManageQuiz = new PanelManageQuiz();
+	PanelManageResult panelManageResult = new PanelManageResult();
+	PanelManageStatistic panelManageStatistic = new PanelManageStatistic();
+ 
 
 	/**
 	 * Launch the application.
@@ -36,10 +40,11 @@ public class AdminMain extends JDialog {
 	public AdminMain() {
 		setBounds(100, 100, 720, 480);
 		getContentPane().setLayout(null);
+		getContentPane().setLayout(null);
 		getContentPane().add(getBtnManageUser());
-		getContentPane().add(getBtnManageMbtiQuiz());
-		getContentPane().add(getBtnManageAptitudeQuiz());
-		getContentPane().add(getBtnManageMbtiResults());
+		getContentPane().add(getBtnManageQuiz());
+		getContentPane().add(getBtnManageResult());
+		getContentPane().add(getBtnManageStatistic());
 	}
 
 	private JButton getBtnManageUser() {
@@ -48,59 +53,61 @@ public class AdminMain extends JDialog {
 			btnManageUser.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					RestPanel();
-					panelManageUser.setVisible(true);
+					panelManageUser.setVisible(false);
+					
 				}
 			});
 			btnManageUser.setBounds(30, 60, 120, 35);
 		}
 		return btnManageUser;
 	}
-	private JButton getBtnManageMbtiQuiz() {
-		if (btnManageMbtiQuiz == null) {
-			btnManageMbtiQuiz = new JButton("MBTI문제관리");
-			btnManageMbtiQuiz.addActionListener(new ActionListener() {
+	private JButton getBtnManageQuiz() {
+		if (btnManageQuiz == null) {
+			btnManageQuiz = new JButton("문제관리");
+			btnManageQuiz.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					RestPanel();
-					panelManageMbtiResult.setVisible(true);
+					panelManageQuiz.setVisible(true);
+				
 				}
 			});
-			btnManageMbtiQuiz.setBounds(30, 155, 120, 35);
+			btnManageQuiz.setBounds(30, 155, 120, 35);
 		}
-		return btnManageMbtiQuiz;
+		return btnManageQuiz;
 	}
-	private JButton getBtnManageAptitudeQuiz() {
-		if (btnManageAptitudeQuiz == null) {
-			btnManageAptitudeQuiz = new JButton("적성문제관리");
-			btnManageAptitudeQuiz.addActionListener(new ActionListener() {
+	private JButton getBtnManageResult() {
+		if (btnManageResult == null) {
+			btnManageResult = new JButton("결과관리");
+			btnManageResult.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					RestPanel();
-					panelManageMbtiQuiz.setVisible(true);
+					panelManageResult.setVisible(true);
 					
+
 				}
 			});
-			btnManageAptitudeQuiz.setBounds(30, 345, 120, 35);
+			btnManageResult.setBounds(30, 250, 120, 35);
 		}
-		return btnManageAptitudeQuiz;
+		return btnManageResult;
 	}
-	private JButton getBtnManageMbtiResults() {
-		if (btnManageMbtiResults == null) {
-			btnManageMbtiResults = new JButton("MBTI결과관리");
-			btnManageMbtiResults.addActionListener(new ActionListener() {
+	private JButton getBtnManageStatistic() {
+		if (btnManageStatistic == null) {
+			btnManageStatistic = new JButton("통계");
+			btnManageStatistic.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					RestPanel();
-					panelManageAptitudeQuiz.setVisible(true);
+					panelManageStatistic.setVisible(true);
 				}
 			});
-			btnManageMbtiResults.setBounds(30, 250, 120, 35);
+			btnManageStatistic.setBounds(30, 345, 120, 35);
 		}
-		return btnManageMbtiResults;
+		return btnManageStatistic;
 	}
-	
 	private void RestPanel() {
 		panelManageUser.setVisible(false);
-		panelManageMbtiResult.setVisible(false);
-		panelManageMbtiQuiz.setVisible(false);
-		panelManageAptitudeQuiz.setVisible(false);
-		
+		panelManageQuiz.setVisible(false);
+		panelManageResult.setVisible(false);
+		panelManageStatistic.setVisible(false);
+		 
 	}
 }

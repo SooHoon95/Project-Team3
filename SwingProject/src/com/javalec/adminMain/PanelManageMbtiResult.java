@@ -32,7 +32,7 @@ public class PanelManageMbtiResult extends JPanel {
 	 */
 	public PanelManageMbtiResult() {
 		setBackground(Color.GREEN);
-		setBounds(new Rectangle(180, 10, 500, 420));
+		setBounds(new Rectangle(180, 70, 370, 350));
 		setLayout(null);
 		add(getScrollPane_AdMBTIResult());
 		add(getLblAdMBTIResultName());
