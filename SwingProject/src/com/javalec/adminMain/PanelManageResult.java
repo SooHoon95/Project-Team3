@@ -21,15 +21,13 @@ public class PanelManageResult extends JPanel {
 		setLayout(null);
 		add(getBtnManageMbtiResult());
 		add(getBtnManageAptitudeResult());
-		add(panelManageAptitudeResult);
-		add(panelManageMbtiResult);
 	}
 	private JButton getBtnManageMbtiResult() {
 		if (btnManageMbtiResult == null) {
-			btnManageMbtiResult = new JButton("MBTI 결과");
+			btnManageMbtiResult = new JButton("MBTI문제");
 			btnManageMbtiResult.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ResetResultPanel();
+					panelManageAptitudeResult.setVisible(false);
 					panelManageMbtiResult.setVisible(true);
 				}
 			});
@@ -39,29 +37,15 @@ public class PanelManageResult extends JPanel {
 	}
 	private JButton getBtnManageAptitudeResult() {
 		if (btnManageAptitudeResult == null) {
-			btnManageAptitudeResult = new JButton("적성 결과");
+			btnManageAptitudeResult = new JButton("적성문제");
 			btnManageAptitudeResult.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ResetResultPanel();
 					panelManageAptitudeResult.setVisible(true);
+					panelManageMbtiResult.setVisible(false);
 				}
 			});
 			btnManageAptitudeResult.setBounds(300, 10, 120, 35);
 		}
 		return btnManageAptitudeResult;
 	}
-	
-	public void ResetResultPanel() {
-		panelManageMbtiResult.setVisible(false);
-		panelManageAptitudeResult.setVisible(false);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-}//=================
+}
