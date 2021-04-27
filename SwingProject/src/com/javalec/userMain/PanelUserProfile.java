@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JButton;
 
 public class PanelUserProfile extends JPanel {
 	private JLabel lblNewLabel;
@@ -17,6 +18,7 @@ public class PanelUserProfile extends JPanel {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JLabel lblNewLabel_2;
+	private JButton btnUserProfileEdit;
 
 	/**
 	 * Create the panel.
@@ -34,6 +36,7 @@ public class PanelUserProfile extends JPanel {
 		add(getTextField_3());
 		add(getTextField_4());
 		add(getLblNewLabel_2());
+		add(getBtnUserProfileEdit());
 	}
 
 	private JLabel getLblNewLabel() {
@@ -76,6 +79,7 @@ public class PanelUserProfile extends JPanel {
 	private JTextField getTextField_2() {
 		if (textField_2 == null) {
 			textField_2 = new JTextField();
+			textField_2.setEnabled(false);
 			textField_2.setColumns(10);
 			textField_2.setBounds(116, 257, 116, 21);
 		}
@@ -91,6 +95,7 @@ public class PanelUserProfile extends JPanel {
 	private JTextField getTextField_3() {
 		if (textField_3 == null) {
 			textField_3 = new JTextField();
+			textField_3.setEnabled(false);
 			textField_3.setColumns(10);
 			textField_3.setBounds(117, 329, 116, 21);
 		}
@@ -99,6 +104,7 @@ public class PanelUserProfile extends JPanel {
 	private JTextField getTextField_4() {
 		if (textField_4 == null) {
 			textField_4 = new JTextField();
+			textField_4.setEnabled(false);
 			textField_4.setColumns(10);
 			textField_4.setBounds(117, 113, 116, 21);
 		}
@@ -110,5 +116,12 @@ public class PanelUserProfile extends JPanel {
 			lblNewLabel_2.setBounds(37, 188, 57, 15);
 		}
 		return lblNewLabel_2;
+	}
+	private JButton getBtnUserProfileEdit() {
+		if (btnUserProfileEdit == null) {
+			btnUserProfileEdit = new JButton("수정");
+			btnUserProfileEdit.setBounds(355, 328, 97, 23);
+		}
+		return btnUserProfileEdit;
 	}
 }
