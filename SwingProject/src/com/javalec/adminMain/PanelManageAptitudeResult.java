@@ -32,7 +32,7 @@ public class PanelManageAptitudeResult extends JPanel {
 	 */
 	public PanelManageAptitudeResult() {
 		setBackground(Color.RED);
-		setBounds(new Rectangle(180, 70, 370, 350));
+		setBounds(new Rectangle(65, 57, 370, 350));
 		setLayout(null);
 		add(getScrollPane_AdAptitideResult());
 		add(getLblAdAptitideResultName());

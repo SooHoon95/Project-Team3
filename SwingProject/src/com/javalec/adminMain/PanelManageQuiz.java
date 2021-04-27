@@ -23,7 +23,7 @@ public class PanelManageQuiz extends JPanel {
 		add(getBtnManageMbtiQuiz());
 		add(getBtnManageAptitudeQuiz());
 		add(panelManageMbtiQuiz);
-		add(panelManageMbtiQuiz);
+		add(panelManageAptitudeQuiz);
 	}
 
 	private JButton getBtnManageMbtiQuiz() {
