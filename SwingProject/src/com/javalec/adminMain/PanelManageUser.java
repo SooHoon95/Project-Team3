@@ -1,6 +1,7 @@
 package com.javalec.adminMain;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -12,7 +13,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-public class AdManageUser extends JPanel {
+public class PanelManageUser extends JPanel {
 	private JScrollPane scrollPane_AdUser;
 	private JTable inner_table_AdUser;
 	private final DefaultTableModel Outer_Table_AdManagerUser = new DefaultTableModel(); // ################
@@ -33,9 +34,9 @@ public class AdManageUser extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AdManageUser() {
+	public PanelManageUser() {
 		setBackground(Color.YELLOW);
-		setBounds(165, 45, 539, 396);
+		setBounds(new Rectangle(180, 10, 500, 420));
 		setLayout(null);
 		add(getScrollPane_AdUser());
 		add(getScrollPane_AdUser());

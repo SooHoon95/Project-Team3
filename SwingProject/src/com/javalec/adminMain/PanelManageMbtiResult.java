@@ -1,6 +1,7 @@
 package com.javalec.adminMain;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -12,7 +13,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-public class AdManagerMBTIResult extends JPanel {
+public class PanelManageMbtiResult extends JPanel {
 	private JScrollPane scrollPane_AdMBTIResult;
 	private final DefaultTableModel Outer_Table_AdMBTIResult = new DefaultTableModel(); // ################
 	private JTable inner_table_AdMBTIResult;
@@ -29,9 +30,9 @@ public class AdManagerMBTIResult extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AdManagerMBTIResult() {
+	public PanelManageMbtiResult() {
 		setBackground(Color.GREEN);
-		setBounds(165, 45, 539, 396);
+		setBounds(new Rectangle(180, 10, 500, 420));
 		setLayout(null);
 		add(getScrollPane_AdMBTIResult());
 		add(getLblAdMBTIResultName());

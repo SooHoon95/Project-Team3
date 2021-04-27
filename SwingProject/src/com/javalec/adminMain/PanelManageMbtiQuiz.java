@@ -4,6 +4,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Rectangle;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -11,7 +13,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-public class AdManagerMBTIQA extends JPanel {
+public class PanelManageMbtiQuiz extends JPanel {
 	private JScrollPane scrollPane_AdMBTIQA;
 	private JTable inner_table_AdMBTIQA;
 	private final DefaultTableModel Outer_Table_AdMBTIQA= new DefaultTableModel(); // ################
@@ -31,9 +33,9 @@ public class AdManagerMBTIQA extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AdManagerMBTIQA() {
+	public PanelManageMbtiQuiz() {
 		setBackground(Color.BLUE);
-		setBounds(165, 45, 539, 396);
+		setBounds(new Rectangle(180, 10, 500, 420));
 		setLayout(null);
 		add(getScrollPane_AdMBTIQA());
 		add(getLblAdMBTIQANum());
