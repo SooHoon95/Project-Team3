@@ -52,7 +52,7 @@ CREATE TABLE `aptitudequestion` (
   `aqAnswer1` varchar(10) DEFAULT NULL,
   `aqAnswer2` varchar(10) DEFAULT NULL,
   `aqScore1` varchar(10) DEFAULT NULL,
-  `aqScore` varchar(10) DEFAULT NULL,
+  `aqScore2` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`aqNum`),
   UNIQUE KEY `qqNum_UNIQUE` (`aqNum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -103,7 +103,6 @@ DROP TABLE IF EXISTS `mbtiquestion`;
 CREATE TABLE `mbtiquestion` (
   `mqNum` int NOT NULL AUTO_INCREMENT,
   `mqQuestion` varchar(45) DEFAULT NULL,
-  `mqType` varchar(10) DEFAULT NULL,
   `mqAnswer1` varchar(10) DEFAULT NULL,
   `mqAnswer2` varchar(10) DEFAULT NULL,
   `mqScore1` varchar(45) DEFAULT NULL,
@@ -119,7 +118,7 @@ CREATE TABLE `mbtiquestion` (
 
 LOCK TABLES `mbtiquestion` WRITE;
 /*!40000 ALTER TABLE `mbtiquestion` DISABLE KEYS */;
-INSERT INTO `mbtiquestion` VALUES (1,'1','1','1','2','1','0'),(2,'2','2','1','2','1','0');
+INSERT INTO `mbtiquestion` VALUES (1,'1','1','2','1','0'),(2,'2','1','2','1','0');
 /*!40000 ALTER TABLE `mbtiquestion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,7 +131,6 @@ DROP TABLE IF EXISTS `mbtiresult`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mbtiresult` (
   `mrNum` int NOT NULL AUTO_INCREMENT,
-  `mrType` varchar(10) DEFAULT NULL,
   `mrName` varchar(12) DEFAULT NULL,
   `mrExplain` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`mrNum`),
@@ -162,7 +160,7 @@ CREATE TABLE `quizquestion` (
   `qqAnswer1` varchar(10) DEFAULT NULL,
   `qqAnswer2` varchar(10) DEFAULT NULL,
   `qqScore1` varchar(10) DEFAULT NULL,
-  `qqScore` varchar(10) DEFAULT NULL,
+  `qqScore2` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`qqNum`),
   UNIQUE KEY `qqNum_UNIQUE` (`qqNum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -220,7 +218,8 @@ CREATE TABLE `user` (
   `userPw` varchar(45) DEFAULT NULL,
   `userEmail` varchar(45) DEFAULT NULL,
   `userResultM` varchar(45) DEFAULT NULL,
-  `userResultQ` varchar(45) DEFAULT NULL,
+  `userResultA` varchar(45) DEFAULT NULL,
+  `userState` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`userNum`),
   UNIQUE KEY `userNum_UNIQUE` (`userNum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -232,7 +231,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'김도우','kdw','1234','kdw@naver.com',NULL,NULL),(2,'최수훈','csh','1234','csh@naver.com',NULL,NULL),(3,'오성아','osa','1234','osa@naver.com',NULL,NULL),(4,'양현준','yhj','1234','yhj@naver.com',NULL,NULL);
+INSERT INTO `user` VALUES (1,'김도우','kdw','1234','kdw@naver.com',NULL,NULL,NULL),(2,'최수훈','csh','1234','csh@naver.com',NULL,NULL,NULL),(3,'오성아','osa','1234','osa@naver.com',NULL,NULL,NULL),(4,'양현준','yhj','1234','yhj@naver.com',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -245,4 +244,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-28 16:22:39
+-- Dump completed on 2021-04-28 16:34:51

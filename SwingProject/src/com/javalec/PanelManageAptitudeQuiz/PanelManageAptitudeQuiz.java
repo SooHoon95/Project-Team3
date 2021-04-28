@@ -294,7 +294,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection conn_mysql = DriverManager.getConnection(data_Enviroment_define.url_mysql, data_Enviroment_define.id_mysql, data_Enviroment_define.pw_mysql);
 				Statement stmt_mysql = conn_mysql.createStatement();						
-				String query = "insert into aptitudequestion (aqQuestion, aqAnswer1, aqAnswer2, aqScore1, aqScore) values (?,?,?,?,?)";
+				String query = "insert into aptitudequestion (aqQuestion, aqAnswer1, aqAnswer2, aqScore1, aqScore2) values (?,?,?,?,?)";
 
 				ps = conn_mysql.prepareStatement(query);
 				ps.setString(1, tfAdAptitideQA.getText().trim());
