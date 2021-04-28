@@ -156,7 +156,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 	private JTextField getTfAdAptitideQANum() {
 		if (tfAdAptitideQANum == null) {
 			tfAdAptitideQANum = new JTextField();
-			tfAdAptitideQANum.setEnabled(false);
+			tfAdAptitideQANum.setEditable(false);
 			tfAdAptitideQANum.setBounds(93, 189, 60, 26);
 			tfAdAptitideQANum.setColumns(10);
 		}
@@ -243,45 +243,51 @@ public class PanelManageAptitudeQuiz extends JPanel {
 		return cbAptitideAnswer2Score;
 	}
 	//-----------------------------------------------------------
-		//DbAction
-		
-		//DbAction 생성
-		// SungAh 2021.04.28
 		
 		
 		//공백 체크
 		// SungAh 2021.04.28
 		private int FieldCheck() {
 			int i = 0;
+			String message = "";
 			if(tfAdAptitideQA.getText().length() == 0) {
 				i++;
+				message = "질문을 ";
 				tfAdAptitideQA.requestFocus(); // 커서 띄우기
 			}
 			if(tfAdAptitideAnswer1.getText().length() == 0) {
 				i++;
+				message = "답1을 ";
 				tfAdAptitideAnswer1.requestFocus();
 			}
 			if(tfAdAptitideAnswer2.getText().length() == 0) {
 				i++;
+				message = "답2을 ";
 				tfAdAptitideAnswer2.requestFocus();
 			}
 			if(cbAptitideAnswer1Score.getSelectedItem() == null) {
+				message = "점수1을 ";
 				i++;
 			}
 			if(cbAptitideAnswer1Score.getSelectedItem() == null) {
+				message = "점수2를 ";
 				i++;
 			}
+			if(i>0) {
+				JOptionPane.showMessageDialog(null, message + "입력하세요");
+			}
+			
 			return i;
 		}
 		
-		//공백체크 메세지
+		//공백체크+생성버튼 동작 실행
 		//SungAh 2021.04.28
 		private void ActionPartition_insertAction() {
 			int i_chk = FieldCheck();
 			if(i_chk == 0) {
 				MAQ_insertAction();
 			}else {
-				JOptionPane.showMessageDialog(this, "정보를 입력하세요");
+				
 			}
 		}
 		
@@ -294,7 +300,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection conn_mysql = DriverManager.getConnection(data_Enviroment_define.url_mysql, data_Enviroment_define.id_mysql, data_Enviroment_define.pw_mysql);
 				Statement stmt_mysql = conn_mysql.createStatement();						
-				String query = "insert into aptitudequestion (aqQuestion, aqAnswer1, aqAnswer2, aqScore1, aqScore2) values (?,?,?,?,?)";
+				String query = "insert into SwingProject_Database.aptitudequestion (aqQuestion, aqAnswer1, aqAnswer2, aqScore1, aqScore2) values (?,?,?,?,?)";
 
 				ps = conn_mysql.prepareStatement(query);
 				ps.setString(1, tfAdAptitideQA.getText().trim());
@@ -317,7 +323,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 				return false;
 			}
 		}
-		
+	
 		// 생성 액션
 		// SungAh 2021.04.28
 		private void MAQ_insertAction() {
