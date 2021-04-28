@@ -232,7 +232,7 @@ public class DbAction {
               				
 	}
 	
-	
+	//수정
 	public boolean UpdateAction() {
       PreparedStatement ps = null;
       
