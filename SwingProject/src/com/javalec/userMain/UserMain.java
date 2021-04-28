@@ -40,7 +40,7 @@ public class UserMain extends JDialog {
 	public static void main(String[] args) {
 		try {
 			UserMain dialog = new UserMain();
-			dialog.frame.setVisible(true);
+			dialog.setVisible(true);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,26 +51,17 @@ public class UserMain extends JDialog {
 	 * Create the dialog.
 	 */
 	public UserMain() {
-		initialize();
+		setTitle("유저 Page");
+		setBounds(100, 100, 720, 480);
+		getContentPane().setLayout(null);
+		
+		getContentPane().add(getBtnUserProfile());
+		getContentPane().add(getBtnUserMbti());
+		getContentPane().add(getBtnUserAptitudeQuiz());
+		getContentPane().add(getBtnUserStatistic());
+
 	}
-	
-	private void initialize() {
-		frame = new JFrame();
-		
-		frame.setBounds(100, 100, 720, 480);
-		frame.getContentPane().setLayout(null);
-		
-		frame.getContentPane().add(getBtnUserProfile());
-		frame.getContentPane().add(getBtnUserMbti());
-		frame.getContentPane().add(getBtnUserAptitudeQuiz());
-		frame.getContentPane().add(getBtnUserStatistic());
-		
-		frame.getContentPane().add(panelUserPrifile);
-		frame.getContentPane().add(panelUserMbti); 
-		frame.getContentPane().add(panelUserAptitudeQuiz); 
-		frame.getContentPane().add(panelUserStatistic);
-		RestPanel();
-	}
+
 	
 	private JButton getBtnUserProfile() {
 		if (btnUserProfile == null) {
