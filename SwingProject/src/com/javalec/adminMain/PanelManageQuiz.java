@@ -3,6 +3,10 @@ package com.javalec.adminMain;
 import java.awt.Rectangle;
 
 import javax.swing.JPanel;
+
+import com.javalec.PanelManageAptitudeQuiz.PanelManageAptitudeQuiz;
+import com.javalec.PanelManageMbtiQuiz.PanelManageMbtiQuiz;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

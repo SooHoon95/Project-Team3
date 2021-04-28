@@ -8,6 +8,12 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.javalec.PanelUserAptitudeQuiz.PanelUserAptitudeQuiz;
+import com.javalec.PanelUserMbti.PanelUserMbti;
+import com.javalec.PanelUserProfile.PanelUserProfile;
+import com.javalec.PanelUserStatistic.PanelUserStatistic;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
