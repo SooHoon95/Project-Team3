@@ -48,6 +48,7 @@ public class PanelManageMbtiQuiz extends JPanel {
    private JLabel lblAdMBTIAnswer2_1;
    private JComboBox cbMBTIAnswer1Score;
    private JComboBox cbMBTIAnswer2Score;
+   private JButton btnAdMBTIQARemove_1;
 
    /**
     * Create the panel.
@@ -74,6 +75,7 @@ public class PanelManageMbtiQuiz extends JPanel {
       add(getLblAdMBTIAnswer2_1());
       add(getCbMBTIAnswer1Score());
       add(getCbMBTIAnswer2Score());
+      add(getBtnAdMBTIQARemove_1());
 
    }
 
@@ -172,7 +174,7 @@ public class PanelManageMbtiQuiz extends JPanel {
                ClearColumn();
             }
          });
-         btnAdMBTIQACreate.setBounds(20, 320, 60, 29);
+         btnAdMBTIQACreate.setBounds(26, 320, 60, 29);
       }
       return btnAdMBTIQACreate;
    }
@@ -187,7 +189,7 @@ public class PanelManageMbtiQuiz extends JPanel {
                ClearColumn();
             }
          });
-         btnAdMBTIQAEdit.setBounds(155, 320, 60, 29);
+         btnAdMBTIQAEdit.setBounds(112, 320, 60, 29);
       }
       return btnAdMBTIQAEdit;
    }
@@ -202,7 +204,7 @@ public class PanelManageMbtiQuiz extends JPanel {
                ClearColumn();
             }
          });
-         btnAdMBTIQARemove.setBounds(290, 320, 60, 29);
+         btnAdMBTIQARemove.setBounds(198, 320, 60, 29);
       }
       return btnAdMBTIQARemove;
    }
@@ -216,7 +218,7 @@ public class PanelManageMbtiQuiz extends JPanel {
    private JComboBox getCbType() {
       if (cbType == null) {
          cbType = new JComboBox();
-         cbType.setModel(new DefaultComboBoxModel(new String[] {"EI", "SN", "TF", "JP"}));
+         cbType.setModel(new DefaultComboBoxModel(new String[] {"선택", "EI", "SN", "TF", "JP"}));
          cbType.setBounds(253, 189, 105, 26);
       }
       return cbType;
@@ -407,6 +409,11 @@ public class PanelManageMbtiQuiz extends JPanel {
       cbMBTIAnswer1Score.setSelectedItem("1");
       cbMBTIAnswer2Score.setSelectedItem("1");
    }
-      
-   
+	private JButton getBtnAdMBTIQARemove_1() {
+		if (btnAdMBTIQARemove_1 == null) {
+			btnAdMBTIQARemove_1 = new JButton("검색");
+			btnAdMBTIQARemove_1.setBounds(284, 320, 60, 29);
+		}
+		return btnAdMBTIQARemove_1;
+	}
 }//==============================
