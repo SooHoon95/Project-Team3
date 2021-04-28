@@ -1,4 +1,4 @@
-package com.javalec.login;
+package com.javalec.login; // 04_28 현준 저녁에 할 예정 ㅎㅎ;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.Color;
 
 public class SearchPW extends JDialog {
 
@@ -65,7 +66,8 @@ public class SearchPW extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnOK = new JButton("확인");
+				JButton btnOK = new JButton("찾기");
+				btnOK.setBackground(new Color(102, 153, 255));
 				btnOK.setActionCommand("OK");
 				buttonPane.add(btnOK);
 				getRootPane().setDefaultButton(btnOK);

@@ -1,4 +1,4 @@
-package com.javalec.login;
+package com.javalec.login;  // 0428 현준 회원가입 기능 수정
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -7,12 +7,21 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.javalec.Datadefine.data_Enviroment_define;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 
 public class SignUp extends JDialog {
@@ -29,6 +38,8 @@ public class SignUp extends JDialog {
 	private JButton btnSignUp;
 	private JButton btnOverlap;
 	private JPasswordField pwSignPw;
+	
+	data_Enviroment_define dataDefine = new data_Enviroment_define();
 
 	/**
 	 * Launch the application.
@@ -171,13 +182,40 @@ public class SignUp extends JDialog {
 	}
 	
 	public void insertAction() {
-		
+		PreparedStatement ps = null;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(dataDefine.url_mysql, dataDefine.id_mysql, dataDefine.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			
+			String query = "insert into user (userName, userId, userPw, userEmail)\n"
+					+ "values (?,?,?,?);";
+
+			ps = conn_mysql.prepareStatement(query); // 쿼리를 실행하여 ps 형태로 ?값에 가져오기 
+			ps.setString(1, tfSignName.getText().trim());
+			ps.setString(2, tfSignId.getText().trim());
+			
+			char[] pw = pwSignPw.getPassword();
+			String pwString = new String(pw); // 패스워드 char -> string
+			ps.setString(3, pwString.trim());
+			
+			ps.setString(4, tfSignEmail.getText().trim());
+			ps.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null,  tfSignName.getText() + " 님의 아이디가 저장되었습니다.");
+			
+			conn_mysql.close(); // DB 연결 끊기
+			
+			// to do ----------------------------- 회원가입 창 종료 기능 넣기 
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace(); // 화면에 에러코드 보여주기
+		}
 	}
 	
+
 	
-	
-	
-	
-	
-	
-}//===============
+}
