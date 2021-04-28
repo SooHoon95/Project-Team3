@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.17, for macos10.14 (x86_64)
 --
--- Host: localhost    Database: swing_project_team3
+-- Host: localhost    Database: SwingProject_Database
 -- ------------------------------------------------------
--- Server version	8.0.22
+-- Server version	8.0.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -40,6 +40,60 @@ INSERT INTO `admin` VALUES ('admin','1234');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `aptitudequestion`
+--
+
+DROP TABLE IF EXISTS `aptitudequestion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `aptitudequestion` (
+  `aqNum` int NOT NULL AUTO_INCREMENT,
+  `aqQuestion` varchar(45) DEFAULT NULL,
+  `aqAnswer1` varchar(10) DEFAULT NULL,
+  `aqAnswer2` varchar(10) DEFAULT NULL,
+  `aqScore1` varchar(10) DEFAULT NULL,
+  `aqScore2` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`aqNum`),
+  UNIQUE KEY `qqNum_UNIQUE` (`aqNum`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `aptitudequestion`
+--
+
+LOCK TABLES `aptitudequestion` WRITE;
+/*!40000 ALTER TABLE `aptitudequestion` DISABLE KEYS */;
+INSERT INTO `aptitudequestion` VALUES (1,'1','1','2','1','0'),(2,'2','1','2','0','1'),(3,'3','33','33','0','0');
+/*!40000 ALTER TABLE `aptitudequestion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `aptituderesult`
+--
+
+DROP TABLE IF EXISTS `aptituderesult`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `aptituderesult` (
+  `arNum` int NOT NULL AUTO_INCREMENT,
+  `arName` varchar(45) DEFAULT NULL,
+  `arExplain` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`arNum`),
+  UNIQUE KEY `QuizNum_UNIQUE` (`arNum`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `aptituderesult`
+--
+
+LOCK TABLES `aptituderesult` WRITE;
+/*!40000 ALTER TABLE `aptituderesult` DISABLE KEYS */;
+/*!40000 ALTER TABLE `aptituderesult` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `mbtiquestion`
 --
 
@@ -49,7 +103,6 @@ DROP TABLE IF EXISTS `mbtiquestion`;
 CREATE TABLE `mbtiquestion` (
   `mqNum` int NOT NULL AUTO_INCREMENT,
   `mqQuestion` varchar(45) DEFAULT NULL,
-  `mqType` varchar(10) DEFAULT NULL,
   `mqAnswer1` varchar(10) DEFAULT NULL,
   `mqAnswer2` varchar(10) DEFAULT NULL,
   `mqScore1` varchar(45) DEFAULT NULL,
@@ -65,7 +118,7 @@ CREATE TABLE `mbtiquestion` (
 
 LOCK TABLES `mbtiquestion` WRITE;
 /*!40000 ALTER TABLE `mbtiquestion` DISABLE KEYS */;
-INSERT INTO `mbtiquestion` VALUES (1,'1','1','1','2','1','0'),(2,'2','2','1','2','1','0');
+INSERT INTO `mbtiquestion` VALUES (1,'1','1','2','1','0'),(2,'2','1','2','1','0');
 /*!40000 ALTER TABLE `mbtiquestion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,13 +130,11 @@ DROP TABLE IF EXISTS `mbtiresult`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mbtiresult` (
-  `mbtiNum` int NOT NULL AUTO_INCREMENT,
-  `mbtiType` varchar(10) DEFAULT NULL,
-  `mbtiName` varchar(12) DEFAULT NULL,
-  `mbtiExplain` varchar(1000) DEFAULT NULL,
-  `mbtiImage` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`mbtiNum`),
-  UNIQUE KEY `MbtiNum_UNIQUE` (`mbtiNum`)
+  `mrNum` int NOT NULL AUTO_INCREMENT,
+  `mrName` varchar(12) DEFAULT NULL,
+  `mrExplain` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`mrNum`),
+  UNIQUE KEY `MbtiNum_UNIQUE` (`mrNum`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -109,7 +160,7 @@ CREATE TABLE `quizquestion` (
   `qqAnswer1` varchar(10) DEFAULT NULL,
   `qqAnswer2` varchar(10) DEFAULT NULL,
   `qqScore1` varchar(10) DEFAULT NULL,
-  `qqScore` varchar(10) DEFAULT NULL,
+  `qqScore2` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`qqNum`),
   UNIQUE KEY `qqNum_UNIQUE` (`qqNum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -167,7 +218,8 @@ CREATE TABLE `user` (
   `userPw` varchar(45) DEFAULT NULL,
   `userEmail` varchar(45) DEFAULT NULL,
   `userResultM` varchar(45) DEFAULT NULL,
-  `userResultQ` varchar(45) DEFAULT NULL,
+  `userResultA` varchar(45) DEFAULT NULL,
+  `userState` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`userNum`),
   UNIQUE KEY `userNum_UNIQUE` (`userNum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -179,7 +231,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'김도우','kdw','1234','kdw@naver.com',NULL,NULL),(2,'최수훈','csh','1234','csh@naver.com',NULL,NULL),(3,'오성아','osa','1234','osa@naver.com',NULL,NULL),(4,'양현준','yhj','1234','yhj@naver.com',NULL,NULL);
+INSERT INTO `user` VALUES (1,'김도우','kdw','1234','kdw@naver.com',NULL,NULL,NULL),(2,'최수훈','csh','1234','csh@naver.com',NULL,NULL,NULL),(3,'오성아','osa','1234','osa@naver.com',NULL,NULL,NULL),(4,'양현준','yhj','1234','yhj@naver.com',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -192,4 +244,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-28 13:58:10
+-- Dump completed on 2021-04-28 16:34:51
