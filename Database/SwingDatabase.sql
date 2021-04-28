@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.17, for macos10.14 (x86_64)
 --
--- Host: localhost    Database: swing_project_team3
+-- Host: localhost    Database: SwingProject_Database
 -- ------------------------------------------------------
--- Server version	8.0.17
+-- Server version	8.0.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -47,7 +47,7 @@ DROP TABLE IF EXISTS `aptitudequestion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `aptitudequestion` (
-  `aqNum` int(11) NOT NULL,
+  `aqNum` int NOT NULL AUTO_INCREMENT,
   `aqQuestion` varchar(45) DEFAULT NULL,
   `aqAnswer1` varchar(10) DEFAULT NULL,
   `aqAnswer2` varchar(10) DEFAULT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE `aptitudequestion` (
   `aqScore` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`aqNum`),
   UNIQUE KEY `qqNum_UNIQUE` (`aqNum`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `aptitudequestion` (
 
 LOCK TABLES `aptitudequestion` WRITE;
 /*!40000 ALTER TABLE `aptitudequestion` DISABLE KEYS */;
-INSERT INTO `aptitudequestion` VALUES (1,'1','1','2','1','0'),(2,'2','1','2','0','1');
+INSERT INTO `aptitudequestion` VALUES (1,'1','1','2','1','0'),(2,'2','1','2','0','1'),(3,'3','33','33','0','0');
 /*!40000 ALTER TABLE `aptitudequestion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,7 +76,7 @@ DROP TABLE IF EXISTS `aptituderesult`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `aptituderesult` (
-  `arNum` int(11) NOT NULL,
+  `arNum` int NOT NULL AUTO_INCREMENT,
   `arName` varchar(45) DEFAULT NULL,
   `arExplain` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`arNum`),
@@ -101,7 +101,7 @@ DROP TABLE IF EXISTS `mbtiquestion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mbtiquestion` (
-  `mqNum` int(11) NOT NULL AUTO_INCREMENT,
+  `mqNum` int NOT NULL AUTO_INCREMENT,
   `mqQuestion` varchar(45) DEFAULT NULL,
   `mqType` varchar(10) DEFAULT NULL,
   `mqAnswer1` varchar(10) DEFAULT NULL,
@@ -131,7 +131,7 @@ DROP TABLE IF EXISTS `mbtiresult`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mbtiresult` (
-  `mrNum` int(11) NOT NULL AUTO_INCREMENT,
+  `mrNum` int NOT NULL AUTO_INCREMENT,
   `mrType` varchar(10) DEFAULT NULL,
   `mrName` varchar(12) DEFAULT NULL,
   `mrExplain` varchar(1000) DEFAULT NULL,
@@ -150,6 +150,63 @@ LOCK TABLES `mbtiresult` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `quizquestion`
+--
+
+DROP TABLE IF EXISTS `quizquestion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `quizquestion` (
+  `qqNum` int NOT NULL AUTO_INCREMENT,
+  `qqQuestion` varchar(45) DEFAULT NULL,
+  `qqAnswer1` varchar(10) DEFAULT NULL,
+  `qqAnswer2` varchar(10) DEFAULT NULL,
+  `qqScore1` varchar(10) DEFAULT NULL,
+  `qqScore` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`qqNum`),
+  UNIQUE KEY `qqNum_UNIQUE` (`qqNum`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quizquestion`
+--
+
+LOCK TABLES `quizquestion` WRITE;
+/*!40000 ALTER TABLE `quizquestion` DISABLE KEYS */;
+INSERT INTO `quizquestion` VALUES (1,'1','1','2','1','0'),(2,'2','1','2','0','1');
+/*!40000 ALTER TABLE `quizquestion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `quizresult`
+--
+
+DROP TABLE IF EXISTS `quizresult`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `quizresult` (
+  `quizNum` int NOT NULL AUTO_INCREMENT,
+  `quizType` varchar(45) DEFAULT NULL,
+  `quizExplain` varchar(45) DEFAULT NULL,
+  `quizGrade1` varchar(45) DEFAULT NULL,
+  `quizGrade2` varchar(45) DEFAULT NULL,
+  `quizGrade3` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`quizNum`),
+  UNIQUE KEY `QuizNum_UNIQUE` (`quizNum`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quizresult`
+--
+
+LOCK TABLES `quizresult` WRITE;
+/*!40000 ALTER TABLE `quizresult` DISABLE KEYS */;
+/*!40000 ALTER TABLE `quizresult` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -157,7 +214,7 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `userNum` int(11) NOT NULL AUTO_INCREMENT,
+  `userNum` int NOT NULL AUTO_INCREMENT,
   `userName` varchar(15) DEFAULT NULL,
   `userId` varchar(45) DEFAULT NULL,
   `userPw` varchar(45) DEFAULT NULL,
@@ -188,4 +245,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-28 14:56:49
+-- Dump completed on 2021-04-28 16:22:39

@@ -2,9 +2,14 @@ package com.javalec.PanelManageAptitudeQuiz;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -12,8 +17,13 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+
+import com.javalec.Datadefine.data_Enviroment_define;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelManageAptitudeQuiz extends JPanel {
 	private JScrollPane scrollPane_AdAptitideQA;
@@ -146,6 +156,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 	private JTextField getTfAdAptitideQANum() {
 		if (tfAdAptitideQANum == null) {
 			tfAdAptitideQANum = new JTextField();
+			tfAdAptitideQANum.setEnabled(false);
 			tfAdAptitideQANum.setBounds(93, 189, 60, 26);
 			tfAdAptitideQANum.setColumns(10);
 		}
@@ -178,6 +189,11 @@ public class PanelManageAptitudeQuiz extends JPanel {
 	private JButton getBtnAdAptitideQACreate() {
 		if (btnAdAptitideQACreate == null) {
 			btnAdAptitideQACreate = new JButton("생성");
+			btnAdAptitideQACreate.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ActionPartition_insertAction();
+				}
+			});
 			btnAdAptitideQACreate.setBounds(20, 320, 60, 29);
 		}
 		return btnAdAptitideQACreate;
@@ -213,6 +229,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 	private JComboBox getCbAptitideAnswer1Score() {
 		if (cbAptitideAnswer1Score == null) {
 			cbAptitideAnswer1Score = new JComboBox();
+			cbAptitideAnswer1Score.setModel(new DefaultComboBoxModel(new String[] {"", "0", "1"}));
 			cbAptitideAnswer1Score.setBounds(296, 258, 62, 26);
 		}
 		return cbAptitideAnswer1Score;
@@ -220,8 +237,102 @@ public class PanelManageAptitudeQuiz extends JPanel {
 	private JComboBox getCbAptitideAnswer2Score() {
 		if (cbAptitideAnswer2Score == null) {
 			cbAptitideAnswer2Score = new JComboBox();
+			cbAptitideAnswer2Score.setModel(new DefaultComboBoxModel(new String[] {"", "0", "1"}));
 			cbAptitideAnswer2Score.setBounds(297, 292, 61, 26);
 		}
 		return cbAptitideAnswer2Score;
 	}
+	//-----------------------------------------------------------
+		//DbAction
+		
+		//DbAction 생성
+		// SungAh 2021.04.28
+		
+		
+		//공백 체크
+		// SungAh 2021.04.28
+		private int FieldCheck() {
+			int i = 0;
+			if(tfAdAptitideQA.getText().length() == 0) {
+				i++;
+				tfAdAptitideQA.requestFocus(); // 커서 띄우기
+			}
+			if(tfAdAptitideAnswer1.getText().length() == 0) {
+				i++;
+				tfAdAptitideAnswer1.requestFocus();
+			}
+			if(tfAdAptitideAnswer2.getText().length() == 0) {
+				i++;
+				tfAdAptitideAnswer2.requestFocus();
+			}
+			if(cbAptitideAnswer1Score.getSelectedItem() == null) {
+				i++;
+			}
+			if(cbAptitideAnswer1Score.getSelectedItem() == null) {
+				i++;
+			}
+			return i;
+		}
+		
+		//공백체크 메세지
+		//SungAh 2021.04.28
+		private void ActionPartition_insertAction() {
+			int i_chk = FieldCheck();
+			if(i_chk == 0) {
+				MAQ_insertAction();
+			}else {
+				JOptionPane.showMessageDialog(this, "정보를 입력하세요");
+			}
+		}
+		
+		//생성 버튼 동작 확인+query
+		//SungAh 2021.04.28.
+		public boolean insertAction_boolean() { // 반환값 boolean 확인, 맞으면 true/틀리면 false
+			PreparedStatement ps = null;
+					
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection conn_mysql = DriverManager.getConnection(data_Enviroment_define.url_mysql, data_Enviroment_define.id_mysql, data_Enviroment_define.pw_mysql);
+				Statement stmt_mysql = conn_mysql.createStatement();						
+				String query = "insert into aptitudequestion (aqQuestion, aqAnswer1, aqAnswer2, aqScore1, aqScore) values (?,?,?,?,?)";
+
+				ps = conn_mysql.prepareStatement(query);
+				ps.setString(1, tfAdAptitideQA.getText().trim());
+				ps.setString(2, tfAdAptitideAnswer1.getText().trim());
+				ps.setString(3, tfAdAptitideAnswer2.getText().trim());
+				ps.setString(4, (String) cbAptitideAnswer1Score.getSelectedItem());
+				ps.setString(5, (String) cbAptitideAnswer2Score.getSelectedItem());
+				ps.executeUpdate();
+					
+//				String adAptitideQA = tfAdAptitideQA.getText().trim();
+//				String adAptitideAnswer1 = tfAdAptitideAnswer1.getText().trim();
+//				String adAptitideAnswer2 = tfAdAptitideAnswer2.getText().trim();
+//				String aptitideAnswer1Score = (String) cbAptitideAnswer1Score.getSelectedItem();
+//				String aptitideAnswer2Score = (String) cbAptitideAnswer2Score.getSelectedItem();						
+				
+				conn_mysql.close(); //DB 연결 끊기
+				return true;
+			}catch(Exception e) {
+				e.printStackTrace();// 화면에 에러코드 보여주기
+				return false;
+			}
+		}
+		
+		// 생성 액션
+		// SungAh 2021.04.28
+		private void MAQ_insertAction() {
+			
+			
+			boolean msg = insertAction_boolean();
+			if(msg == true) {
+				JOptionPane.showMessageDialog(this, "적성검사 질문 정보가 입력되었습니다", "입력완료", 
+						JOptionPane.INFORMATION_MESSAGE);
+			}else {
+				JOptionPane.showMessageDialog(this, "DB에 자료 입력 중 에러가 발생했습니다", "Critical Error!", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		
+		
+		
+	
 }//-----------------------------------
