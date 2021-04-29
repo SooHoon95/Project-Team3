@@ -185,10 +185,7 @@ public class PanelManageMbtiQuiz extends JPanel {
          btnAdMBTIQAEdit = new JButton("수정");
          btnAdMBTIQAEdit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            MMQ_UpdateAction();
-            MMQ_TableInit();
-            MMQ_SearchAction();
-            MMQ_ClearColumn();
+           MMQ_UpdateCheckAction();
             }
          });
          btnAdMBTIQAEdit.setBounds(164, 320, 60, 29);
@@ -413,6 +410,19 @@ public class PanelManageMbtiQuiz extends JPanel {
 	}
    
       
+   
+   // 빈값있으면 수정 안되게
+  private void MMQ_UpdateCheckAction() {
+	  int i_chk = MMQ_InsertFieldCheck();
+	   if(i_chk == 0) {
+		   MMQ_UpdateAction();
+		   MMQ_TableInit();
+		   MMQ_SearchAction();
+		   MMQ_ClearColumn();
+	   }
+	   
+	  
+  }
    //수정 메소드
    private void MMQ_UpdateAction() {
       String mqQuestion = tfAdMBTIQA.getText().trim();
