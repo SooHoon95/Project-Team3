@@ -23,6 +23,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -48,7 +50,7 @@ public class PanelManageMbtiQuiz extends JPanel {
    private JLabel lblAdMBTIAnswer2_1;
    private JComboBox cbMBTIAnswer1Score;
    private JComboBox cbMBTIAnswer2Score;
-   private JButton btnAdMBTIQARemove_1;
+   private JButton btnAdMBTIQASearch;
 
    /**
     * Create the panel.
@@ -75,7 +77,8 @@ public class PanelManageMbtiQuiz extends JPanel {
       add(getLblAdMBTIAnswer2_1());
       add(getCbMBTIAnswer1Score());
       add(getCbMBTIAnswer2Score());
-      add(getBtnAdMBTIQARemove_1());
+      add(getBtnAdMBTIQASearch());
+      ClearColumn();
 
    }
 
@@ -99,6 +102,8 @@ public class PanelManageMbtiQuiz extends JPanel {
          
          inner_table_AdMBTIQA.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
          inner_table_AdMBTIQA.setModel(Outer_Table_AdMBTIQA); // 테이블을 불러오기 위해 ******꼭 써야할 것*****
+         
+         TableInit();
       }
       return inner_table_AdMBTIQA;
    }
@@ -151,7 +156,7 @@ public class PanelManageMbtiQuiz extends JPanel {
       if (tfAdMBTIAnswer1 == null) {
          tfAdMBTIAnswer1 = new JTextField();
          tfAdMBTIAnswer1.setColumns(10);
-         tfAdMBTIAnswer1.setBounds(51, 256, 122, 26);
+         tfAdMBTIAnswer1.setBounds(51, 256, 285, 26);
       }
       return tfAdMBTIAnswer1;
    }
@@ -159,7 +164,7 @@ public class PanelManageMbtiQuiz extends JPanel {
       if (tfAdMBTIAnswer2 == null) {
          tfAdMBTIAnswer2 = new JTextField();
          tfAdMBTIAnswer2.setColumns(10);
-         tfAdMBTIAnswer2.setBounds(51, 290, 122, 26);
+         tfAdMBTIAnswer2.setBounds(51, 290, 285, 26);
       }
       return tfAdMBTIAnswer2;
    }
@@ -168,16 +173,8 @@ public class PanelManageMbtiQuiz extends JPanel {
          btnAdMBTIQACreate = new JButton("생성");
          btnAdMBTIQACreate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//	            int i_chk = insertFieldCheck();
-//	            if(i_chk == 0) {
-	            	insertAction();
-	            	TableInit();
-	            	SearchAction();
-	            	ClearColumn();
-//	            }else {
-//					JOptionPane.showMessageDialog(null, "빈칸을 입력하세요");
-//	            }
-            }
+            	InsertCheckAction();
+            	}
          });
          btnAdMBTIQACreate.setBounds(52, 320, 60, 29);
       }
@@ -223,7 +220,7 @@ public class PanelManageMbtiQuiz extends JPanel {
    private JComboBox getCbType() {
       if (cbType == null) {
          cbType = new JComboBox();
-         cbType.setModel(new DefaultComboBoxModel(new String[] {"선택", "EI", "SN", "TF", "JP"}));
+         cbType.setModel(new DefaultComboBoxModel(new String[] {"", "EI", "SN", "TF", "JP"}));
          cbType.setBounds(243, 183, 62, 26);
       }
       return cbType;
@@ -231,14 +228,14 @@ public class PanelManageMbtiQuiz extends JPanel {
    private JLabel getLblAdMBTIAnswer1_1() {
       if (lblAdMBTIAnswer1_1 == null) {
          lblAdMBTIAnswer1_1 = new JLabel("답1 점수");
-         lblAdMBTIAnswer1_1.setBounds(185, 258, 46, 16);
+         lblAdMBTIAnswer1_1.setBounds(368, 258, 46, 16);
       }
       return lblAdMBTIAnswer1_1;
    }
    private JLabel getLblAdMBTIAnswer2_1() {
       if (lblAdMBTIAnswer2_1 == null) {
          lblAdMBTIAnswer2_1 = new JLabel("답2 점수");
-         lblAdMBTIAnswer2_1.setBounds(185, 294, 61, 16);
+         lblAdMBTIAnswer2_1.setBounds(368, 294, 46, 16);
       }
       return lblAdMBTIAnswer2_1;
    }
@@ -246,7 +243,7 @@ public class PanelManageMbtiQuiz extends JPanel {
       if (cbMBTIAnswer1Score == null) {
          cbMBTIAnswer1Score = new JComboBox();
          cbMBTIAnswer1Score.setModel(new DefaultComboBoxModel(new String[] {"", "0", "1"}));
-         cbMBTIAnswer1Score.setBounds(243, 256, 62, 26);
+         cbMBTIAnswer1Score.setBounds(426, 250, 62, 26);
       }
       return cbMBTIAnswer1Score;
    }
@@ -254,7 +251,7 @@ public class PanelManageMbtiQuiz extends JPanel {
       if (cbMBTIAnswer2Score == null) {
          cbMBTIAnswer2Score = new JComboBox();
          cbMBTIAnswer2Score.setModel(new DefaultComboBoxModel(new String[] {"", "0", "1"}));
-         cbMBTIAnswer2Score.setBounds(244, 290, 61, 26);
+         cbMBTIAnswer2Score.setBounds(427, 284, 61, 26);
       }
       return cbMBTIAnswer2Score;
    }
@@ -266,7 +263,7 @@ public class PanelManageMbtiQuiz extends JPanel {
    
    
    //Table 초기화
-   private void TableInit() {
+  public void TableInit() {
       Outer_Table_AdMBTIQA.addColumn("번호"); //mqNum
       Outer_Table_AdMBTIQA.addColumn("MBTI질문"); //mqQuestion
       Outer_Table_AdMBTIQA.addColumn("답1");   // mqAnswer1
@@ -287,12 +284,12 @@ public class PanelManageMbtiQuiz extends JPanel {
       
       vColIndex = 1; // 2번째 행
       col = inner_table_AdMBTIQA.getColumnModel().getColumn(vColIndex);
-      width = 100; // 2번째 행 가로
+      width = 246; // 2번째 행 가로
       col.setPreferredWidth(width);; // 2번째 행 가로크기 설정
       
       vColIndex = 2; // 3번째 행
       col = inner_table_AdMBTIQA.getColumnModel().getColumn(vColIndex);
-      width = 150; // 2번째 행 가로
+      width = 100; // 2번째 행 가로
       col.setPreferredWidth(width);; // 3번째 행 가로크기 설정
       
       vColIndex = 3; // 4번째 행
@@ -303,7 +300,7 @@ public class PanelManageMbtiQuiz extends JPanel {
    }
    
    //DB to Table
-   private void SearchAction() {
+   public void SearchAction() {
       
       MMQ_DbAction dbAction = new MMQ_DbAction();
       ArrayList<MMQ_Bean> beanlList = dbAction.selectList();
@@ -323,15 +320,16 @@ public class PanelManageMbtiQuiz extends JPanel {
    
    private void TableClick() {
         int i = inner_table_AdMBTIQA.getSelectedRow();
-        String tmSequence = (String)inner_table_AdMBTIQA.getValueAt(i, 0);
-        int wkSequence = Integer.parseInt(tmSequence);
+        String tmmqNum = (String)inner_table_AdMBTIQA.getValueAt(i, 0);
+        int wkSequence = Integer.parseInt(tmmqNum);
         
         
-        MMQ_DbAction dbAction =new MMQ_DbAction();
+        MMQ_DbAction dbAction =new MMQ_DbAction(wkSequence);
         MMQ_Bean bean = dbAction.TableClick();
         
-        tfAdMBTIQA.setText(Integer.toString(bean.getMqNum()));
-        cbType.setSelectedItem(bean.getMqQuestion());
+        tfAdMBTIQANum.setText(Integer.toString(bean.getMqNum()));
+        tfAdMBTIQA.setText(bean.getMqQuestion());
+        cbType.setSelectedItem(bean.getMqType());
         tfAdMBTIAnswer1.setText(bean.getMqAnswer1());
         tfAdMBTIAnswer2.setText(bean.getMqAnswer2());
         cbMBTIAnswer1Score.setSelectedItem(bean.getMqScore1());
@@ -361,7 +359,21 @@ public class PanelManageMbtiQuiz extends JPanel {
                       JOptionPane.ERROR_MESSAGE);    
       }
    }
-      
+   
+   //빈칸메소드 + insertAction
+   private void InsertCheckAction() {
+	   int i_chk = InsertFieldCheck();
+	  
+	   if(i_chk == 0) {
+		   insertAction();
+		   TableInit();
+		   SearchAction();
+		   ClearColumn();
+	   }
+	   
+   }
+   
+   
    // 빈값있으면 삽입 안되게.
    private int InsertFieldCheck() {
 		int i = 0;
@@ -409,8 +421,9 @@ public class PanelManageMbtiQuiz extends JPanel {
       String mqAnswer2 = tfAdMBTIAnswer2.getText().trim();
       String mqScore1 = cbMBTIAnswer1Score.getSelectedItem().toString();
       String mqScore2 = cbMBTIAnswer2Score.getSelectedItem().toString();
-      int mqNum = Integer.parseInt(tfAdMBTIQANum.getText().trim());
+      int mqNum = Integer.parseInt(tfAdMBTIQANum.getText());
       
+      System.out.println(mqNum + "mqnum");
       MMQ_DbAction dbAction = new MMQ_DbAction(mqQuestion, mqType, mqAnswer1, mqAnswer2, mqScore1, mqScore2, mqNum);
       boolean msg = dbAction.UpdateAction();
       
@@ -427,7 +440,7 @@ public class PanelManageMbtiQuiz extends JPanel {
    // Data 삭제
       private void DeleteAction() {
             
-         int mqNum = Integer.parseInt(tfAdMBTIQA.getText());
+         int mqNum = Integer.parseInt(tfAdMBTIQANum.getText());
          
          MMQ_DbAction dbAction =new MMQ_DbAction(mqNum);
          boolean msg=dbAction.DeleteAction();
@@ -443,22 +456,85 @@ public class PanelManageMbtiQuiz extends JPanel {
             }
          }
    
+   // 유형 선택하고 검색 버튼 입력시 
+   		private void ConditionQueryAction(String selectType) {
+//   			selectType = cbType.getSelectedItem().toString();
+   			
+   			MMQ_DbAction dbAction = new MMQ_DbAction(selectType);
+   			ArrayList<MMQ_Bean> beanlList = dbAction.ConditionQueryAction();
+   				
+   			
+   				int listCount =beanlList.size();
+   				for(int i=0; i<listCount; i++) {
+   					String temp =Integer.toString(beanlList.get(i).getMqNum());
+   					String[] qtxt = {temp, beanlList.get(i).getMqQuestion(),beanlList.get(i).getMqAnswer1(),beanlList.get(i).getMqAnswer2()};
+   					Outer_Table_AdMBTIQA.addRow(qtxt);
+   				}
+   				
+   		}
+      private void ConditionQuery() {
+    	  int i = cbType.getSelectedIndex();
+  		String selectType = "";
+  		switch (i) {
+  		case 0:
+  			selectType = null;
+  			break;
+  		case 1:
+  			selectType = "EI";
+  			break;
+  		case 2:
+  			selectType = "SN";
+  			break;
+  		case 3:
+  			selectType = "TF";
+  			break;
+  		case 4:
+  			selectType = "JP";
+  			break;
+  		default:
+  			break;
+  		} 
+  		
+  		TableInit();
+  		ClearColumn();
+  		ConditionQueryAction(selectType);
+
+      }
    
    //DataField 정리
-   private void ClearColumn() {
+   public void ClearColumn() {
       tfAdMBTIQANum.setText("");
       tfAdMBTIQA.setText("");
-      cbType.setSelectedItem("EI");
+//      cbType.setSelectedItem(null);
       tfAdMBTIAnswer1.setText("");
       tfAdMBTIAnswer2.setText("");
-      cbMBTIAnswer1Score.setSelectedItem("1");
-      cbMBTIAnswer2Score.setSelectedItem("1");
+      cbMBTIAnswer1Score.setSelectedItem(null);
+      cbMBTIAnswer2Score.setSelectedItem(null);
    }
-	private JButton getBtnAdMBTIQARemove_1() {
-		if (btnAdMBTIQARemove_1 == null) {
-			btnAdMBTIQARemove_1 = new JButton("검색");
-			btnAdMBTIQARemove_1.setBounds(388, 320, 60, 29);
+   
+   //tf 에디터블
+   private void editabletf() {
+	   tfAdMBTIQANum.setEditable(false);
+	   tfAdMBTIQA.setEditable(false);
+	   cbType.setEditable(false);
+	   tfAdMBTIAnswer1.setEditable(false);
+	   tfAdMBTIAnswer2.setEditable(false);
+	   cbMBTIAnswer1Score.setEditable(false);
+	   cbMBTIAnswer2Score.setEditable(false);
+   }
+   
+	private JButton getBtnAdMBTIQASearch() {
+		if (btnAdMBTIQASearch == null) {
+			btnAdMBTIQASearch = new JButton("검색");
+			btnAdMBTIQASearch.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				ConditionQuery();
+				ClearColumn();
+	
+				}
+			});
+			btnAdMBTIQASearch.setBounds(388, 320, 60, 29);
 		}
-		return btnAdMBTIQARemove_1;
+		return btnAdMBTIQASearch;
 	}
 }//==============================

@@ -38,6 +38,9 @@ public class PanelManageQuiz extends JPanel {
 					ResetQuizpanel();
 					panelManageAptitudeQuiz.setVisible(false);
 					panelManageMbtiQuiz.setVisible(true);
+					panelManageMbtiQuiz.ClearColumn();
+					panelManageMbtiQuiz.TableInit();
+					panelManageMbtiQuiz.SearchAction();
 				}
 			});
 			btnManageMbtiQuiz.setBounds(86, 10, 120, 35);
