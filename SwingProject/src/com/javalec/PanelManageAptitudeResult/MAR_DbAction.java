@@ -97,7 +97,6 @@ public class MAR_DbAction {
 			
 			MAR_Bean bean =null;
 			
-	      //tfSelection.setText(stSequence);
 	      String A = "select arNum, arName, arExplain from aptituderesult "; 
 	      String B = "where arNUM = ";
 	      try{

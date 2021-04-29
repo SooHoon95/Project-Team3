@@ -57,7 +57,7 @@ public class MU_DbAction {
 			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
 	
 				ps = conn_mysql.prepareStatement(A+B); 
-				 ps.setString(1, userState.trim());
+				 ps.setString(1, "탈퇴");
 		         ps.setInt(2, userNum);
 		         ps.executeUpdate();
 	
