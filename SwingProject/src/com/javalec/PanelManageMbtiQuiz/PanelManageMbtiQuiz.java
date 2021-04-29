@@ -394,11 +394,11 @@ public class PanelManageMbtiQuiz extends JPanel {
 			message = "답2을 ";
 			tfAdMBTIAnswer2.requestFocus();
 		}
-		if(cbMBTIAnswer1Score.getSelectedItem() == null) {
+		if(cbMBTIAnswer1Score.getSelectedItem().equals("")) {
 			message = "점수1을 ";
 			i++;
 		}
-		if(cbMBTIAnswer1Score.getSelectedItem() == null) {
+		if(cbMBTIAnswer2Score.getSelectedItem().equals("")) {
 			message = "점수2를 ";
 			i++;
 		}
