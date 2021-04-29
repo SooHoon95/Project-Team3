@@ -71,7 +71,7 @@ public class MAQ_DbAction {
 	//전체 검색(table)
 	 public ArrayList<MAQ_Bean> selectList(){
 		 ArrayList<MAQ_Bean> beanList = new ArrayList<MAQ_Bean>();
-		 String WhereDefault = "select aqNum, aqQuestion, aqAnswer1, aqAnswer2 from SwingProject_Database.aptitudequestion ";
+		 String WhereDefault = "select aqNum, aqQuestion, aqAnswer1, aqAnswer2 from swing_project_team3.aptitudequestion ";
 	      
 			try{
 	          Class.forName("com.mysql.cj.jdbc.Driver");
@@ -104,7 +104,7 @@ public class MAQ_DbAction {
 	
 		 MAQ_Bean maq_bean = null;
 	
-		String WhereDefault = "select aqNum, aqQuestion, aqAnswer1, aqAnswer2, aqScore1, aqScore2 from SwingProject_Database.aptitudequestion "; 
+		String WhereDefault = "select aqNum, aqQuestion, aqAnswer1, aqAnswer2, aqScore1, aqScore2 from swing_project_team3.aptitudequestion "; 
 		String WhereDefault2 = "where seqno = " ;
 	      try{
 	          Class.forName("com.mysql.cj.jdbc.Driver");
@@ -143,7 +143,7 @@ public class MAQ_DbAction {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();						
-			String query = "insert into SwingProject_Database.aptitudequestion (aqQuestion, aqAnswer1, aqAnswer2, aqScore1, aqScore2) values (?,?,?,?,?)";
+			String query = "insert into swing_project_team3.aptitudequestion (aqQuestion, aqAnswer1, aqAnswer2, aqScore1, aqScore2) values (?,?,?,?,?)";
 			ps = conn_mysql.prepareStatement(query);
 			ps.setString(1, aqQuestion.trim());
 			ps.setString(2, aqAnswer1.trim());
@@ -169,7 +169,7 @@ public class MAQ_DbAction {
 	          Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
 	          @SuppressWarnings("unused")
 	          Statement stmt_mysql = conn_mysql.createStatement();
-	          String A = "update SwingProject_Database.aptitudequestion set aqQuestion = ?, aqAnswer1 = ?, aqAnswer2 = ?, aqScore1 = ?, aqScore2 = ? ";
+	          String A = "update swing_project_team3.aptitudequestion set aqQuestion = ?, aqAnswer1 = ?, aqAnswer2 = ?, aqScore1 = ?, aqScore2 = ? ";
 	          String B = " where aqNum = ? ";
 
 	          ps = conn_mysql.prepareStatement(A+B);
@@ -201,7 +201,7 @@ public class MAQ_DbAction {
           @SuppressWarnings("unused")
           Statement stmt_mysql = conn_mysql.createStatement();
 
-          String A = "delete from SwingProject_Database.aptitudequestion where aqNum = ? " ;
+          String A = "delete from swing_project_team3.aptitudequestion where aqNum = ? " ;
 		  ps = conn_mysql.prepareStatement(A);
 		       
 		  ps.setInt(1, aqNum);

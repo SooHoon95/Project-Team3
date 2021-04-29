@@ -277,7 +277,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 	
 	//table에 DB 정보 입력
 	private void tableInputAction() {
-		String query = "select aqNum, aqQuestion, aqAnswer1, aqAnswer2 from aptitudequestion";
+		String query = "select aqNum, aqQuestion, aqAnswer1, aqAnswer2 from swing_project_team3.aptitudequestion";
 		PreparedStatement ps = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -314,7 +314,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 	private void TableClick() {
 		int i = inner_table_AdMBTIQA.getSelectedRow(); // i행을 불러옴, Seqno의 숫자 1~n까지
 		String wkSeq = (String) inner_table_AdMBTIQA.getValueAt(i, 0); // String값으로 차례로 i행을 불러와 넣어줌
-		String query = "select aqNum, aqQuestion, aqAnswer1, aqAnswer2, aqScore1, aqScore2 from SwingProject_Database.aptitudequestion where aqNum="+wkSeq;
+		String query = "select aqNum, aqQuestion, aqAnswer1, aqAnswer2, aqScore1, aqScore2 from swing_project_team3.aptitudequestion where aqNum="+wkSeq;
 		// 열값을 차례로 불러오기 위함	
 		PreparedStatement ps = null;
 		try {
