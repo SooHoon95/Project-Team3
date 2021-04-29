@@ -15,7 +15,12 @@ public class MMR_Bean {
 	//-----------------
 	//Construction
 	//-----------------
-	
+	public MMR_Bean(int mrNum, String mrName, String mrExplain) {
+		super();
+		this.mrNum = mrNum;
+		this.mrName = mrName;
+		this.mrExplain = mrExplain;
+	}
 	
 	//-----------------
 	//Method

@@ -2,10 +2,6 @@ package com.javalec.PanelManageMbtiResult;
 
 import java.awt.Color;
 import java.awt.Rectangle;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -18,18 +14,22 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import com.javalec.Datadefine.data_Enviroment_define;
+import com.javalec.PanelManageAptitudeResult.MAR_Bean;
+import com.javalec.PanelManageAptitudeResult.MAR_DbAction;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class PanelManageMbtiResult extends JPanel {
 	private JScrollPane scrollPane_AdMBTIResult;
 	private final DefaultTableModel Outer_Table_AdMBTIResult = new DefaultTableModel(); // ################
 	private JTable inner_table_AdMBTIResult;
 	private JLabel lblAdMBTIResultName;
-	private JLabel lblAdMBTIResultExplanation;
+	private JLabel lbAdMBTIResultarExplain;
 	private JTextField tfAdMBTIResultName;
-	private JTextField tfAdMBTIResultExplanation;
+	private JTextField tfAdMBTIResultarExplain;
 	private JButton btnAdMBTIQResultCreate;
 	private JButton btnAdMBTIResultEdit;
 	private JButton btnAdMBTIResultRemove;
@@ -48,7 +48,7 @@ public class PanelManageMbtiResult extends JPanel {
 		add(getLblAdMBTIResultName());
 		add(getlblAdMBTIResultExplanation());
 		add(getTfAdMBTIResultName());
-		add(getTfAdMBTIResultExplanation());
+		add(getTfAdMBTIResultarExplain());
 		add(getBtnAdMBTIResultCreate());
 		add(getBtnAdMBTIResultEdit());
 		add(getBtnAdMBTIResultRemove());
@@ -70,41 +70,19 @@ public class PanelManageMbtiResult extends JPanel {
 	private JTable getInner_table_AdMBTIResult() {
 		if (inner_table_AdMBTIResult == null) {
 			inner_table_AdMBTIResult = new JTable();
+			inner_table_AdMBTIResult.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					MMR_TableClick();
+				}
+			});
 			inner_table_AdMBTIResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			inner_table_AdMBTIResult.setModel(Outer_Table_AdMBTIResult); // 테이블을 불러오기 위해 ******꼭 써야할 것*****
-			
-			//관리자 User table 설정
-			Outer_Table_AdMBTIResult.addColumn("번호");
-			Outer_Table_AdMBTIResult.addColumn("이름");
-			Outer_Table_AdMBTIResult.addColumn("설명");
-			Outer_Table_AdMBTIResult.setColumnCount(3); // Column이 4개
-			
-			int i = Outer_Table_AdMBTIResult.getRowCount();
-			for(int j=0; j<i; j++) {
-				Outer_Table_AdMBTIResult.removeRow(0);
-			}
-			
-//			inner_table_AdManageUser.setAutoResizeMode(inner_table_AdManageUser.AUTO_RESIZE_OFF); // 마음대로 리사이징 x
-			
-			int vColIndex = 0; // 첫번째 행
-			TableColumn col = inner_table_AdMBTIResult.getColumnModel().getColumn(vColIndex);
-			int width = 30; // 첫번째 행 가로
-			col.setPreferredWidth(width);; // 첫번째 행 가로크기 설정
-			
-			vColIndex = 1; // 2번째 행
-			col = inner_table_AdMBTIResult.getColumnModel().getColumn(vColIndex);
-			width = 100; // 2번째 행 가로
-			col.setPreferredWidth(width);; // 2번째 행 가로크기 설정
-			
-			vColIndex = 2; // 3번째 행
-			col = inner_table_AdMBTIResult.getColumnModel().getColumn(vColIndex);
-			width = 100; // 3번째 행 가로
-			col.setPreferredWidth(width);; // 3번째 행 가로크기 설정
-
-			
+			MMR_TableInit();
+			MMR_selectList();
 		}
-		return inner_table_AdMBTIResult;
-	}
+			return inner_table_AdMBTIResult;
+		}
 	
 	private JLabel getLblAdMBTIResultName() {
 		if (lblAdMBTIResultName == null) {
@@ -114,11 +92,11 @@ public class PanelManageMbtiResult extends JPanel {
 		return lblAdMBTIResultName;
 	}
 	private JLabel getlblAdMBTIResultExplanation() {
-		if (lblAdMBTIResultExplanation == null) {
-			lblAdMBTIResultExplanation = new JLabel("MBTI설명");
-			lblAdMBTIResultExplanation.setBounds(20, 263, 61, 16);
+		if (lbAdMBTIResultarExplain == null) {
+			lbAdMBTIResultarExplain = new JLabel("MBTI설명");
+			lbAdMBTIResultarExplain.setBounds(20, 263, 61, 16);
 		}
-		return lblAdMBTIResultExplanation;
+		return lbAdMBTIResultarExplain;
 	}
 	
 	private JTextField getTfAdMBTIResultName() {
@@ -129,13 +107,13 @@ public class PanelManageMbtiResult extends JPanel {
 		}
 		return tfAdMBTIResultName;
 	}
-	private JTextField getTfAdMBTIResultExplanation() {
-		if (tfAdMBTIResultExplanation == null) {
-			tfAdMBTIResultExplanation = new JTextField();
-			tfAdMBTIResultExplanation.setColumns(10);
-			tfAdMBTIResultExplanation.setBounds(93, 258, 265, 54);
+	private JTextField getTfAdMBTIResultarExplain() {
+		if (tfAdMBTIResultarExplain == null) {
+			tfAdMBTIResultarExplain = new JTextField();
+			tfAdMBTIResultarExplain.setColumns(10);
+			tfAdMBTIResultarExplain.setBounds(93, 258, 265, 54);
 		}
-		return tfAdMBTIResultExplanation;
+		return tfAdMBTIResultarExplain;
 	}
 	
 	private JButton getBtnAdMBTIResultCreate() {
@@ -143,7 +121,7 @@ public class PanelManageMbtiResult extends JPanel {
 			btnAdMBTIQResultCreate = new JButton("생성");
 			btnAdMBTIQResultCreate.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ActionPartition_insertAction();
+					MMR_Action(1);
 				}
 			});
 			btnAdMBTIQResultCreate.setBounds(20, 320, 60, 29);
@@ -153,6 +131,11 @@ public class PanelManageMbtiResult extends JPanel {
 	private JButton getBtnAdMBTIResultEdit() {
 		if (btnAdMBTIResultEdit == null) {
 			btnAdMBTIResultEdit = new JButton("수정");
+			btnAdMBTIResultEdit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					MMR_Action(2);
+				}
+			});
 			btnAdMBTIResultEdit.setBounds(155, 320, 60, 29);
 		}
 		return btnAdMBTIResultEdit;
@@ -160,6 +143,11 @@ public class PanelManageMbtiResult extends JPanel {
 	private JButton getBtnAdMBTIResultRemove() {
 		if (btnAdMBTIResultRemove == null) {
 			btnAdMBTIResultRemove = new JButton("삭제");
+			btnAdMBTIResultRemove.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					MMR_Action(3);
+				}
+			});
 			btnAdMBTIResultRemove.setBounds(290, 320, 60, 29);
 		}
 		return btnAdMBTIResultRemove;
@@ -174,7 +162,6 @@ public class PanelManageMbtiResult extends JPanel {
 	private JTextField getTfAdMBTIResultNum() {
 		if (tfAdMBTIResultNum == null) {
 			tfAdMBTIResultNum = new JTextField();
-			tfAdMBTIResultNum.setEditable(false);
 			tfAdMBTIResultNum.setColumns(10);
 			tfAdMBTIResultNum.setBounds(93, 189, 60, 26);
 		}
@@ -188,88 +175,179 @@ public class PanelManageMbtiResult extends JPanel {
 		return panelAdMBTIimage;
 	}
 	
+	//-------------------------------
+	//메소드정리 
+	//-------------------------------
 	
-	//--------------------------------------------------------
-	
-	
-	//공백 체크
-	// SungAh 2021.04.28
-	private int FieldCheck() {
-		int i = 0;
-		String message = "";
-		if(tfAdMBTIResultName.getText().length() == 0) {
-			i++;
-			message = "MBTI 이름을";
-			tfAdMBTIResultName.requestFocus(); // 커서 띄우기
-		}
-		if(tfAdMBTIResultExplanation.getText().length() == 0) {
-			i++;
-			message = "MBTI 설명을";
-			tfAdMBTIResultExplanation.requestFocus();
-		}
-		
-		if(i>0) {
-			JOptionPane.showMessageDialog(null, message + "입력하세요");
-		}
-		
-		return i;
-	}
-	
-	//공백체크 + 생성버튼동작 실행
-	//SungAh 2021.04.28
-	private void ActionPartition_insertAction() {
-		int i_chk = FieldCheck();
-		if(i_chk == 0) {
-			MMR_insertAction();
-		}else {
+	//Dowoo 2021.04.28  삭제
+
+	//테이블초기화 Dowoo 2021.04.28 가로길이 수정	
+		private void MMR_TableInit() {	
+			//관리자 User table 설정
+			Outer_Table_AdMBTIResult.addColumn("번호");
+			Outer_Table_AdMBTIResult.addColumn("이름");
+			Outer_Table_AdMBTIResult.addColumn("설명");
+			Outer_Table_AdMBTIResult.setColumnCount(3); 
+			
+			int i = Outer_Table_AdMBTIResult.getRowCount();
+			for(int j=0; j<i; j++) {
+				Outer_Table_AdMBTIResult.removeRow(0);
+			}
+			
+			inner_table_AdMBTIResult.setAutoResizeMode(inner_table_AdMBTIResult.AUTO_RESIZE_OFF); // 마음대로 리사이징 x
+			
+			int vColIndex = 0; // 첫번째 행
+			TableColumn col = inner_table_AdMBTIResult.getColumnModel().getColumn(vColIndex);
+			int width = 30; // 첫번째 행 가로
+			col.setPreferredWidth(width);; // 첫번째 행 가로크기 설정
+			
+			vColIndex = 1; // 2번째 행
+			col = inner_table_AdMBTIResult.getColumnModel().getColumn(vColIndex);
+			width = 50; // 2번째 행 가로
+			col.setPreferredWidth(width);; // 2번째 행 가로크기 설정
+			
+			vColIndex = 2; // 3번째 행
+			col = inner_table_AdMBTIResult.getColumnModel().getColumn(vColIndex);
+			width = 150; // 3번째 행 가로
+			col.setPreferredWidth(width);; // 3번째 행 가로크기 설정
+
 			
 		}
-	}
-	
-	//생성 버튼 동작 확인+query
-	//SungAh 2021.04.28.
-	public boolean insertAction_boolean() { // 반환값 boolean 확인, 맞으면 true/틀리면 false
-		PreparedStatement ps = null;
-				
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn_mysql = DriverManager.getConnection(data_Enviroment_define.url_mysql, data_Enviroment_define.id_mysql, data_Enviroment_define.pw_mysql);
-			Statement stmt_mysql = conn_mysql.createStatement();						
-			String query = "insert into SwingProject_Database.mbtiresult (mrName, mrExplain) values (?,?)";
+		//데이터 초기화
+		private void MMR_ClearColumn() {
+			tfAdMBTIResultarExplain.setText("");
+			tfAdMBTIResultName.setText("");
+			tfAdMBTIResultNum.setText("");
+		}
 
-			ps = conn_mysql.prepareStatement(query);
-			ps.setString(1, tfAdMBTIResultName.getText().trim());
-			ps.setString(2, tfAdMBTIResultExplanation.getText().trim());
-			ps.executeUpdate();
-				
-//			String adAptitideQA = tfAdAptitideQA.getText().trim();
-//			String adAptitideAnswer1 = tfAdAptitideAnswer1.getText().trim();
-//			String adAptitideAnswer2 = tfAdAptitideAnswer2.getText().trim();
-//			String aptitideAnswer1Score = (String) cbAptitideAnswer1Score.getSelectedItem();
-//			String aptitideAnswer2Score = (String) cbAptitideAnswer2Score.getSelectedItem();						
+		//전제검색 Dowoo 2021.04.29
+		private void MMR_selectList(){
+
+			MMR_DbAction dbAction = new MMR_DbAction();
+			ArrayList<MMR_Bean> beanlList = dbAction.MMR_selectList();
 			
-			conn_mysql.close(); //DB 연결 끊기
-			return true;
-		}catch(Exception e) {
-			e.printStackTrace();// 화면에 에러코드 보여주기
-			return false;
+			int listCount =beanlList.size();
+			
+			for(int i=0; i<listCount; i++) {
+				String temp =Integer.toString(beanlList.get(i).getMrNum());
+				String[] qtxt = {temp, beanlList.get(i).getMrName(),beanlList.get(i).getMrExplain()};
+				Outer_Table_AdMBTIResult.addRow(qtxt);
+				}
 		}
-	}
+		
+		//클릭시 채우기 Dowoo 2021.04.29
+		private void MMR_TableClick() {
+		int i = inner_table_AdMBTIResult.getSelectedRow();
+		String tmMrNum = (String)inner_table_AdMBTIResult.getValueAt(i,0);
+		int wkMrNUM = Integer.parseInt(tmMrNum);
+		
+		MMR_DbAction mmr_DbAction =new MMR_DbAction(wkMrNUM);
+		MMR_Bean bean =mmr_DbAction.MMR_TableClick();
+		
+		tfAdMBTIResultNum.setText(Integer.toString(bean.getMrNum()));
+		tfAdMBTIResultName.setText(bean.getMrName()); 
+		tfAdMBTIResultarExplain.setText(bean.getMrExplain());
+			
+		}
+		
+		// 공란불가 입력
+		private void MMR_Action(int k) {
+			int i_chk = MMR_FieldCheck();
+			if(i_chk == 0){
+					
+				switch(k) {
+				case 1 : MMR_insertAction();
+					break;
+				case 2 : MMR_UpdateAction();
+					break;
+				case 3 : MMR_DeleteAction();
+					break;
+				}
+				MMR_TableInit();
+				MMR_selectList();
+				MMR_ClearColumn();
+			}else {
+				JOptionPane.showMessageDialog(this, "공란확인" + "\n" + 
+						"Data를 입력하세요 하세요!");			
+				}	
+			}
+		
+			
+		//실행메소드 Dowoo 2021.04.29
+		private void MMR_insertAction(){
 
-	// 생성 액션
-	// SungAh 2021.04.28
-	private void MMR_insertAction() {
+			String mrName = tfAdMBTIResultName.getText().trim();
+			String mrExplain = tfAdMBTIResultarExplain.getText().trim();
+		
+			MMR_DbAction mmr_DbAction =new MMR_DbAction(mrName, mrExplain);
+			boolean msg = mmr_DbAction.MMR_insertAction();
+			
+			if(msg=true) {
+				JOptionPane.showMessageDialog(this, tfAdMBTIResultName.getText()+" 의 정보가 입력 되었습니다.!",
+			             "입력 완료!", 
+			             JOptionPane.INFORMATION_MESSAGE);  
+			}else if(msg=false){
+				 
+				   JOptionPane.showMessageDialog(this, "DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!",
+					          "Critical Error!", 
+					          JOptionPane.ERROR_MESSAGE);    
+			}
+		}
+		
+		//입력	Dowoo 2021.04.29
+		private int MMR_FieldCheck(){
+			int i = 0;
+			if(tfAdMBTIResultName.getText().length() == 0){
+				i++;
+				tfAdMBTIResultName.requestFocus();
+			}
+			if(tfAdMBTIResultarExplain.getText().length() == 0){
+				i++;
+				tfAdMBTIResultarExplain.requestFocus();
+			}
+			return i;
+		}
+			
 		
 		
-		boolean msg = insertAction_boolean();
-		if(msg == true) {
-			JOptionPane.showMessageDialog(this, "MBTI 결과 정보가 입력되었습니다", "입력완료", 
-					JOptionPane.INFORMATION_MESSAGE);
-		}else {
-			JOptionPane.showMessageDialog(this, "DB에 자료 입력 중 에러가 발생했습니다", "Critical Error!", JOptionPane.ERROR_MESSAGE);
+		
+		
+		//수정	Dowoo 2021.04.29
+		private void MMR_UpdateAction() {
+			int mrNum = Integer.parseInt(tfAdMBTIResultNum.getText().trim());
+			String mrName = tfAdMBTIResultName.getText().trim();
+			String mrExplain = tfAdMBTIResultarExplain.getText().trim();
+			
+			MMR_DbAction mmr_DbAction =new MMR_DbAction(mrNum, mrName, mrExplain);
+			boolean msg = mmr_DbAction.MMR_UpdateAction();
+			
+			if(msg=true) {
+				JOptionPane.showMessageDialog(this, tfAdMBTIResultName.getText()+" 님의 정보가 수정되었습니다.!",
+			             "입력 완료!", 
+			             JOptionPane.INFORMATION_MESSAGE);  
+			}else if(msg=false) {
+				JOptionPane.showMessageDialog(this, tfAdMBTIResultName.getText()+"DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!",
+			             "입력 불가!", 
+			             JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
-	}
+		
+		
 
-	
-	
+	private void MMR_DeleteAction() {
+		
+		int mNum  = Integer.parseInt(tfAdMBTIResultNum.getText());
+		
+		MMR_DbAction mmr_DbAction =new MMR_DbAction(mNum);
+		boolean msg=mmr_DbAction.MMR_DeleteAction();
+			if(msg=true) {
+				JOptionPane.showMessageDialog(this,tfAdMBTIResultName.getText()+"이 삭제되었습니다.",
+				        	"삭제완료!",JOptionPane.INFORMATION_MESSAGE);
+       
+			}else if(msg=false){	 
+				JOptionPane.showMessageDialog(this, "DB에 자료 수정중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!",
+						 "Critical Error!", 
+						 JOptionPane.ERROR_MESSAGE);    
+			}
+		}
 }//---------------------------------
