@@ -245,6 +245,7 @@ public class PanelManageMbtiQuiz extends JPanel {
    private JComboBox getCbMBTIAnswer1Score() {
       if (cbMBTIAnswer1Score == null) {
          cbMBTIAnswer1Score = new JComboBox();
+         cbMBTIAnswer1Score.setModel(new DefaultComboBoxModel(new String[] {"", "0", "1"}));
          cbMBTIAnswer1Score.setBounds(243, 256, 62, 26);
       }
       return cbMBTIAnswer1Score;
@@ -252,6 +253,7 @@ public class PanelManageMbtiQuiz extends JPanel {
    private JComboBox getCbMBTIAnswer2Score() {
       if (cbMBTIAnswer2Score == null) {
          cbMBTIAnswer2Score = new JComboBox();
+         cbMBTIAnswer2Score.setModel(new DefaultComboBoxModel(new String[] {"", "0", "1"}));
          cbMBTIAnswer2Score.setBounds(244, 290, 61, 26);
       }
       return cbMBTIAnswer2Score;
@@ -341,13 +343,13 @@ public class PanelManageMbtiQuiz extends JPanel {
       
       String mqQuestion = tfAdMBTIQA.getText().trim();
       String mqType = cbType.getSelectedItem().toString();
-      String mqAnswer1 =tfAdMBTIAnswer1.getText().trim();
+      String mqAnswer1 = tfAdMBTIAnswer1.getText().trim();
       String mqAnswer2 =  tfAdMBTIAnswer2.getText().trim();
       String mqScore1 = cbMBTIAnswer1Score.getSelectedItem().toString();
       String mqScore2 = cbMBTIAnswer2Score.getSelectedItem().toString();
    
       
-      MMQ_DbAction dbAction =new MMQ_DbAction(mqQuestion, mqType, mqAnswer1, mqAnswer2, mqScore1, mqScore2);
+      MMQ_DbAction dbAction = new MMQ_DbAction(mqQuestion, mqType, mqAnswer1, mqAnswer2, mqScore1, mqScore2);
       boolean msg=dbAction.insertAction();
       
       if(msg=true) {
@@ -361,33 +363,40 @@ public class PanelManageMbtiQuiz extends JPanel {
    }
       
    // 빈값있으면 삽입 안되게.
-   private int insertFieldCheck() {
+   private int InsertFieldCheck() {
 		int i = 0;
-		if(tfAdMBTIQA.getText().length() == 0){
+		String message = "";
+		if(tfAdMBTIQA.getText().length() == 0) {
 			i++;
-			tfAdMBTIQA.requestFocus();
+			message = "질문을 ";
+			tfAdMBTIQA.requestFocus(); // 커서 띄우기
 		}
-		if(cbType.getSelectedItem().toString().length() == 0){
+		if(cbType.getSelectedItem().equals("선택")) {
 			i++;
-			cbType.requestFocus();
+			message = "유형을 ";
 		}
-		if(tfAdMBTIAnswer1.getText().length() == 0){
+		if(tfAdMBTIAnswer1.getText().length() == 0) {
 			i++;
+			message = "답1을 ";
 			tfAdMBTIAnswer1.requestFocus();
 		}
-		if(tfAdMBTIAnswer2.getText().length() == 0){
+		if(tfAdMBTIAnswer2.getText().length() == 0) {
 			i++;
+			message = "답2을 ";
 			tfAdMBTIAnswer2.requestFocus();
 		}
-		if(cbMBTIAnswer1Score.getSelectedItem().toString().length() == 0){
+		if(cbMBTIAnswer1Score.getSelectedItem() == null) {
+			message = "점수1을 ";
 			i++;
-			cbMBTIAnswer1Score.requestFocus();
 		}
-		if(cbMBTIAnswer2Score.getSelectedItem().toString().length() == 0){
+		if(cbMBTIAnswer1Score.getSelectedItem() == null) {
+			message = "점수2를 ";
 			i++;
-			cbMBTIAnswer2Score.requestFocus();
 		}
-				
+		if(i>0) {
+			JOptionPane.showMessageDialog(null, message + "입력하세요");
+		}
+		
 		return i;
 	}
    
