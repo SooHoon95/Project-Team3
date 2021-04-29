@@ -28,7 +28,7 @@ public class MMQ_DbAction {
    String mqScore1;
    String mqScore2;
    String selection;
-   String ConditionQueryColumn;
+   String selectType;
    
    // Constructor
    public MMQ_DbAction() {
@@ -57,6 +57,7 @@ public class MMQ_DbAction {
       this.mqAnswer2 = mqAnswer2;
       this.mqScore1 = mqScore1;
       this.mqScore2 = mqScore2;
+      this.mqNum= mqNum;
    }
    
    
@@ -69,6 +70,109 @@ public class MMQ_DbAction {
 
    //Method
    
+   public MMQ_DbAction(String selectType) {
+	super();
+	this.selectType = selectType;
+}
+
+
+//전체검색
+   public ArrayList<MMQ_Bean> selectList(){
+	   
+	   ArrayList<MMQ_Bean> beanList = new ArrayList<MMQ_Bean>();
+	   String WhereDefault = "select mqNum, mqQuestion, mqAnswer1, mqAnswer2 from mbtiquestion ";
+	   
+	   try{
+		   Class.forName("com.mysql.cj.jdbc.Driver");
+		   Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+		   Statement stmt_mysql = conn_mysql.createStatement();
+		   ResultSet rs = stmt_mysql.executeQuery(WhereDefault);
+		   
+		   while(rs.next()){
+			   int mqNum =rs.getInt(1);
+			   String mqQuestion =rs.getString(2);
+			   String mqAnswer1 =rs.getString(3);
+			   String mqAnswer2 =rs.getString(4);
+			   
+			   MMQ_Bean bean = new MMQ_Bean(mqNum, mqQuestion, mqAnswer1, mqAnswer2);
+			   beanList.add(bean);
+		   }
+		   conn_mysql.close();
+	   }
+	   catch (Exception e){
+		   e.printStackTrace();
+	   }
+	   return beanList;
+	   
+   }
+   
+   //검색
+   public ArrayList<MMQ_Bean> ConditionQueryAction() {
+	   
+	   
+	   ArrayList<MMQ_Bean> beanList = new ArrayList<MMQ_Bean>();
+	   String WhereDefault = "select mqNum, mqQuestion, mqAnswer1, mqAnswer2 from mbtiquestion where mqType = '" + selectType +"'";
+	   try{
+		   Class.forName("com.mysql.cj.jdbc.Driver");
+		   Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+		   Statement stmt_mysql = conn_mysql.createStatement();
+		   
+		   ResultSet rs = stmt_mysql.executeQuery(WhereDefault);
+		   
+		   while(rs.next()){
+			   int mqNum =rs.getInt(1);
+			   String mqQuestion =rs.getString(2);
+			   String mqAnswer1 =rs.getString(3);
+			   String mqAnswer2 =rs.getString(4);
+
+			   MMQ_Bean bean = new MMQ_Bean(mqNum, mqQuestion, mqAnswer1, mqAnswer2);
+			   beanList.add(bean);
+		   }
+		   conn_mysql.close();
+	   }
+	   catch (Exception e){
+		   e.printStackTrace();
+	   }
+	   return beanList;
+	   
+   }
+   
+   //테이블 클릭시 보여주기
+   public MMQ_Bean TableClick() {
+         
+      MMQ_Bean bean =null;
+         
+         //tfSelection.setText(stSequence);
+         String WhereDefault = "select mqNum, mqQuestion, mqType, mqAnswer1, mqAnswer2, mqScore1, mqScore2 from mbtiquestion "; 
+         String WhereDefault2 = "where mqNum = " ;
+         try{
+             Class.forName("com.mysql.cj.jdbc.Driver");
+             Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+             Statement stmt_mysql = conn_mysql.createStatement();
+
+             ResultSet rs = stmt_mysql.executeQuery(WhereDefault + WhereDefault2 + mqNum);
+
+             while(rs.next()){
+                int mqNum=(rs.getInt(1));
+                String mqQuestion=(rs.getString(2));
+                String mqType=(rs.getString(3));
+                String mqAnswer1=(rs.getString(4));
+                String mqAnswer2=(rs.getString(5));
+                String mqScore1=(rs.getString(6));
+                String mqScore2=(rs.getString(7));
+                
+                bean = new MMQ_Bean(mqNum, mqQuestion, mqType, mqAnswer1, mqAnswer2, mqScore1, mqScore2);
+
+             }
+             conn_mysql.close();
+         }
+         catch (Exception e){
+             e.printStackTrace();
+         }
+         return bean;
+      }
+
+   
    //입력 메소드
    public boolean insertAction(){
         PreparedStatement ps = null;
@@ -78,7 +182,7 @@ public class MMQ_DbAction {
             @SuppressWarnings("unused")
          Statement stmt_mysql = conn_mysql.createStatement();
 
-            String A = "insert into userinfo (mqQuestion, mqType, mqAnswer1, mqAnswer2, mqScore1 , mqScore2";
+            String A = "insert into mbtiquestion (mqQuestion, mqType, mqAnswer1, mqAnswer2, mqScore1 , mqScore2";
             String B = ") values (?,?,?,?,?,?)";
 
             ps = conn_mysql.prepareStatement(A+B);
@@ -116,13 +220,20 @@ public class MMQ_DbAction {
              ps = conn_mysql.prepareStatement(query + query2);
              ps.setString(1, mqQuestion.trim());
              ps.setString(2, mqType.trim());
-             ps.setString(3,mqAnswer1.trim());
+             ps.setString(3, mqAnswer1.trim());
              ps.setString(4, mqAnswer2.trim());
              ps.setString(5, mqScore1.trim());
              ps.setString(6, mqScore2.trim());
              ps.setInt(7, mqNum);
              ps.executeUpdate();
-          
+             
+          System.out.println(mqQuestion);
+          System.out.println(mqType);
+          System.out.println(mqAnswer1);
+          System.out.println(mqAnswer2);
+          System.out.println(mqScore1);
+          System.out.println(mqScore2);
+          System.out.println(mqNum);
              conn_mysql.close();
              return true;
       }
@@ -142,7 +253,7 @@ public class MMQ_DbAction {
              @SuppressWarnings("unused")
             Statement stmt_mysql = conn_mysql.createStatement();
 
-             String A = "delete from mbtiquestion where seqno = ? ";
+             String A = "delete from mbtiquestion where mqNum = ? ";
             
              ps = conn_mysql.prepareStatement(A); 
              ps.setInt(1,mqNum);
@@ -160,106 +271,9 @@ public class MMQ_DbAction {
       }
    
    
-   //전체검색
-   public ArrayList<MMQ_Bean> selectList(){
-        
-      ArrayList<MMQ_Bean> beanList = new ArrayList<MMQ_Bean>();
-      String WhereDefault = "select mqNum, mqQuestion, mqAnswer1, mqAnswer2 from mbtiquestion ";
-      
-      try{
-          Class.forName("com.mysql.cj.jdbc.Driver");
-           Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
-           Statement stmt_mysql = conn_mysql.createStatement();
-           ResultSet rs = stmt_mysql.executeQuery(WhereDefault);
-           
-           while(rs.next()){
-              int mqNum =rs.getInt(1);
-              String mqQuestion =rs.getString(2);
-              String mqAnswer1 =rs.getString(3);
-              String mqAnswer2 =rs.getString(4);
-              
-              MMQ_Bean bean = new MMQ_Bean(mqNum, mqQuestion, mqAnswer1, mqAnswer2);
-              beanList.add(bean);
-           }
-             conn_mysql.close();
-       }
-       catch (Exception e){
-             e.printStackTrace();
-       }
-       return beanList;
-      
-}
 
    
-   //검색
-   public ArrayList<MMQ_Bean> ConditionQueryAction() {
-
-
-      ArrayList<MMQ_Bean> beanList = new ArrayList<MMQ_Bean>();
-      String WhereDefault = "select mqNum, mqQuestion, mqAnswer1, relation from mbtiquestion where " + ConditionQueryColumn;
-      String WhereDefault2 = " like '%" + selection.trim() + "%'";
-     
-
-            try{
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
-                Statement stmt_mysql = conn_mysql.createStatement();
-      
-                ResultSet rs = stmt_mysql.executeQuery(WhereDefault + WhereDefault2);
-      
-                while(rs.next()){
-                   int mqNum =rs.getInt(1);
-                    String mqQuestion =rs.getString(2);
-                    String mqAnswer1 =rs.getString(3);
-                    String mqAnswer2 =rs.getString(4);
-                    
-                    MMQ_Bean bean = new MMQ_Bean(mqNum, mqQuestion, mqAnswer1, mqAnswer2);
-                    beanList.add(bean);
-                }
-                conn_mysql.close();
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
-            return beanList;
-         
-   }
-   
-   //테이블 클릭시 보여주기
-public MMQ_Bean TableClick() {
-      
-   MMQ_Bean bean =null;
-      
-      //tfSelection.setText(stSequence);
-      String WhereDefault = "select mqNum, mqQuestion, mqType, mqAnswer1, mqAnswer2, mqScore1, mqScore2 from mbtiquestion "; 
-      String WhereDefault2 = "where mqNum = " ;
-      try{
-          Class.forName("com.mysql.cj.jdbc.Driver");
-          Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
-          Statement stmt_mysql = conn_mysql.createStatement();
-
-          ResultSet rs = stmt_mysql.executeQuery(WhereDefault + WhereDefault2 + mqNum);
-
-          while(rs.next()){
-             int mqNum=(rs.getInt(1));
-             String mqQuestion=(rs.getString(2));
-             String mqType=(rs.getString(3));
-             String mqAnswer1=(rs.getString(4));
-             String mqAnswer2=(rs.getString(5));
-             String mqScore1=(rs.getString(6));
-             String mqScore2=(rs.getString(7));
-             
-             bean = new MMQ_Bean(mqNum, mqQuestion, mqType, mqAnswer1, mqAnswer2, mqScore1, mqScore2);
-
-          }
-          conn_mysql.close();
-      }
-      catch (Exception e){
-          e.printStackTrace();
-      }
-      return bean;
-   }
-
+  
    
    
 }//===================

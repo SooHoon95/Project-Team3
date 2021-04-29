@@ -15,6 +15,13 @@ public class MAR_Bean {
 	//Construction
 	//-----------------
 	
+	//검색생성자 Dowoo 2021.04.29
+	public MAR_Bean(int arNum, String arName, String arExplain) {
+		super();
+		this.arNum = arNum;
+		this.arName = arName;
+		this.arExplain = arExplain;
+	}
 	
 	//-----------------
 	//Method
@@ -22,6 +29,7 @@ public class MAR_Bean {
 	public int getArNum() {
 		return arNum;
 	}
+
 	public void setArNum(int arNum) {
 		this.arNum = arNum;
 	}

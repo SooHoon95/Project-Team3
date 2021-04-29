@@ -18,8 +18,29 @@ public class MU_Bean {
 	//-----------------
 	//Construction
 	//-----------------
-	
-	
+	public MU_Bean(int userNum, String userState, String userName, String userID, String userEmail) {
+		super();
+		this.userNum = userNum;
+		this.userState = userState;
+		this.userName = userName;
+		this.userID = userID;
+		this.userEmail = userEmail;
+	}
+		
+	public MU_Bean(int userNum, String userState, String userName, String userID, String userEmail, String userResultM,
+			String userResultA) {
+		super();
+		this.userNum = userNum;
+		this.userState = userState;
+		this.userName = userName;
+		this.userID = userID;
+		this.userEmail = userEmail;
+		this.userResultM = userResultM;
+		this.userResultA = userResultA;
+	}
+
+
+
 	//-----------------
 	//Method
 	//-----------------
