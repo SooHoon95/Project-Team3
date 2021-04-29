@@ -59,10 +59,8 @@ public class AdminMain extends JDialog {
 			frame.getContentPane().add(panelManageUser);
 			frame.getContentPane().add(panelManageQuiz); 
 			frame.getContentPane().add(panelManageResult); 
+			frame.setVisible(true);
 	}
-
-	
-	
 
 	private JButton getBtnManageUser() {
 		if (btnManageUser == null) {
