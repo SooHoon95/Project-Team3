@@ -22,17 +22,17 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComboBox;
+import javax.swing.JSeparator;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SearchId extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JLabel lblProjectName;
 	private JTextField tfUserName;
 	private JTextField tfUserEmail;
-	private JLabel lblSearchId;
-	private String Email[] = {"naver", "gmail", "hanmail", "nate", "직접입력"}; // 콤보 박스 내용
-//	JComboBox<E> // 04_28 현준 제작 중 :(
-	
+	private String Email[] = {"직접입력", "naver.com", "gmail.com", "hanmail.net", "nate.com"}; // 콤보 박스 내용
+	JComboBox<String> cBEmail = new JComboBox(Email);
 	data_Enviroment_define dataDefine = new data_Enviroment_define();
 
 	/**
@@ -57,70 +57,83 @@ public class SearchId extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		contentPanel.add(getLblProjectName());
-		{
-			JLabel lblProjectSimbol = new JLabel("로고");
-			lblProjectSimbol.setBounds(157, 99, 61, 16);
-			contentPanel.add(lblProjectSimbol);
-		}
+		
+		JSeparator separator_2 = new JSeparator();
+		separator_2.setBounds(34, 351, 335, 12);
+		contentPanel.add(separator_2);
 		{
 			JLabel lblUserName = new JLabel("이름");
-			lblUserName.setBounds(20, 233, 61, 16);
+			lblUserName.setForeground(new Color(51, 51, 51));
+			lblUserName.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+			lblUserName.setBounds(31, 212, 61, 16);
 			contentPanel.add(lblUserName);
 		}
 		{
 			JLabel lblUserEmail = new JLabel("E-mail");
-			lblUserEmail.setBounds(20, 294, 61, 16);
+			lblUserEmail.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+			lblUserEmail.setBounds(31, 275, 61, 16);
 			contentPanel.add(lblUserEmail);
 		}
 		contentPanel.add(getTfUserName());
 		contentPanel.add(getTfUserEmail());
-		contentPanel.add(getLabel_1());
 		
-		JComboBox cBEmail = new JComboBox();
-		cBEmail.setBounds(273, 290, 97, 27);
+		cBEmail.setBounds(270, 262, 100, 45);
 		contentPanel.add(cBEmail);
-		
+		{
 		JLabel lblNewLabel = new JLabel("@");
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		lblNewLabel.setBounds(258, 288, 17, 26);
+		lblNewLabel.setBounds(257, 268, 17, 26);
 		contentPanel.add(lblNewLabel);
+		}
+		JLabel Label_Title = new JLabel("✓ 아이디 찾기");
+		Label_Title.setFont(new Font("Kefa", Font.PLAIN, 20));
+		Label_Title.setBounds(34, 54, 199, 26);
+		contentPanel.add(Label_Title);
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton btnOK = new JButton("찾기");
-				btnOK.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						findIdAction();  
+		JSeparator separator = new JSeparator();
+		separator.setForeground(Color.BLACK);
+		separator.setBounds(35, 90, 335, 37);
+		contentPanel.add(separator);
+		}
+		{
+			JSeparator separator_1 = new JSeparator();
+			separator_1.setBounds(31, 240, 335, 12);
+			contentPanel.add(separator_1);
+		}
+		{
+			JButton btnOK = new JButton("아이디 찾기");
+			btnOK.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+			btnOK.setBounds(135, 375, 114, 44);
+			contentPanel.add(btnOK);
+			btnOK.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					String tfUserNamestr = tfUserName.getText().trim();
+					String tfUserEmailstr = tfUserEmail.getText().trim();
+					
+					if (tfUserNamestr.equals("") || tfUserEmailstr.equals("")) {
+						JOptionPane.showMessageDialog(null, "이름과 이메일에 빈칸이 없는지 확인해주세요!");
+					} else {
+						findIdAction(); 
 					}
-				});
-				btnOK.setBackground(new Color(102, 153, 255));
-				btnOK.setActionCommand("OK");
-				buttonPane.add(btnOK);
-				getRootPane().setDefaultButton(btnOK);
-			}
-			{
-				JButton btnCancel = new JButton("취소");
-				btnCancel.setActionCommand("Cancel");
-				buttonPane.add(btnCancel);
-			}
+				}
+			});
+			btnOK.setBackground(new Color(102, 102, 102));
+			btnOK.setActionCommand("OK");
+			getRootPane().setDefaultButton(btnOK);
 		}
-	}
-	
-	private JLabel getLblProjectName() {
-		if (lblProjectName == null) {
-			lblProjectName = new JLabel("프로젝트이름");
-			lblProjectName.setBounds(157, 35, 61, 16);
+		{
+			JLabel lblNewLabel_1 = new JLabel("이름과 이메일을 입력해 주세요.");
+			lblNewLabel_1.setForeground(new Color(102, 102, 102));
+			lblNewLabel_1.setBounds(45, 111, 297, 16);
+			contentPanel.add(lblNewLabel_1);
 		}
-		return lblProjectName;
+		
 	}
 	private JTextField getTfUserName() {
 		if (tfUserName == null) {
 			tfUserName = new JTextField();
-			tfUserName.setBounds(93, 228, 273, 26);
+			tfUserName.setBounds(93, 205, 114, 30);
 			tfUserName.setColumns(10);
 		}
 		return tfUserName;
@@ -129,17 +142,9 @@ public class SearchId extends JDialog {
 		if (tfUserEmail == null) {
 			tfUserEmail = new JTextField();
 			tfUserEmail.setColumns(10);
-			tfUserEmail.setBounds(93, 289, 164, 26);
+			tfUserEmail.setBounds(94, 268, 164, 30);
 		}
 		return tfUserEmail;
-	}
-	private JLabel getLabel_1() {
-		if (lblSearchId == null) {
-			lblSearchId = new JLabel("아이디 찾기");
-			lblSearchId.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-			lblSearchId.setBounds(139, 159, 147, 36);
-		}
-		return lblSearchId;
 	}
 	
 	
@@ -152,8 +157,14 @@ public class SearchId extends JDialog {
 			Connection conn_mysql = DriverManager.getConnection(dataDefine.url_mysql, dataDefine.id_mysql, dataDefine.pw_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
 			
-			String query = "SELECT userId FROM user where userName = '" + tfUserName.getText().trim() + "' and userEmail = '" + tfUserEmail.getText().trim() + "';"; // ' 사용에 유의!!
+			String cbEmailStr = cBEmail.getSelectedItem().toString(); // combobox에서 받아온 글자
+			if(cbEmailStr.equals("직접입력")) {
+				cbEmailStr = "";
+			} else {
+				cbEmailStr = "@" + cBEmail.getSelectedItem().toString();
+			}
 			
+			String query = "SELECT userId FROM user where userName = '" + tfUserName.getText().trim() + "' and userEmail = '" + tfUserEmail.getText().trim() + cbEmailStr + "';"; // ' 사용에 유의!!
 			ResultSet rs = stmt_mysql.executeQuery(query); // 쿼리문장을 실행해서 ResultSet타입으로 변환.
 			
 			while(rs.next()) {
@@ -164,7 +175,7 @@ public class SearchId extends JDialog {
 				JOptionPane.showMessageDialog(null, "일치하는 아이디가 없습니다. 이름과 메일을 확인하세요! ");
 				
 			}else {
-				JOptionPane.showMessageDialog(null,  tfUserName.getText() + " 님의 아이디는 " + searchedId + " 입니다.");
+				JOptionPane.showMessageDialog(null,  tfUserName.getText() + " 님의 아이디는 " + searchedId + " 입니다!");
 			}
 			conn_mysql.close(); // DB 연결 끊기
 			
