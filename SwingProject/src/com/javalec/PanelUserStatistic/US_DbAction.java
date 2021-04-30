@@ -4,11 +4,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import com.javalec.Datadefine.data_Enviroment_define;
 import com.javalec.PanelUserProfile.UP_Bean;
 
 public class US_DbAction {
+	
+	//Dowoo 2021.04.30 완료
+	
 	
 	//-----------------
 	//Field 
@@ -151,6 +155,57 @@ public class US_DbAction {
 	          e.printStackTrace();
 	      }
 	      return bean;
+		}
+	
+	public US_Bean US_Aptitude1Top() {
+		
+		US_Bean bean =null;
+		
+		String A ="select userResultM, count(*) from user group by userResultM order by count(*) DESC limit 1";
+		
+		try{
+	          Class.forName("com.mysql.cj.jdbc.Driver");
+	          Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+	          Statement stmt_mysql = conn_mysql.createStatement();
+	          ResultSet rs = stmt_mysql.executeQuery(A);
+
+	          while(rs.next()){
+	        	String wkUserResultM=(rs.getString(1));
+	        	String wkCount=(rs.getString(2));
+	      
+	        	bean = new US_Bean(wkUserResultM,wkCount);
+	          }
+	          conn_mysql.close();
+	      }
+	      catch (Exception e){
+	          e.printStackTrace();
+	      }
+			return bean;
+		}
+	public US_Bean US_Aptitude2Top() {
+		
+		US_Bean bean =null;
+		
+		String A ="select userResultA, count(*) from user group by userResultM order by count(*) DESC limit 1";
+		
+		try{
+	          Class.forName("com.mysql.cj.jdbc.Driver");
+	          Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+	          Statement stmt_mysql = conn_mysql.createStatement();
+	          ResultSet rs = stmt_mysql.executeQuery(A);
+
+	          while(rs.next()){
+	        	String wkUserResultA=(rs.getString(1));
+	        	String wkCount=(rs.getString(2));
+	      
+	        	bean = new US_Bean(wkUserResultA,wkCount);
+	          }
+	          conn_mysql.close();
+	      }
+	      catch (Exception e){
+	          e.printStackTrace();
+	      }
+			return bean;
 		}
 	
 	
