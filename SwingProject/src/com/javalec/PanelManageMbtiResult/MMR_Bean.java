@@ -7,17 +7,20 @@ public class MMR_Bean {
 	//Field 
 	//-----------------
 	int mrNum;
+	String mrType;
 	String mrName;
 	String mrExplain;
+	
 	
 	
 	
 	//-----------------
 	//Construction
 	//-----------------
-	public MMR_Bean(int mrNum, String mrName, String mrExplain) {
+	public MMR_Bean(int mrNum, String mrType, String mrName, String mrExplain) {
 		super();
 		this.mrNum = mrNum;
+		this.mrType = mrType;
 		this.mrName = mrName;
 		this.mrExplain = mrExplain;
 	}
@@ -42,6 +45,14 @@ public class MMR_Bean {
 	}
 	public void setMrExplain(String mrExplain) {
 		this.mrExplain = mrExplain;
+	}
+
+	public String getMrType() {
+		return mrType;
+	}
+
+	public void setMrType(String mrType) {
+		this.mrType = mrType;
 	}
 	
 }

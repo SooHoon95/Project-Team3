@@ -36,6 +36,10 @@ public class PanelManageResult extends JPanel {
 					ResetReulstPanel();
 					panelManageMbtiResult.setVisible(true);
 					panelManageAptitudeResult.setVisible(false);
+					panelManageMbtiResult.MMR_TableInit();
+					panelManageMbtiResult.MMR_selectList();
+					panelManageMbtiResult.MMR_ClearColumn();
+					
 				}
 			});
 			btnManageMbtiResult.setBounds(86, 10, 120, 35);
@@ -50,6 +54,9 @@ public class PanelManageResult extends JPanel {
 					ResetReulstPanel();
 					panelManageMbtiResult.setVisible(false);
 					panelManageAptitudeResult.setVisible(true);
+					panelManageAptitudeResult.MAR_TableInit();
+					panelManageAptitudeResult.MAR_selectList();
+					panelManageAptitudeResult.MAR_ClearColumn();
 				}
 			});
 			btnManageAptitudeResult.setBounds(300, 10, 120, 35);

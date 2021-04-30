@@ -20,8 +20,10 @@ public class MMR_DbAction {
 	private final String pw_mysql = data_Enviroment_define.pw_mysql;
 	
 	int mrNum;
+	String mrType;
 	String mrName;
 	String mrExplain;
+	
 	
 	
 	//-----------------
@@ -38,15 +40,17 @@ public class MMR_DbAction {
 	}
 	
 	//입력 생성자 Dowoo 2021.04.29
-	public MMR_DbAction(String mrName, String mrExplain) {
+	public MMR_DbAction(String mrType, String mrName, String mrExplain) {
 		super();
+		this.mrType = mrType;
 		this.mrName = mrName;
 		this.mrExplain = mrExplain;
 	}
 	//수정 생성자 Dowoo 2021.04.29
-	public MMR_DbAction(int mrNum, String mrName, String mrExplain) {
+	public MMR_DbAction(int mrNum, String mrType, String mrName, String mrExplain) {
 		super();
 		this.mrNum = mrNum;
+		this.mrType = mrType;
 		this.mrName = mrName;
 		this.mrExplain = mrExplain;
 	}
@@ -70,7 +74,7 @@ public class MMR_DbAction {
 	public ArrayList<MMR_Bean> MMR_selectList(){
 		
 		ArrayList<MMR_Bean> beanList = new ArrayList<MMR_Bean>();
-		String A = "select mrNum, mrName, mrExplain from mbtiresult" ;
+		String A = "select mrNum, mrType, mrName, mrExplain from mbtiresult" ;
 	   
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -80,10 +84,12 @@ public class MMR_DbAction {
 	        
 	        while(rs.next()){
 	        	int wkMrNum =rs.getInt(1);
-	        	String wkMrName =rs.getString(2);
-	        	String wkMrExplain =rs.getString(3);
+	        	String wkMrType =rs.getString(2);
+	        	String wkMrName =rs.getString(3);
+	        	String wkMrExplain =rs.getString(4);
 	        	
-	        	MMR_Bean bean = new MMR_Bean(wkMrNum, wkMrName, wkMrExplain);
+	        	
+	        	MMR_Bean bean = new MMR_Bean(wkMrNum, wkMrType, wkMrName, wkMrExplain);
 	        	beanList.add(bean);
 	        }
 	          conn_mysql.close();
@@ -103,7 +109,7 @@ public class MMR_DbAction {
 			MMR_Bean bean =null;
 			
 	      //tfSelection.setText(stSequence);
-	      String A = "select mrNum, mrName, mrExplain from mbtiresult "; 
+	      String A = "select mrNum, mrType, mrName, mrExplain from mbtiresult "; 
 	      String B = "where mrNUM = ";
 	      try{
 	          Class.forName("com.mysql.cj.jdbc.Driver");
@@ -114,10 +120,11 @@ public class MMR_DbAction {
 
 	          while(rs.next()){
 	          	int wkMrNum=(rs.getInt(1));
-	          	String wkMrName=(rs.getString(2));
-	          	String wkMrExplain=(rs.getString(3));
+	          	String wkMrType =rs.getString(2);
+	        	String wkMrName =rs.getString(3);
+	        	String wkMrExplain =rs.getString(4);
 	          	
-	          	bean = new MMR_Bean(wkMrNum,wkMrName,wkMrExplain);
+	          	bean = new MMR_Bean(wkMrNum, wkMrType, wkMrName, wkMrExplain);
 
 	          }
 	          conn_mysql.close();
@@ -137,12 +144,13 @@ public class MMR_DbAction {
 			@SuppressWarnings("unused")
 			Statement stmt_mysql = conn_mysql.createStatement();
 
-			String A = "insert into mbtiresult (mrName, mrExplain";
-			String B = ") values (?,?)";
+			String A = "insert into mbtiresult (mrType, mrName, mrExplain";
+			String B = ") values (?,?,?)";
 
 			ps = conn_mysql.prepareStatement(A+B);
-			ps.setString(1, mrName.trim());
-			ps.setString(2, mrExplain.trim());
+			ps.setString(1, mrType.trim());
+			ps.setString(2, mrName.trim());
+			ps.setString(3, mrExplain.trim());
 			ps.executeUpdate();
 
 			conn_mysql.close();
@@ -164,13 +172,14 @@ public class MMR_DbAction {
 			@SuppressWarnings("unused")
 			Statement stmt_mysql = conn_mysql.createStatement();
 
-			String A = "update mbtiresult set mrName = ?, mrExplain = ?";
+			String A = "update mbtiresult set mrType = ?, mrName = ?, mrExplain = ?";
 			String B = "where mrNum = ? ";
 		          
 		     ps = conn_mysql.prepareStatement(A+B);
 		     ps.setString(1, mrName.trim());
-		     ps.setString(2, mrExplain.trim());
-		     ps.setInt(3, mrNum);
+		     ps.setString(2, mrName.trim());
+		     ps.setString(3, mrExplain.trim());
+		     ps.setInt(4, mrNum);
 		     ps.executeUpdate();
 
 		     conn_mysql.close();

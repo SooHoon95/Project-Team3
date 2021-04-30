@@ -131,7 +131,7 @@ public class Login extends JFrame {
 		private JTextField getTfLoginId() {
 			if (tfLoginId == null) {
 				tfLoginId = new JTextField();
-				tfLoginId.setEnabled(false);
+				tfLoginId.setEnabled(true);
 				tfLoginId.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -151,7 +151,7 @@ public class Login extends JFrame {
 		private JPasswordField getTfLoginPw() {
 			if (pfLoginPw == null) {
 			pfLoginPw = new JPasswordField();
-			pfLoginPw.setEnabled(false);
+			pfLoginPw.setEnabled(true);
 			pfLoginPw.setBounds(70, 240, 280, 43);
 			pfLoginPw.addMouseListener(new MouseAdapter() {
 				@Override
@@ -220,7 +220,7 @@ public class Login extends JFrame {
 									searchedUserState = (rs.getString(3));
 								}
 								if(searchedUserId.equals(id)) { // UserNum이 0이 아닐 때 
-									if(searchedUserState == "회원") {
+									if(searchedUserState.equals("회원")) {
 										JOptionPane.showMessageDialog(null, "유저 " + id + " 님 로그인 하셨습니다.");
 										data_Enviroment_define.userNum = searchedUserNum;
 				                        UserMain loginuserMain = new UserMain();

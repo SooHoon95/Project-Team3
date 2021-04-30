@@ -9,7 +9,6 @@ public class US_Bean { 	//Dowoo 2021.04.30 완료
 	String userResultM;
 	String userResultA;
 	String count;
-	String userResultMA; // TOP3보여주는 메소드작업시 오버로드 불가하여  통합하여 하나의 생성자만 사용할 예정.
 
 	
 
@@ -38,9 +37,9 @@ public class US_Bean { 	//Dowoo 2021.04.30 완료
 	}
 
 	
-	public US_Bean(String userResultMA, String count) {
+	public US_Bean(String userResultM, String count) {
 		super();
-		this.userResultM = userResultMA;
+		this.userResultM = userResultM;
 		this.count = count;
 	}
 
@@ -91,18 +90,7 @@ public class US_Bean { 	//Dowoo 2021.04.30 완료
 	public void setCount(String count) {
 		this.count = count;
 	}
-	
-	public String getUserResultMA() {
-		return userResultMA;
-	}
 
-
-	public void setUserResultMA(String userResultMA) {
-		this.userResultMA = userResultMA;
-	}
-
-	
-	
 		
 
 }

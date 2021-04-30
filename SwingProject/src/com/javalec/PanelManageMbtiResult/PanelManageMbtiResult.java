@@ -36,6 +36,8 @@ public class PanelManageMbtiResult extends JPanel {
 	private JLabel lblAdMBTIResultNum;
 	private JTextField tfAdMBTIResultNum;
 	private JPanel panelAdMBTIimage;
+	private JLabel lblMbti;
+	private JTextField tfAdMBTIResultType;
 
 	/**
 	 * Create the panel.
@@ -55,6 +57,8 @@ public class PanelManageMbtiResult extends JPanel {
 		add(getLblAdMBTIResultNum());
 		add(getTfAdMBTIResultNum());
 		add(getPanelAdMBTIimage());
+		add(getLblMbti());
+		add(getTfAdMBTIResultType());
 		
 		
 
@@ -162,6 +166,7 @@ public class PanelManageMbtiResult extends JPanel {
 	private JTextField getTfAdMBTIResultNum() {
 		if (tfAdMBTIResultNum == null) {
 			tfAdMBTIResultNum = new JTextField();
+			tfAdMBTIResultNum.setEditable(false);
 			tfAdMBTIResultNum.setColumns(10);
 			tfAdMBTIResultNum.setBounds(93, 189, 60, 26);
 		}
@@ -175,6 +180,22 @@ public class PanelManageMbtiResult extends JPanel {
 		return panelAdMBTIimage;
 	}
 	
+	private JLabel getLblMbti() {
+		if (lblMbti == null) {
+			lblMbti = new JLabel("MBTI유형");
+			lblMbti.setBounds(165, 194, 61, 16);
+		}
+		return lblMbti;
+	}
+	private JTextField getTfAdMBTIResultType() {
+		if (tfAdMBTIResultType == null) {
+			tfAdMBTIResultType = new JTextField();
+			tfAdMBTIResultType.setColumns(10);
+			tfAdMBTIResultType.setBounds(236, 189, 122, 26);
+		}
+		return tfAdMBTIResultType;
+	}
+	
 	//-------------------------------
 	//메소드정리 
 	//-------------------------------
@@ -182,12 +203,13 @@ public class PanelManageMbtiResult extends JPanel {
 	//Dowoo 2021.04.28  삭제
 
 	//테이블초기화 Dowoo 2021.04.28 가로길이 수정	
-		private void MMR_TableInit() {	
+		public void MMR_TableInit() {	
 			//관리자 User table 설정
 			Outer_Table_AdMBTIResult.addColumn("번호");
+			Outer_Table_AdMBTIResult.addColumn("유형");
 			Outer_Table_AdMBTIResult.addColumn("이름");
 			Outer_Table_AdMBTIResult.addColumn("설명");
-			Outer_Table_AdMBTIResult.setColumnCount(3); 
+			Outer_Table_AdMBTIResult.setColumnCount(4); 
 			
 			int i = Outer_Table_AdMBTIResult.getRowCount();
 			for(int j=0; j<i; j++) {
@@ -208,20 +230,26 @@ public class PanelManageMbtiResult extends JPanel {
 			
 			vColIndex = 2; // 3번째 행
 			col = inner_table_AdMBTIResult.getColumnModel().getColumn(vColIndex);
-			width = 150; // 3번째 행 가로
+			width = 100; // 3번째 행 가로
 			col.setPreferredWidth(width);; // 3번째 행 가로크기 설정
+			
+			vColIndex = 3; // 4번째 행
+			col = inner_table_AdMBTIResult.getColumnModel().getColumn(vColIndex);
+			width = 200; // 4번째 행 가로
+			col.setPreferredWidth(width);; // 4번째 행 가로크기 설정
 
 			
 		}
 		//데이터 초기화
-		private void MMR_ClearColumn() {
+		public void MMR_ClearColumn() {
 			tfAdMBTIResultarExplain.setText("");
 			tfAdMBTIResultName.setText("");
 			tfAdMBTIResultNum.setText("");
+			tfAdMBTIResultType.setText("");
 		}
 
 		//전제검색 Dowoo 2021.04.29
-		private void MMR_selectList(){
+		public void MMR_selectList(){
 
 			MMR_DbAction dbAction = new MMR_DbAction();
 			ArrayList<MMR_Bean> beanlList = dbAction.MMR_selectList();
@@ -230,7 +258,7 @@ public class PanelManageMbtiResult extends JPanel {
 			
 			for(int i=0; i<listCount; i++) {
 				String temp =Integer.toString(beanlList.get(i).getMrNum());
-				String[] qtxt = {temp, beanlList.get(i).getMrName(),beanlList.get(i).getMrExplain()};
+				String[] qtxt = {temp,beanlList.get(i).getMrType(), beanlList.get(i).getMrName(),beanlList.get(i).getMrExplain()};
 				Outer_Table_AdMBTIResult.addRow(qtxt);
 				}
 		}
@@ -245,6 +273,7 @@ public class PanelManageMbtiResult extends JPanel {
 		MMR_Bean bean =mmr_DbAction.MMR_TableClick();
 		
 		tfAdMBTIResultNum.setText(Integer.toString(bean.getMrNum()));
+		tfAdMBTIResultType.setText(bean.getMrType());
 		tfAdMBTIResultName.setText(bean.getMrName()); 
 		tfAdMBTIResultarExplain.setText(bean.getMrExplain());
 			
@@ -276,10 +305,12 @@ public class PanelManageMbtiResult extends JPanel {
 		//실행메소드 Dowoo 2021.04.29
 		private void MMR_insertAction(){
 
+			String mrType = tfAdMBTIResultType.getText().trim();
 			String mrName = tfAdMBTIResultName.getText().trim();
 			String mrExplain = tfAdMBTIResultarExplain.getText().trim();
+			
 		
-			MMR_DbAction mmr_DbAction =new MMR_DbAction(mrName, mrExplain);
+			MMR_DbAction mmr_DbAction =new MMR_DbAction(mrType, mrName, mrExplain);
 			boolean msg = mmr_DbAction.MMR_insertAction();
 			
 			if(msg=true) {
@@ -297,6 +328,10 @@ public class PanelManageMbtiResult extends JPanel {
 		//입력	Dowoo 2021.04.29
 		private int MMR_FieldCheck(){
 			int i = 0;
+			if(tfAdMBTIResultType.getText().length() == 0){
+				i++;
+				tfAdMBTIResultType.requestFocus();
+			}
 			if(tfAdMBTIResultName.getText().length() == 0){
 				i++;
 				tfAdMBTIResultName.requestFocus();
@@ -315,10 +350,11 @@ public class PanelManageMbtiResult extends JPanel {
 		//수정	Dowoo 2021.04.29
 		private void MMR_UpdateAction() {
 			int mrNum = Integer.parseInt(tfAdMBTIResultNum.getText().trim());
+			String mrType = tfAdMBTIResultType.getText().trim();
 			String mrName = tfAdMBTIResultName.getText().trim();
 			String mrExplain = tfAdMBTIResultarExplain.getText().trim();
 			
-			MMR_DbAction mmr_DbAction =new MMR_DbAction(mrNum, mrName, mrExplain);
+			MMR_DbAction mmr_DbAction =new MMR_DbAction(mrNum, mrType, mrName, mrExplain);
 			boolean msg = mmr_DbAction.MMR_UpdateAction();
 			
 			if(msg=true) {
@@ -350,4 +386,5 @@ public class PanelManageMbtiResult extends JPanel {
 						 JOptionPane.ERROR_MESSAGE);    
 			}
 		}
+
 }//---------------------------------

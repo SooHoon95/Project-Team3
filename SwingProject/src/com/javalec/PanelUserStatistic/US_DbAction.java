@@ -161,7 +161,7 @@ public class US_DbAction {
 		
 		US_Bean bean =null;
 		
-		String A ="select userResultM, count(*) from user group by userResultM order by count(*) DESC limit 1";
+		String A ="select userResultM, count(*) from user where userResultA = '천직' group by userResultM order by count(*) DESC limit 1";
 		
 		try{
 	          Class.forName("com.mysql.cj.jdbc.Driver");
@@ -186,7 +186,7 @@ public class US_DbAction {
 		
 		US_Bean bean =null;
 		
-		String A ="select userResultA, count(*) from user group by userResultM order by count(*) DESC limit 1";
+		String A ="select userResultM, count(*) from user where userResultA = '한번더 의심하기' group by userResultM order by count(*) DESC limit 1";
 		
 		try{
 	          Class.forName("com.mysql.cj.jdbc.Driver");
@@ -195,12 +195,12 @@ public class US_DbAction {
 	          ResultSet rs = stmt_mysql.executeQuery(A);
 
 	          while(rs.next()){
-	        	String wkUserResultA=(rs.getString(1));
-	        	String wkCount=(rs.getString(2));
-	      
-	        	bean = new US_Bean(wkUserResultA,wkCount);
-	          }
-	          conn_mysql.close();
+		        	String wkUserResultM=(rs.getString(1));
+		        	String wkCount=(rs.getString(2));
+		      
+		        	bean = new US_Bean(wkUserResultM,wkCount);
+		          }
+		          conn_mysql.close();
 	      }
 	      catch (Exception e){
 	          e.printStackTrace();

@@ -173,7 +173,7 @@ public class PanelManageAptitudeResult extends JPanel {
 	//-------------------------------
 	
 	//테이블초기화 Dowoo 2021.04.28 가로길이 수정	
-	private void MAR_TableInit() {
+	public void MAR_TableInit() {
 			//관리자 User table 설정
 			Outer_Table_AdAptitideResult.addColumn("번호");
 			Outer_Table_AdAptitideResult.addColumn("이름");
@@ -194,26 +194,26 @@ public class PanelManageAptitudeResult extends JPanel {
 			
 			vColIndex = 1; // 2번째 행
 			col = inner_table_AdAptitideResult.getColumnModel().getColumn(vColIndex);
-			width = 50; // 2번째 행 가로
+			width = 100; // 2번째 행 가로
 			col.setPreferredWidth(width);; // 2번째 행 가로크기 설정
 			
 			vColIndex = 2; // 3번째 행
 			col = inner_table_AdAptitideResult.getColumnModel().getColumn(vColIndex);
-			width = 150; // 3번째 행 가로
+			width = 300; // 3번째 행 가로
 			col.setPreferredWidth(width);; // 3번째 행 가로크기 설정
 
 	}
 
 	
 	//데이터 초기화
-	private void MAR_ClearColumn() {
+	public void MAR_ClearColumn() {
 		tfAdAptitideResultarExplain.setText("");
 		tfAdAptitideResultName.setText("");
 		tfAdAptitideResultNum.setText("");
 	}
 
 	//전제검색 Dowoo 2021.04.29
-	private void MAR_selectList(){
+	public void MAR_selectList(){
 
 		MAR_DbAction dbAction = new MAR_DbAction();
 		ArrayList<MAR_Bean> beanlList = dbAction.MAR_selectList();
