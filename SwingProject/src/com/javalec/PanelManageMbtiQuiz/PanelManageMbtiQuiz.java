@@ -139,6 +139,7 @@ public class PanelManageMbtiQuiz extends JPanel {
    private JTextField getTfAdMBTIQANum() {
       if (tfAdMBTIQANum == null) {
          tfAdMBTIQANum = new JTextField();
+         tfAdMBTIQANum.setEditable(false);
          tfAdMBTIQANum.setBounds(51, 187, 60, 26);
          tfAdMBTIQANum.setColumns(10);
       }
@@ -217,7 +218,7 @@ public class PanelManageMbtiQuiz extends JPanel {
    private JComboBox getCbType() {
       if (cbType == null) {
          cbType = new JComboBox();
-         cbType.setModel(new DefaultComboBoxModel(new String[] {"", "EI", "SN", "TF", "JP"}));
+         cbType.setModel(new DefaultComboBoxModel(new String[] {"선택", "EI", "SN", "TF", "JP"}));
          cbType.setBounds(243, 183, 62, 26);
       }
       return cbType;
@@ -239,7 +240,7 @@ public class PanelManageMbtiQuiz extends JPanel {
    private JComboBox getCbMBTIAnswer1Score() {
       if (cbMBTIAnswer1Score == null) {
          cbMBTIAnswer1Score = new JComboBox();
-         cbMBTIAnswer1Score.setModel(new DefaultComboBoxModel(new String[] {"", "0", "1"}));
+         cbMBTIAnswer1Score.setModel(new DefaultComboBoxModel(new String[] {"선택", "0", "1"}));
          cbMBTIAnswer1Score.setBounds(426, 250, 62, 26);
       }
       return cbMBTIAnswer1Score;
@@ -247,7 +248,7 @@ public class PanelManageMbtiQuiz extends JPanel {
    private JComboBox getCbMBTIAnswer2Score() {
       if (cbMBTIAnswer2Score == null) {
          cbMBTIAnswer2Score = new JComboBox();
-         cbMBTIAnswer2Score.setModel(new DefaultComboBoxModel(new String[] {"", "0", "1"}));
+         cbMBTIAnswer2Score.setModel(new DefaultComboBoxModel(new String[] {"선택", "0", "1"}));
          cbMBTIAnswer2Score.setBounds(427, 284, 61, 26);
       }
       return cbMBTIAnswer2Score;
@@ -348,7 +349,8 @@ public class PanelManageMbtiQuiz extends JPanel {
       boolean msg=dbAction.insertAction();
       
       if(msg=true) {
-         JOptionPane.showMessageDialog(this, "문제 입력이 완료되었습니다!");  
+         JOptionPane.showMessageDialog(this, "문제 입력이 완료되었습니다!", "입력완료",
+        		 JOptionPane.INFORMATION_MESSAGE);  
       }else if(msg=false){
           
             JOptionPane.showMessageDialog(this, "DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!",
@@ -360,8 +362,8 @@ public class PanelManageMbtiQuiz extends JPanel {
    //빈칸메소드 + insertAction
    private void MMQ_InsertCheckAction() {
 	   int i_chk = MMQ_InsertFieldCheck();
-	  
-	   if(i_chk == 0) {
+	   int i_Schk = ScoreFieldCheck();
+	   if(i_chk == 0 && i_Schk == 0) {
 		   MMQ_insertAction();
 		   MMQ_TableInit();
 		   MMQ_SearchAction();
@@ -380,7 +382,7 @@ public class PanelManageMbtiQuiz extends JPanel {
 			message = "질문을 ";
 			tfAdMBTIQA.requestFocus(); // 커서 띄우기
 		}
-		if(cbType.getSelectedItem().equals("")) {
+		if(cbType.getSelectedItem().equals("선택")) {
 			i++;
 			message = "유형을 ";
 		}
@@ -394,11 +396,11 @@ public class PanelManageMbtiQuiz extends JPanel {
 			message = "답2을 ";
 			tfAdMBTIAnswer2.requestFocus();
 		}
-		if(cbMBTIAnswer1Score.getSelectedItem().equals("")) {
+		if(cbMBTIAnswer1Score.getSelectedItem().equals("선택")) {
 			message = "점수1을 ";
 			i++;
 		}
-		if(cbMBTIAnswer2Score.getSelectedItem().equals("")) {
+		if(cbMBTIAnswer2Score.getSelectedItem().equals("선택")) {
 			message = "점수2를 ";
 			i++;
 		}
@@ -408,13 +410,31 @@ public class PanelManageMbtiQuiz extends JPanel {
 		
 		return i;
 	}
+ //점수1, 점수2이 같은 값일 경우 오류 출력
+ 	//SungAh 2021.04.28
+ 	private int ScoreFieldCheck(){
+ 		int i = 0;			
+ 		if(cbMBTIAnswer1Score.getSelectedItem() == "0" && cbMBTIAnswer1Score.getSelectedItem() == "0") {
+ 			i++; // 점수1과 점수2의 값 = 0이면
+ 		}			
+ 		if(cbMBTIAnswer2Score.getSelectedItem() == "1" && cbMBTIAnswer2Score.getSelectedItem() == "1") {
+ 			i++; // 점수1과 점수2의 값 = 1이면
+ 		}			
+ 		
+ 		if(i>0) {
+ 			JOptionPane.showMessageDialog(null, "점수1과 점수2의 값이 동일합니다");
+ 		}
+ 		return i;
+ 		
+ 	}   
    
       
    
    // 빈값있으면 수정 안되게
   private void MMQ_UpdateCheckAction() {
 	  int i_chk = MMQ_InsertFieldCheck();
-	   if(i_chk == 0) {
+	  int i_Schk = ScoreFieldCheck();
+	   if(i_chk == 0 && i_Schk == 0) {
 		   MMQ_UpdateAction();
 		   MMQ_TableInit();
 		   MMQ_SearchAction();
@@ -433,7 +453,6 @@ public class PanelManageMbtiQuiz extends JPanel {
       String mqScore2 = cbMBTIAnswer2Score.getSelectedItem().toString();
       int mqNum = Integer.parseInt(tfAdMBTIQANum.getText());
       
-      System.out.println(mqNum + "mqnum");
       MMQ_DbAction dbAction = new MMQ_DbAction(mqQuestion, mqType, mqAnswer1, mqAnswer2, mqScore1, mqScore2, mqNum);
       boolean msg = dbAction.UpdateAction();
       
@@ -515,10 +534,11 @@ public class PanelManageMbtiQuiz extends JPanel {
    public void MMQ_ClearColumn() {
       tfAdMBTIQANum.setText("");
       tfAdMBTIQA.setText("");
+      cbType.setSelectedItem("선택");
       tfAdMBTIAnswer1.setText("");
       tfAdMBTIAnswer2.setText("");
-      cbMBTIAnswer1Score.setSelectedItem(null);
-      cbMBTIAnswer2Score.setSelectedItem(null);
+      cbMBTIAnswer1Score.setSelectedItem("선택");
+      cbMBTIAnswer2Score.setSelectedItem("선택");
    }
    
    //tf 에디터블

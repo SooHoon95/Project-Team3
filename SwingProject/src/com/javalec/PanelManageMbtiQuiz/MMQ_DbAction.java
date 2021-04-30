@@ -227,13 +227,6 @@ public class MMQ_DbAction {
              ps.setInt(7, mqNum);
              ps.executeUpdate();
              
-          System.out.println(mqQuestion);
-          System.out.println(mqType);
-          System.out.println(mqAnswer1);
-          System.out.println(mqAnswer2);
-          System.out.println(mqScore1);
-          System.out.println(mqScore2);
-          System.out.println(mqNum);
              conn_mysql.close();
              return true;
       }
