@@ -48,12 +48,12 @@ DROP TABLE IF EXISTS `aptitudequestion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `aptitudequestion` (
-  `aqNum` int(10) NOT NULL AUTO_INCREMENT,
+  `aqNum` int(11) NOT NULL AUTO_INCREMENT,
   `aqQuestion` varchar(100) DEFAULT NULL,
   `aqAnswer1` varchar(100) DEFAULT NULL,
   `aqAnswer2` varchar(100) DEFAULT NULL,
-  `aqScore1` int(10) DEFAULT NULL,
-  `aqScore2` int(10) DEFAULT NULL,
+  `aqScore1` int(11) DEFAULT NULL,
+  `aqScore2` int(11) DEFAULT NULL,
   PRIMARY KEY (`aqNum`),
   UNIQUE KEY `idaptitudequestion_UNIQUE` (`aqNum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -77,7 +77,7 @@ DROP TABLE IF EXISTS `aptituderesult`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `aptituderesult` (
-  `arNum` int(10) NOT NULL AUTO_INCREMENT,
+  `arNum` int(11) NOT NULL AUTO_INCREMENT,
   `arName` varchar(100) DEFAULT NULL,
   `arExplain` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`arNum`),
@@ -91,7 +91,7 @@ CREATE TABLE `aptituderesult` (
 
 LOCK TABLES `aptituderesult` WRITE;
 /*!40000 ALTER TABLE `aptituderesult` DISABLE KEYS */;
-INSERT INTO `aptituderesult` VALUES (1,'직업으로!','완벽하다 바로 개발자의 길을 걷자! 혹시 근무자?'),(2,'잘맞는편이다!','개발자를 직업으로 생각해볼만하다!'),(3,'평범하다','경험을 많이 해보고 결정을 추천한다.'),(4,'음....','개발자를 다시 생각해보는건 어떨까?');
+INSERT INTO `aptituderesult` VALUES (1,'천직','완벽하다 바로 개발자의 길을 걷자!'),(2,'한번 더 의심하기','공부하면서 항상 의심하고 또 의심해보자!');
 /*!40000 ALTER TABLE `aptituderesult` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,8 +108,8 @@ CREATE TABLE `mbtiquestion` (
   `mqType` varchar(10) DEFAULT NULL,
   `mqAnswer1` varchar(100) DEFAULT NULL,
   `mqAnswer2` varchar(100) DEFAULT NULL,
-  `mqScore1` int(10) DEFAULT NULL,
-  `mqScore2` int(10) DEFAULT NULL,
+  `mqScore1` int(11) DEFAULT NULL,
+  `mqScore2` int(11) DEFAULT NULL,
   PRIMARY KEY (`mqNum`),
   UNIQUE KEY `idmbtiquestion_UNIQUE` (`mqNum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -133,7 +133,7 @@ DROP TABLE IF EXISTS `mbtiresult`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mbtiresult` (
-  `mrNum` int(10) NOT NULL AUTO_INCREMENT,
+  `mrNum` int(11) NOT NULL AUTO_INCREMENT,
   `mrType` varchar(45) DEFAULT NULL,
   `mrName` varchar(45) DEFAULT NULL,
   `mrExplain` varchar(45) DEFAULT NULL,
@@ -160,7 +160,7 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `userNum` int(10) NOT NULL AUTO_INCREMENT,
+  `userNum` int(11) NOT NULL AUTO_INCREMENT,
   `userName` varchar(45) DEFAULT NULL,
   `userState` varchar(45) DEFAULT NULL,
   `userId` varchar(45) DEFAULT NULL,
@@ -168,9 +168,10 @@ CREATE TABLE `user` (
   `userEmail` varchar(45) DEFAULT NULL,
   `userResultM` varchar(45) DEFAULT NULL,
   `userResultA` varchar(45) DEFAULT NULL,
+  `userResultScore` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`userNum`),
   UNIQUE KEY `userNum_UNIQUE` (`userNum`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,7 +180,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'양현준','회원','YHJ','1234','YHJ@naver.com',NULL,NULL),(2,'이도희','회원','LDH','1234','LDH@naver.com','INTP',NULL),(3,'양서린','회원','YSL','1234','YSL@naver.com','INFJ',NULL),(4,'윤재필','회원','YJP','1234','YJP@naver.com','ENFJ',NULL),(5,'이승연','회원','LSY','1234','LSY@naver.com','ESFJ',NULL),(6,'박찬수','회원','PCS','1234','PCS@naver.com',NULL,NULL),(7,'김민재','회원','KMJ','1234','KMJ@naver.com','ENFJ',NULL),(8,'김득수','회원','KDS','1234','KDS@naver.com','ENFP',NULL),(9,'강예진','회원','KYJ','1234','KYJ@naver.com','INFJ',NULL),(10,'최지연','회원','CJY','1234','CJY@naver.com','ENTJ',NULL),(11,'문정형','회원','MJH','1234','MJH@naver.com','ENTP',NULL),(12,'이찬호','회원','LCH','1234','LCH@naver.com','ENFJ',NULL),(13,'한경호','회원','HKH','1234','HKH@naver.com','',NULL),(14,'임현진','회원','IHJ','1234','IHJ@naver.com',NULL,NULL),(15,'조효경','회원','JHK','1234','JHK@naver.com','ENFP',NULL),(16,'오영준','회원','OYJ','1234','OYJ@naver.com','ENFJ',NULL);
+INSERT INTO `user` VALUES (1,'양현준','회원','YHJ','1234','YHJ@naver.com','INFJ','한번더 의심하기','6'),(2,'이도희','회원','LDH','1234','LDH@naver.com','INTP','한번더 의심하기','5'),(3,'양서린','회원','YSL','1234','YSL@naver.com','INFJ','천직','9'),(4,'윤재필','회원','YJP','1234','YJP@naver.com','ENFJ','천직','10'),(5,'이승연','회원','LSY','1234','LSY@naver.com','ESFJ','한번더 의심하기','6'),(6,'박찬수','회원','PCS','1234','PCS@naver.com','ENTP','천직','7'),(7,'김민재','회원','KMJ','1234','KMJ@naver.com','ENFJ','천직','7'),(8,'김득수','회원','KDS','1234','KDS@naver.com','ENFP','한번더 의심하기','3'),(9,'강예진','회원','KYJ','1234','KYJ@naver.com','INFJ','천직','8'),(10,'최지연','회원','CJY','1234','CJY@naver.com','ENTJ','천직','7'),(11,'이찬호','회원','LCH','1234','LCH@naver.com','ENFJ','한번더 의심하기','4'),(12,'한경호','회원','HKH','1234','HKH@naver.com','ENFJ','천직','9'),(13,'임현진','회원','IHJ','1234','IHJ@naver.com','INTP','한번더 의심하기','5'),(14,'조효경','회원','JHK','1234','JHK@naver.com','ENFP','한번더 의심하기','4'),(15,'오영준','회원','OYJ','1234','OYJ@naver.com','ENFJ','천직','10'),(16,'박재원','회원','PJW','1234','PJW@naver.com','ENFP','한번더 의심하기','5'),(17,'권효은','회원','KHE','1234','KHE@naver.com','ENTP','천직','7'),(18,'김민규','회원','KMG','1234','KMG@naver.com','ENTP','천직','8'),(19,'이도영','회원','LDY','1234','LDY@naver.com','INFJ','천직','9'),(20,'김진영','회원','KJY','1234','KJY@naver.com','INTJ','천직','9'),(21,'박성준','회원','PSJ','1234','PSJ@naver.com','ESFJ','천직','8'),(22,'송정평','회원','SJP','1234','SJP@naver.com','ENTP','한번더 의심하기','5'),(23,'조혜지','회원','JHJ','1234','JHJ@naver.com','ESFP','한번더 의심하기','5');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -192,4 +193,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-30  0:38:18
+-- Dump completed on 2021-04-30 22:34:37
