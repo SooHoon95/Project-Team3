@@ -49,7 +49,7 @@ public class UP_DbAction {
 			UP_Bean bean =null;			
 			
 	      String A = "select userName,userId,userEmail,userResultM,userResultA from user "; 
-	      String B = "where userNUM = ";
+	      String B = "where userNum = ";
 	      try{
 	          Class.forName("com.mysql.cj.jdbc.Driver");
 	          Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);

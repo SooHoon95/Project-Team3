@@ -55,6 +55,10 @@ public class PanelManageQuiz extends JPanel {
 					ResetQuizpanel();
 					panelManageAptitudeQuiz.setVisible(true);
 					panelManageMbtiQuiz.setVisible(false);
+					panelManageAptitudeQuiz.MAQ_ClearColumn();
+					panelManageAptitudeQuiz.MAQ_TableInit();
+					panelManageAptitudeQuiz.MAQ_tableInputAction();
+					
 				}
 			});
 			

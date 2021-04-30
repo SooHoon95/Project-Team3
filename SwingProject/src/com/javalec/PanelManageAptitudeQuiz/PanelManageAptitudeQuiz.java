@@ -98,8 +98,8 @@ public class PanelManageAptitudeQuiz extends JPanel {
 			inner_table_AdMBTIQA.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			inner_table_AdMBTIQA.setModel(Outer_Table_AdMBTIQA); // 테이블을 불러오기 위해 ******꼭 써야할 것*****
 			
-			TableInit();
-			tableInputAction();
+			MAQ_TableInit();
+			MAQ_tableInputAction();
 			
 		}
 		return inner_table_AdMBTIQA;
@@ -239,7 +239,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 	//-----------------------------------------------------------
 	//table 초기화
 	@SuppressWarnings("static-access")
-	private void TableInit(){
+	public void MAQ_TableInit(){
       	Outer_Table_AdMBTIQA.addColumn("번호");
 		Outer_Table_AdMBTIQA.addColumn("MBTI질문");
 		Outer_Table_AdMBTIQA.addColumn("답1");
@@ -276,7 +276,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 	}
 	
 	//table에 DB 정보 입력
-	private void tableInputAction() {
+	public void MAQ_tableInputAction() {
 		String query = "select aqNum, aqQuestion, aqAnswer1, aqAnswer2 from swing_project_team3.aptitudequestion";
 		PreparedStatement ps = null;
 		try {
@@ -301,7 +301,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 	
 	
 	// DataField 초기화(텍스트필드+콤보박스)
-	private void ClearColumn() {
+	public void MAQ_ClearColumn() {
 		tfAdAptitideQANum.setText("");
 		tfAdAptitideQA.setText("");
 		tfAdAptitideAnswer1.setText("");
@@ -405,9 +405,9 @@ public class PanelManageAptitudeQuiz extends JPanel {
 		int i_scorechk = ScoreFieldCheck();
 		if(i_chk == 0 && i_scorechk == 0) { // 빈공란과 점수1&2가 같지않을 때
 			MAQ_insertAction();
-			TableInit();
-			tableInputAction();
-			ClearColumn();
+			MAQ_TableInit();
+			MAQ_tableInputAction();
+			MAQ_ClearColumn();
 		}else {
 			
 		}
@@ -420,9 +420,9 @@ public class PanelManageAptitudeQuiz extends JPanel {
 		int i_scorechk = ScoreFieldCheck();
 		if(i_chk == 0 && i_scorechk == 0) { // 빈공란과 점수1&2가 같지않을 때
 			MAQ_editAction();
-			TableInit();
-			tableInputAction();
-			ClearColumn();
+			MAQ_TableInit();
+			MAQ_tableInputAction();
+			MAQ_ClearColumn();
 		}else {
 			
 		}
@@ -434,9 +434,9 @@ public class PanelManageAptitudeQuiz extends JPanel {
 		int i_chk = FieldCheck();
 		if(i_chk == 0) { // 빈공란과 점수1&2가 같지않을 때
 			MAQ_delectAction();
-			TableInit();
-			tableInputAction();
-			ClearColumn();
+			MAQ_TableInit();
+			MAQ_tableInputAction();
+			MAQ_ClearColumn();
 		}else {
 			
 		}

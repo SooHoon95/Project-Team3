@@ -28,7 +28,6 @@ public class UserMain extends JDialog {
 	private JButton btnUserMbti;
 	private JButton btnUserAptitudeQuiz;
 	private JButton btnUserStatistic;
-	private static int userNum;
 	
 	PanelUserProfile panelUserPrifile = new PanelUserProfile();
 	PanelUserMbti panelUserMbti = new PanelUserMbti();
@@ -82,7 +81,6 @@ public class UserMain extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					RestPanel();
 					panelUserPrifile.setVisible(true);
-					System.out.println(userNum);
 				}
 			});
 			btnUserProfile.setBounds(30, 60, 120, 35);
