@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.17, for macos10.14 (x86_64)
 --
 -- Host: localhost    Database: swing_project_team3
 -- ------------------------------------------------------
--- Server version	8.0.17
+-- Server version	8.0.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -48,12 +48,12 @@ DROP TABLE IF EXISTS `aptitudequestion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `aptitudequestion` (
-  `aqNum` int(10) NOT NULL AUTO_INCREMENT,
+  `aqNum` int NOT NULL AUTO_INCREMENT,
   `aqQuestion` varchar(100) DEFAULT NULL,
   `aqAnswer1` varchar(100) DEFAULT NULL,
   `aqAnswer2` varchar(100) DEFAULT NULL,
-  `aqScore1` int(10) DEFAULT NULL,
-  `aqScore2` int(10) DEFAULT NULL,
+  `aqScore1` int DEFAULT NULL,
+  `aqScore2` int DEFAULT NULL,
   PRIMARY KEY (`aqNum`),
   UNIQUE KEY `idaptitudequestion_UNIQUE` (`aqNum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -77,7 +77,7 @@ DROP TABLE IF EXISTS `aptituderesult`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `aptituderesult` (
-  `arNum` int(10) NOT NULL AUTO_INCREMENT,
+  `arNum` int NOT NULL AUTO_INCREMENT,
   `arName` varchar(100) DEFAULT NULL,
   `arExplain` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`arNum`),
@@ -103,13 +103,13 @@ DROP TABLE IF EXISTS `mbtiquestion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mbtiquestion` (
-  `mqNum` int(11) NOT NULL AUTO_INCREMENT,
+  `mqNum` int NOT NULL AUTO_INCREMENT,
   `mqQuestion` varchar(100) DEFAULT NULL,
   `mqType` varchar(10) DEFAULT NULL,
   `mqAnswer1` varchar(100) DEFAULT NULL,
   `mqAnswer2` varchar(100) DEFAULT NULL,
-  `mqScore1` int(10) DEFAULT NULL,
-  `mqScore2` int(10) DEFAULT NULL,
+  `mqScore1` int DEFAULT NULL,
+  `mqScore2` int DEFAULT NULL,
   PRIMARY KEY (`mqNum`),
   UNIQUE KEY `idmbtiquestion_UNIQUE` (`mqNum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -133,7 +133,7 @@ DROP TABLE IF EXISTS `mbtiresult`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mbtiresult` (
-  `mrNum` int(10) NOT NULL AUTO_INCREMENT,
+  `mrNum` int NOT NULL AUTO_INCREMENT,
   `mrType` varchar(45) DEFAULT NULL,
   `mrName` varchar(45) DEFAULT NULL,
   `mrExplain` varchar(45) DEFAULT NULL,
@@ -160,7 +160,7 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `userNum` int(10) NOT NULL AUTO_INCREMENT,
+  `userNum` int NOT NULL AUTO_INCREMENT,
   `userName` varchar(45) DEFAULT NULL,
   `userState` varchar(45) DEFAULT NULL,
   `userId` varchar(45) DEFAULT NULL,
@@ -170,7 +170,7 @@ CREATE TABLE `user` (
   `userResultA` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`userNum`),
   UNIQUE KEY `userNum_UNIQUE` (`userNum`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,7 +179,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'양현준','회원','YHJ','1234','YHJ@naver.com',NULL,NULL),(2,'이도희','회원','LDH','1234','LDH@naver.com','INTP',NULL),(3,'양서린','회원','YSL','1234','YSL@naver.com','INFJ',NULL),(4,'윤재필','회원','YJP','1234','YJP@naver.com','ENFJ',NULL),(5,'이승연','회원','LSY','1234','LSY@naver.com','ESFJ',NULL),(6,'박찬수','회원','PCS','1234','PCS@naver.com',NULL,NULL),(7,'김민재','회원','KMJ','1234','KMJ@naver.com','ENFJ',NULL),(8,'김득수','회원','KDS','1234','KDS@naver.com','ENFP',NULL),(9,'강예진','회원','KYJ','1234','KYJ@naver.com','INFJ',NULL),(10,'최지연','회원','CJY','1234','CJY@naver.com','ENTJ',NULL),(11,'문정형','회원','MJH','1234','MJH@naver.com','ENTP',NULL),(12,'이찬호','회원','LCH','1234','LCH@naver.com','ENFJ',NULL),(13,'한경호','회원','HKH','1234','HKH@naver.com','',NULL),(14,'임현진','회원','IHJ','1234','IHJ@naver.com',NULL,NULL),(15,'조효경','회원','JHK','1234','JHK@naver.com','ENFP',NULL),(16,'오영준','회원','OYJ','1234','OYJ@naver.com','ENFJ',NULL);
+INSERT INTO `user` VALUES (1,'양현준','회원','YHJ','1234','YHJ@naver.com','INFJ','6'),(2,'이도희','회원','LDH','1234','LDH@naver.com','INTP','5'),(3,'양서린','회원','YSL','1234','YSL@naver.com','INFJ','9'),(4,'윤재필','회원','YJP','1234','YJP@naver.com','ENFJ','10'),(5,'이승연','회원','LSY','1234','LSY@naver.com','ESFJ','6'),(6,'박찬수','회원','PCS','1234','PCS@naver.com','ENTP','7'),(7,'김민재','회원','KMJ','1234','KMJ@naver.com','ENFJ','7'),(8,'김득수','회원','KDS','1234','KDS@naver.com','ENFP','3'),(9,'강예진','회원','KYJ','1234','KYJ@naver.com','INFJ','8'),(10,'최지연','회원','CJY','1234','CJY@naver.com','ENTJ','7'),(11,'이찬호','회원','LCH','1234','LCH@naver.com','ENFJ','4'),(12,'한경호','회원','HKH','1234','HKH@naver.com','ENFJ','9'),(13,'임현진','회원','IHJ','1234','IHJ@naver.com','INTP','5'),(14,'조효경','회원','JHK','1234','JHK@naver.com','ENFP','4'),(15,'오영준','회원','OYJ','1234','OYJ@naver.com','ENFJ','10'),(16,'박재원','회원','PJW','1234','PJW@naver.com','ENFP','5'),(17,'권효은','회원','KHE','1234','KHE@naver.com','ENTP','7'),(18,'김민규','회원','KMG','1234','KMG@naver.com','ENTP','8'),(19,'이도영','회원','LDY','1234','LDY@naver.com','INFJ','9'),(20,'김진영','회원','KJY','1234','KJY@naver.com','INTJ','9'),(21,'박성준','회원','PSJ','1234','PSJ@naver.com','ESFJ','8'),(22,'송정평','회원','SJP','1234','SJP@naver.com','ENTP','5'),(23,'조혜지','회원','JHJ','1234','JHJ@naver.com','ESFP','5');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -192,4 +192,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-30  0:38:18
+-- Dump completed on 2021-04-30 12:37:57
