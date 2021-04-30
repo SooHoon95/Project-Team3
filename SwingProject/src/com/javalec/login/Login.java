@@ -229,7 +229,8 @@ public class Login extends JFrame {
 								}
 								if(searchedUserId.equals(id)) { // UserNum이 0이 아닐 때 
 									JOptionPane.showMessageDialog(null, "유저 " + id + " 님 로그인 하셨습니다.");
-									UserMain loginuserMain = new UserMain(searchedUserNum);
+									data_Enviroment_define.userNum = searchedUserNum;
+									UserMain loginuserMain = new UserMain();
 								}else {
 									JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 올바르지 않습니다.");
 									tfLoginId.setText("");
