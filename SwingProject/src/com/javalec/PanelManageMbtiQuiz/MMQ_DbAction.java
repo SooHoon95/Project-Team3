@@ -76,7 +76,7 @@ public class MMQ_DbAction {
 }
 
 
-//전체검색
+//전체검색 >> 테이블 채우기
    public ArrayList<MMQ_Bean> selectList(){
 	   
 	   ArrayList<MMQ_Bean> beanList = new ArrayList<MMQ_Bean>();

@@ -56,7 +56,7 @@ public class UserMain extends JDialog {
 	
 	private void initialize() {
 		frame = new JFrame();
-		
+		frame.setTitle("유저 메인화면");
 		frame.setBounds(100, 100, 720, 480);
 		frame.getContentPane().setLayout(null);
 		
