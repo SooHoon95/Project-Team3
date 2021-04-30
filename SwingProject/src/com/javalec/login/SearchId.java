@@ -43,6 +43,7 @@ public class SearchId extends JDialog {
 			SearchId dialog = new SearchId();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			dialog.setTitle("아이디 찾기");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -172,10 +173,11 @@ public class SearchId extends JDialog {
 			}
 			
 			if(searchedId == "") { // 가져온 searchedId가 없을 경우 (Null
-				JOptionPane.showMessageDialog(null, "일치하는 아이디가 없습니다. 이름과 메일을 확인하세요! ");
+				JOptionPane.showMessageDialog(null, "일치하는 아이디가 없습니다. 이름과 메일을 확인하세요!" , "오류 메세지", JOptionPane.ERROR_MESSAGE);
 				
 			}else {
 				JOptionPane.showMessageDialog(null,  tfUserName.getText() + " 님의 아이디는 " + searchedId + " 입니다!");
+				panelClean();
 			}
 			conn_mysql.close(); // DB 연결 끊기
 			
@@ -183,5 +185,10 @@ public class SearchId extends JDialog {
 			// TODO: handle exception
 			e.printStackTrace(); // 화면에 에러코드 보여주기
 		}
+	}
+	
+	public void panelClean() {
+		tfUserName.setText("");
+		tfUserEmail.setText("");
 	}
 }

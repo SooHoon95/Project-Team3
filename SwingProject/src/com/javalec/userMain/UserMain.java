@@ -28,7 +28,6 @@ public class UserMain extends JDialog {
 	private JButton btnUserMbti;
 	private JButton btnUserAptitudeQuiz;
 	private JButton btnUserStatistic;
-	private static int userNum;
 	
 	PanelUserProfile panelUserPrifile = new PanelUserProfile();
 	PanelUserMbti panelUserMbti = new PanelUserMbti();
@@ -40,7 +39,7 @@ public class UserMain extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			UserMain dialog = new UserMain(userNum);
+			UserMain dialog = new UserMain();
 			dialog.frame.setVisible(true);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		} catch (Exception e) {
@@ -51,14 +50,13 @@ public class UserMain extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public UserMain(int userNum) {
-		this.userNum = userNum;
+	public UserMain() {
 		initialize();
 	}
 	
 	private void initialize() {
 		frame = new JFrame();
-		
+		frame.setTitle("유저 메인화면");
 		frame.setBounds(100, 100, 720, 480);
 		frame.getContentPane().setLayout(null);
 		
@@ -83,7 +81,6 @@ public class UserMain extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					RestPanel();
 					panelUserPrifile.setVisible(true);
-					System.out.println(userNum);
 				}
 			});
 			btnUserProfile.setBounds(30, 60, 120, 35);
