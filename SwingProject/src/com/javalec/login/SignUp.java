@@ -1,39 +1,27 @@
-package com.javalec.login;  // 0428 현준 회원가입 기능 수정
-
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
+package com.javalec.login;  // 0430_현준 기능 최종
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import com.javalec.Datadefine.data_Enviroment_define;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import java.awt.Cursor;
-
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.ContainerAdapter;
-import java.awt.event.ContainerEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class SignUp extends JDialog {
 	private JPanel panel;
@@ -41,27 +29,27 @@ public class SignUp extends JDialog {
 	private JLabel lblNewLabel_2_1;
 	private JLabel lblNewLabel_2_2;
 	private JLabel lblNewLabel_2_3;
+	private JLabel labelPw;
+	private JLabel lblNewLabel;
 	private JTextField tfSignName;
 	private JTextField tfSignId;
 	private JTextField tfSignEmail;
 	private JButton btnOverlap;
 	private JPasswordField pwSignPw;
-	
 	private JSeparator separator_1;
 	private JLabel lblMBT;
 	private JLabel loginLabelTitle;
 	private JTextField tfSignUp;
 	private JSeparator separator_1_1;
 	private JSeparator separator_1_2;
-	private JLabel labelPw;
-	private String Email[] = {"직접입력", "naver.com", "gmail.com", "hanmail.net", "nate.com"}; // 콤보 박스 내용
-	JComboBox<String> cBEmail = new JComboBox(Email);
-	data_Enviroment_define dataDefine = new data_Enviroment_define();
-	private JLabel lblNewLabel;
+
 	private String checkID = "";
 	private JLabel label_check;
 	private JPasswordField pwSignPw_2;
-
+	private String Email[] = {"직접입력", "naver.com", "gmail.com", "hanmail.net", "nate.com"}; // 콤보 박스 내용
+	private JComboBox<String> cBEmail = new JComboBox(Email);
+	private data_Enviroment_define dataDefine = new data_Enviroment_define();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -79,40 +67,44 @@ public class SignUp extends JDialog {
 	 * Create the dialog.
 	 */
 	public SignUp() {
-		setBounds(100, 100, 430, 530);
-		getContentPane().setLayout(null);
-		setLocationRelativeTo(null);
-		getContentPane().add(getPanel());
-		getContentPane().add(getLblMBT());
-		getContentPane().add(getLoginLabelTitle());
-		
-		tfSignUp = new JTextField();
-		tfSignUp.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				tfSignUp.setCursor(new Cursor(Cursor.HAND_CURSOR));
-				tfSignUp.setForeground(Color.black);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				tfSignUp.setForeground(Color.white);
-			}
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				signUpAction();
-			}
-		});
-		tfSignUp.setText("가입하기");
-		tfSignUp.setHorizontalAlignment(SwingConstants.CENTER);
-		tfSignUp.setForeground(Color.WHITE);
-		tfSignUp.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		tfSignUp.setEditable(false);
-		tfSignUp.setColumns(10);
-		tfSignUp.setBackground(new Color(0, 153, 255));
-		tfSignUp.setBounds(79, 440, 280, 45);
-		getContentPane().add(tfSignUp);
+		initialize();
 	}
 
+	private void initialize() {
+		setBounds(100, 100, 430, 530);
+		getContentPane().setLayout(null);
+		getContentPane().add(getLblMBT());
+		getContentPane().add(getLoginLabelTitle());
+		getContentPane().add(getPanel());
+			// 로그인 버튼
+				tfSignUp = new JTextField();
+			
+				tfSignUp.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						tfSignUp.setCursor(new Cursor(Cursor.HAND_CURSOR));
+						tfSignUp.setForeground(Color.black);
+					}
+					@Override
+					public void mouseExited(MouseEvent e) {
+						tfSignUp.setForeground(Color.white);
+					}
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						signUpAction();
+					}
+				});
+				tfSignUp.setText("가입하기");
+				tfSignUp.setHorizontalAlignment(SwingConstants.CENTER);
+				tfSignUp.setForeground(Color.WHITE);
+				tfSignUp.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+				tfSignUp.setEditable(false);
+				tfSignUp.setColumns(10);
+				tfSignUp.setBackground(new Color(0, 153, 255));
+				tfSignUp.setBounds(79, 440, 280, 45);
+				
+				getContentPane().add(tfSignUp);		
+	}
 	
 	private JPanel getPanel() {
 		if (panel == null) {
@@ -132,11 +124,35 @@ public class SignUp extends JDialog {
 			panel.add(getSeparator_1_1());
 			panel.add(getSeparator_1_2());
 			panel.add(getLabelPw());
+			cBEmail.setBounds(250, 230, 110, 30);
 			panel.add(getCBEmail());
 			panel.add(getLblNewLabel());
 			panel.add(getLabel_check());
+
 			
 			pwSignPw_2 = new JPasswordField();
+			pwSignPw_2.addKeyListener(new KeyAdapter() {
+			
+				@Override
+				public void keyReleased(KeyEvent e) {
+					char[] pw = pwSignPw.getPassword();
+					String pwString = new String(pw); // 패스워드 char -> string
+					char[] pw2 = pwSignPw_2.getPassword();
+					String pwString2 = new String(pw2); // 패스워드 char -> string
+					
+					if(pwString.equals("") || pwString2.equals("")) {
+					
+					}else {
+						if(pwString.equals(pwString2)) {
+							labelPw.setText("비밀번호가 일치합니다. ");
+							labelPw.setForeground(Color.green);
+						}else {
+							labelPw.setText("비밀번호가 일치하지 않습니다. ");
+							labelPw.setForeground(Color.red);
+						}
+					}
+				}
+			});
 			pwSignPw_2.setBounds(18, 145, 210, 30);
 			panel.add(pwSignPw_2);
 			
@@ -144,6 +160,8 @@ public class SignUp extends JDialog {
 			lblNewLabel_2_2_1.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 			lblNewLabel_2_2_1.setBounds(18, 125, 114, 20);
 			panel.add(lblNewLabel_2_2_1);
+			
+			
 		}
 		return panel;
 	}
@@ -178,6 +196,15 @@ public class SignUp extends JDialog {
 	private JTextField getTfSignName() {
 		if (tfSignName == null) {
 			tfSignName = new JTextField();
+			tfSignName.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					int key = e.getKeyCode();
+					if(key == KeyEvent.VK_ENTER) {
+						signUpAction();
+					}
+				}
+			});
 			tfSignName.setBounds(18, 300, 210, 30);
 			tfSignName.setColumns(10);
 		}
@@ -267,37 +294,16 @@ public class SignUp extends JDialog {
 	private JLabel getLabelPw() {
 		if (labelPw == null) {
 			labelPw = new JLabel("");
-			labelPw.addMouseMotionListener(new MouseMotionAdapter() {
-				@Override
-				public void mouseMoved(MouseEvent e) {
-				}
-			});
-			labelPw.addContainerListener(new ContainerAdapter() { // 비밀번호 중복 체크 아직 미완성 @@@@@@@@@@@@@
-				@Override
-				public void componentAdded(ContainerEvent e) {
-					if(pwSignPw.getPassword().toString().equals("") || pwSignPw_2.getPassword().toString().equals("") ) {
-					}else {
-						if(pwSignPw.getPassword().toString().equals(pwSignPw_2.getPassword().toString())) {
-							labelPw.setText("비밀번호가 일치합니다. ");
-							labelPw.setForeground(Color.green);
-						}else {
-							labelPw.setText("비밀번호가 일치하지 않습니다. ");
-							labelPw.setForeground(Color.red);
-						}
-					}
-				}
-			});
-		
 			labelPw.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 			labelPw.setForeground(new Color(255, 0, 0));
 			labelPw.setBounds(20, 180, 157, 16);
 		}
 		return labelPw;
 	}
-	private JComboBox getCBEmail() {
+	private JComboBox<String> getCBEmail(){
 		if (cBEmail == null) {
 			cBEmail = new JComboBox(Email);
-			cBEmail.setBounds(250, 230, 100, 30);
+
 		}
 		return cBEmail;
 	}
@@ -316,7 +322,7 @@ public class SignUp extends JDialog {
 		PreparedStatement ps = null; 
 		
 		if(tfSignId.getText().equals("") || pwSignPw.getPassword().toString().equals("") || pwSignPw_2.getPassword().toString().equals("") || tfSignEmail.getText().equals("") || tfSignName.getText().equals("")) { // 중복체크 완료한 아이디와 가입하는 아이디 비교	
-			JOptionPane.showMessageDialog(null,  "빈 칸 없이 다 채워주세요!");
+			JOptionPane.showMessageDialog(null,  "빈 칸 없이 다 채워주세요!", "오류 메세지", JOptionPane.ERROR_MESSAGE);
 		}else if(checkID.equals(tfSignId.getText().trim()) ) {			
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
@@ -330,8 +336,8 @@ public class SignUp extends JDialog {
 						cbEmailStr = "@" + cBEmail.getSelectedItem().toString();
 					}
 				
-				String query = "insert into user (userName, userId, userPw, userEmail)\n"
-						+ "values (?,?,?,?);";
+				String query = "insert into user (userName, userId, userPw, userEmail, userState)\n"
+						+ "values (?,?,?,?,?);";
 
 				ps = conn_mysql.prepareStatement(query); // 쿼리를 실행하여 ps 형태로 ?값에 가져오기 
 				ps.setString(1, tfSignName.getText().trim());
@@ -339,13 +345,15 @@ public class SignUp extends JDialog {
 				
 				char[] pw = pwSignPw.getPassword();
 				String pwString = new String(pw); // 패스워드 char -> string
-				ps.setString(3, pwString.trim()+cbEmailStr);
+				ps.setString(3, pwString.trim());
 				
 				ps.setString(4, tfSignEmail.getText().trim());
+				ps.setString(5, "회원");
 				ps.executeUpdate();
 				
 				JOptionPane.showMessageDialog(null,  tfSignName.getText() + " 님의 아이디가 저장되었습니다.");
-				
+				panelClean();
+				dispose();
 				conn_mysql.close(); // DB 연결 끊기
 				
 				
@@ -356,7 +364,7 @@ public class SignUp extends JDialog {
 			}
 			
 		} else {
-			JOptionPane.showMessageDialog(null,  "아이디 중복 체크를 해주세요!");	
+			JOptionPane.showMessageDialog(null,  "아이디 중복 체크를 해주세요!" , "오류 메세지", JOptionPane.ERROR_MESSAGE);	
 			}
 		
 		}
@@ -381,7 +389,7 @@ public class SignUp extends JDialog {
 			System.out.println(searchedId);
 			if(searchedId.equals(tfSignId.getText())){
 				checkID = "";
-				JOptionPane.showMessageDialog(null, searchedId + " 는 이미 있는 계정입니다. 아이디를 확인하세요. "); 
+				JOptionPane.showMessageDialog(null, searchedId + " 는 이미 있는 계정입니다. 아이디를 확인하세요. "  , "오류 메세지", JOptionPane.ERROR_MESSAGE); 
 				tfSignId.setText("");
 				label_check.setText("X");
 				label_check.setForeground(Color.red);
@@ -407,4 +415,17 @@ public class SignUp extends JDialog {
 		}
 		return label_check;
 	}
+	
+	public void panelClean() {
+		tfSignId.setText("");
+		tfSignName.setText("");
+		pwSignPw.setText("");
+		pwSignPw_2.setText("");
+		tfSignEmail.setText("");
+		label_check.setText("");
+		labelPw.setText("");
+	}
+	
+	
+
 }

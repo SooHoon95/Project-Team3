@@ -44,6 +44,7 @@ public class SearchPW extends JDialog {
 			SearchPW dialog = new SearchPW();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			dialog.setTitle("비밀번호 찾기");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -130,7 +131,7 @@ public class SearchPW extends JDialog {
 					String tfUserEmailstr = tfUserEmail.getText().trim();
 					
 					if (tfUserIdstr.equals("") || tfUserEmailstr.equals("")) {
-						JOptionPane.showMessageDialog(null, "아이디와 이메일에 빈칸이 없는지 확인해주세요!");
+						JOptionPane.showMessageDialog(null, "아이디와 이메일에 빈칸이 없는지 확인해주세요!", "오류 메세지", JOptionPane.ERROR_MESSAGE);
 					} else {
 						findPwAction(); 
 					}
@@ -166,7 +167,7 @@ public class SearchPW extends JDialog {
 	
 	public void findPwAction() {
 		PreparedStatement ps = null;
-		String searchedId = "";
+		String searchedPw = "";
 
  		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -184,14 +185,15 @@ public class SearchPW extends JDialog {
 			ResultSet rs = stmt_mysql.executeQuery(query); // 쿼리문장을 실행해서 ResultSet타입으로 변환.
 			
 			while(rs.next()) {
-				searchedId = (rs.getString(1));
+				searchedPw = (rs.getString(1));
 			}
 		
-			if(searchedId == "") { // 가져온 searchedId가 없을 경우 (Null
-				JOptionPane.showMessageDialog(null, "정보가 없습니다. 아이디와 이메일을 확인해 주세요! ");
+			if(searchedPw == "") { // 가져온 searchedId가 없을 경우 (Null
+				JOptionPane.showMessageDialog(null, "정보가 없습니다. 아이디와 이메일을 확인해 주세요!" , "오류 메세지", JOptionPane.ERROR_MESSAGE);
 	
 			}else {
-				JOptionPane.showMessageDialog(null,  "아이디 " +tfUserId.getText() + " 의 비밀번호는 " +  searchedId + " 입니다!");
+				JOptionPane.showMessageDialog(null,  "아이디 " +tfUserId.getText() + " 의 비밀번호는 " +  searchedPw + " 입니다!");
+				panelClean();
 			}
 			conn_mysql.close(); // DB 연결 끊기
 			
@@ -199,6 +201,10 @@ public class SearchPW extends JDialog {
 			// TODO: handle exception
 			e.printStackTrace(); // 화면에 에러코드 보여주기
 		}
+	}
+	public void panelClean() {
+		tfUserId.setText("");
+		tfUserEmail.setText("");
 	}
 	
 }

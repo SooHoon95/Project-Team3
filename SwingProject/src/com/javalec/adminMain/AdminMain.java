@@ -43,11 +43,12 @@ public class AdminMain extends JDialog {
 	 * Create the dialog.
 	 */
 	public AdminMain() {
+		System.out.println("adminmain");
 		initialize(); 
 	}
 		private void initialize() {
 			frame = new JFrame();
-			
+			frame.setTitle("관리자 메인화면");
 			frame.setBounds(100, 100, 720, 480);
 			frame.getContentPane().setLayout(null);
 			
