@@ -18,6 +18,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.DoubleSummaryStatistics;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 
@@ -49,10 +50,11 @@ public class PanelUserAptitudeQuiz extends JPanel {
 			btnAptitudeNext = new JButton("다음");
 			btnAptitudeNext.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					UAQ_UpdateResultA_SendDbAction();
 					UAQ_ShowNextQuiz();
 					UAQ_SendScore();
-					UAQ_ShowQuiz(); //출력
-					UAQ_UpdateResultA_Good();
+					
+
 				}
 			});
 			btnAptitudeNext.setBounds(356, 319, 97, 23);
@@ -87,7 +89,7 @@ public class PanelUserAptitudeQuiz extends JPanel {
 	
 	//------------------------------------------------
 	//문제 출력		
-	private void UAQ_ShowQuiz() { 		
+	public void UAQ_ShowQuiz() { 		
 		uaq_dbAction.UAQ_ShowQuiz();
 		UAQ_Bean bean = uaq_dbAction.UAQ_ShowQuiz();
 		
@@ -98,8 +100,9 @@ public class PanelUserAptitudeQuiz extends JPanel {
 	}
 	
 	//버튼(다음 문제 출력)
-	private void UAQ_ShowNextQuiz() {
+	public void UAQ_ShowNextQuiz() {
 		uaq_dbAction.UAQ_ShowNextQuiz();
+		UAQ_ShowQuiz();
 	}
 	
 	
@@ -113,8 +116,10 @@ public class PanelUserAptitudeQuiz extends JPanel {
 		}
 	}
 	
-	private void UAQ_UpdateResultA_Good() {
-		uaq_dbAction.UAQ_UpdateResultA_Good();	
+	//userResultA DB 업데이트
+	private void UAQ_UpdateResultA_SendDbAction() {
+		uaq_dbAction.UAQ_UpdateResultA_SendDbAction();		
+
 	}
 
 	

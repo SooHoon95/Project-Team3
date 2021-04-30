@@ -1,5 +1,6 @@
 package com.javalec.PanelUserAptitudeQuiz;
 
+import java.beans.BeanProperty;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -30,7 +31,8 @@ public class UAQ_DbAction {
 	int countQuizNum = 1; // 문제번호 : 초기값 1번
 	int sumScore = 0; // score 합계
 	int userNum = data_Enviroment_define.userNum; // 유저번호
-	String userResultA = "";
+	String userResultA = ""; //userResultA 값 초기화(천직 혹은 한번 더 의심하기가 들어감)
+//	String resultFinal = "";
 	
 	//----------------------------------------------------------
 	//Construction
@@ -72,6 +74,7 @@ public class UAQ_DbAction {
 	//----------------------------------------------------------
 	//Method
 	//----------------------------------------------------------
+	
 	//문제&답 출력
 	public UAQ_Bean UAQ_ShowQuiz() {			
 		UAQ_Bean bean = null;
@@ -117,6 +120,9 @@ public class UAQ_DbAction {
 
 	
 	
+	
+
+	//(총계점수)sumScore += 1번 버튼 점수 계산
 	public void UAQ_SendScore1() {
 		String query = "select aqScore1 from swing_project_team3.aptitudequestion where aqNum="+(countQuizNum-1);
 		// 열값을 차례로 불러오기 위함	
@@ -143,7 +149,7 @@ public class UAQ_DbAction {
 		}
 	}
 	
-	
+	//(총계점수)sumScore += 2번 버튼 점수 계산
 	public void UAQ_SendScore2() {
 		String query = "select aqScore2 from swing_project_team3.aptitudequestion where aqNum="+(countQuizNum-1);
 		// 열값을 차례로 불러오기 위함	
@@ -169,37 +175,104 @@ public class UAQ_DbAction {
 		}
 	}
 	
+	//총계점수(sumScore)에 따른 userResultA DB 업데이트
+	public void UAQ_UpdateResultA_SendDbAction() {
+		if(countQuizNum>=11 && sumScore>=7) {		
+			UAQ_UpdateResultA_Good();
+			UAQ_UpdateResultA_SendDB();
+		}else if(countQuizNum>=11 && sumScore<7) {
+			UAQ_UpdateResultA_Bad();
+			UAQ_UpdateResultA_SendDB();
+		}
+	}
 	
+	//arName1 값 불러오기(score>=7)
 	public void UAQ_UpdateResultA_Good() {
-		if(countQuizNum>=11 && sumScore>=7) {
 			PreparedStatement ps = null;
 		      try{
 		    	  Class.forName("com.mysql.cj.jdbc.Driver");
 		          Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
 		           @SuppressWarnings("unused")
 		          Statement stmt_mysql = conn_mysql.createStatement();
+
+		          String result1 = "select arName from swing_project_team3.aptituderesult where arNum=1";		          
+		        //arNum=1의 arName값을 불러옴
+		          ResultSet rs = stmt_mysql.executeQuery(result1); // 쿼리문장을 실행하여 ResultSet타입으로 변환 ->객체 rs에 결과값 저장
 		          
-		          String query = "update user set userResultA = ? ";
-		          String result1 = "select arNum from swing_project_team3_new.aptituderesult where arNum=1";
-		          String query2 = "where userNum = ? "; 
-		           //   변수  7개
-		          ps = conn_mysql.prepareStatement(query + result1 + query2 + userNum);
-		          ps.setString(1, userResultA);
-		          ps.executeUpdate();
-		             
+					while(rs.next()) {
+						String resultA = rs.getString(1);
+						userResultA = resultA; // userResultA 값 설정
+						}
+					
 		         conn_mysql.close();
-//		             return true;
 		      }
 		      
 		      catch (Exception e){
 		             e.printStackTrace();
-//		             return false;
 		         }            
 			
-		}else {
-
-		}	
+		
 	}
+	
+	//arName2 값 불러오기(score<7)
+	public void UAQ_UpdateResultA_Bad() {
+		PreparedStatement ps = null;
+	      try{
+	    	  Class.forName("com.mysql.cj.jdbc.Driver");
+	          Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+	           @SuppressWarnings("unused")
+	          Statement stmt_mysql = conn_mysql.createStatement();
+	          
+	          String result1 = "select arName from swing_project_team3.aptituderesult where arNum=2";	          
+	          //arNum=2의 arName값을 불러옴
+	          ResultSet rs = stmt_mysql.executeQuery(result1); // 쿼리문장을 실행하여 ResultSet타입으로 변환 ->객체 rs에 결과값 저장
+	          
+				while(rs.next()) {
+					String resultA = rs.getString(1);
+					userResultA = resultA; // userResultA 값 설정
+					}
+
+	         conn_mysql.close();
+	      }
+	      
+	      catch (Exception e){
+	             e.printStackTrace();
+	         }            
+		
+	
+}
+	
+	
+	//userResultA DB 업데이트
+	public void UAQ_UpdateResultA_SendDB() {
+		PreparedStatement ps = null;
+	      try{
+	    	  Class.forName("com.mysql.cj.jdbc.Driver");
+	          Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+	           @SuppressWarnings("unused")
+	          Statement stmt_mysql = conn_mysql.createStatement();
+	          
+	          String query = "update user set userResultA = ? ";
+	          String query2 = "where userNum = " + userNum; 
+	          
+	          ps = conn_mysql.prepareStatement(query + query2);
+	          ps.setString(1, userResultA.trim()); // 천직 혹은 한번 더 의심하기 업데이트
+	        
+	          ps.executeUpdate();
+	          
+	          
+	         conn_mysql.close();
+//	             return true;
+	      }
+	      
+	      catch (Exception e){
+	             e.printStackTrace();
+//	             return false;
+	         }            
+		
+	
+}
+	
 	
 	
 	
