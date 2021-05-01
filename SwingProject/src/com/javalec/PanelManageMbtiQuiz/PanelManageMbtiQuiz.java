@@ -500,7 +500,6 @@ public class PanelManageMbtiQuiz extends JPanel {
    			
    				int listCount =beanlList.size();
    				
-   				System.out.println(listCount);
    				
    				for(int i=0; i<listCount; i++) {
    					String temp =Integer.toString(beanlList.get(i).getMqNum());
