@@ -131,7 +131,6 @@ public class Login extends JFrame {
 		private JTextField getTfLoginId() {
 			if (tfLoginId == null) {
 				tfLoginId = new JTextField();
-				tfLoginId.setEnabled(true);
 				tfLoginId.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -151,7 +150,6 @@ public class Login extends JFrame {
 		private JPasswordField getTfLoginPw() {
 			if (pfLoginPw == null) {
 			pfLoginPw = new JPasswordField();
-			pfLoginPw.setEnabled(true);
 			pfLoginPw.setBounds(70, 240, 280, 43);
 			pfLoginPw.addMouseListener(new MouseAdapter() {
 				@Override

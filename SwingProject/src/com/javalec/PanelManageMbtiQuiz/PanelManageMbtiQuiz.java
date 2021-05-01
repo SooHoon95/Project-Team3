@@ -414,10 +414,10 @@ public class PanelManageMbtiQuiz extends JPanel {
  	//SungAh 2021.04.28
  	private int ScoreFieldCheck(){
  		int i = 0;			
- 		if(cbMBTIAnswer1Score.getSelectedItem() == "0" && cbMBTIAnswer1Score.getSelectedItem() == "0") {
+ 		if(cbMBTIAnswer1Score.getSelectedItem() == "0" && cbMBTIAnswer2Score.getSelectedItem() == "0") {
  			i++; // 점수1과 점수2의 값 = 0이면
  		}			
- 		if(cbMBTIAnswer2Score.getSelectedItem() == "1" && cbMBTIAnswer2Score.getSelectedItem() == "1") {
+ 		if(cbMBTIAnswer1Score.getSelectedItem() == "1" && cbMBTIAnswer2Score.getSelectedItem() == "1") {
  			i++; // 점수1과 점수2의 값 = 1이면
  		}			
  		
