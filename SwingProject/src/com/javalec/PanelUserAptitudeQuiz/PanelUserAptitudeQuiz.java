@@ -21,6 +21,7 @@ import java.sql.Statement;
 import java.util.DoubleSummaryStatistics;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
+import java.awt.SystemColor;
 
 public class PanelUserAptitudeQuiz extends JPanel {
 	private JButton btnAptitudeNext;
@@ -81,6 +82,7 @@ public class PanelUserAptitudeQuiz extends JPanel {
 	private JTextArea getTaAptitudeQuiz() {
 		if (taAptitudeQuiz == null) {
 			taAptitudeQuiz = new JTextArea();
+			taAptitudeQuiz.setBackground(SystemColor.control);
 			taAptitudeQuiz.setBounds(30, 65, 437, 113);
 			taAptitudeQuiz.setLineWrap(true); // 줄바꿔주는 기능
 		}
@@ -106,11 +108,11 @@ public class PanelUserAptitudeQuiz extends JPanel {
 		if((uaq_dbAction.countQuizNum>uaq_dbAction.countQuizMax) && uaq_dbAction.sumScore>=7) {	//총계점수(sumScore)에 따른 userResultA DB 업데이트
 			uaq_dbAction.UAQ_UpdateResultA_Good();
 			uaq_dbAction.UAQ_UpdateResultA_SendDB();
-			JOptionPane.showMessageDialog(null, "모든 문제를 풀었습니다");	
+			EndAptitudeQuiz();
 		}else if((uaq_dbAction.countQuizNum>uaq_dbAction.countQuizMax) && uaq_dbAction.sumScore<7) {//총계점수(sumScore)에 따른 userResultA DB 업데이트
 			uaq_dbAction.UAQ_UpdateResultA_Bad();
 			uaq_dbAction.UAQ_UpdateResultA_SendDB();
-			JOptionPane.showMessageDialog(null, "모든 문제를 풀었습니다");	
+			EndAptitudeQuiz();
 		}
 		uaq_dbAction.UAQ_ShowNextQuiz();// 문제번호 +1
 		UAQ_ShowQuiz(); //문제, 답 출력	
@@ -128,18 +130,14 @@ public class PanelUserAptitudeQuiz extends JPanel {
 		}
 	}
 	
-	//
-//	private void UAQ_UpdateResultA_SendDbAction() { ****실행이 되지않아 주석처리*****
-//		if((uaq_dbAction.countQuizNum>uaq_dbAction.countQuizMax) && uaq_dbAction.sumScore>=7) {	//총계점수(sumScore)에 따른 userResultA DB 업데이트
-//			uaq_dbAction.UAQ_UpdateResultA_Good();
-//			uaq_dbAction.UAQ_UpdateResultA_SendDB();
-//			JOptionPane.showMessageDialog(null, "모든 문제를 풀었습니다");	
-//		}else if((uaq_dbAction.countQuizNum>uaq_dbAction.countQuizMax) && uaq_dbAction.sumScore<7) {//총계점수(sumScore)에 따른 userResultA DB 업데이트
-//			uaq_dbAction.UAQ_UpdateResultA_Bad();
-//			uaq_dbAction.UAQ_UpdateResultA_SendDB();
-//			JOptionPane.showMessageDialog(null, "모든 문제를 풀었습니다");	
-//		}
-//	}
+	private void EndAptitudeQuiz() {
+		JOptionPane.showMessageDialog(null, "문제가 끝났습니다");
+		JOptionPane.showMessageDialog(null, "당신의 적성검사 결과는 "+ uaq_dbAction.userResultA + "입니다." + "\n" + "자세한 결과는 통계창에서 확인하세요.");
+		taAptitudeQuiz.setText("수고하셨습니다.");
+		rbAptitudeResult1.setVisible(false);
+		rbAptitudeResult2.setVisible(false);
+		btnAptitudeNext.setVisible(false);
+	}
 
 	
 }//------------------------------------------------------
