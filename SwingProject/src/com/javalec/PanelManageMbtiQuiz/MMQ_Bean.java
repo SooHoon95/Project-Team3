@@ -24,8 +24,8 @@ public class MMQ_Bean {
    public MMQ_Bean(int mqNum, String mqType, String mqQuestion, String mqAnswer1, String mqAnswer2) {
 	super();
 	this.mqNum = mqNum;
-	this.mqQuestion = mqQuestion;
 	this.mqType = mqType;
+	this.mqQuestion = mqQuestion;
 	this.mqAnswer1 = mqAnswer1;
 	this.mqAnswer2 = mqAnswer2;
 }
@@ -56,70 +56,105 @@ public MMQ_Bean(int mqNum, String mqQuestion, String mqAnswer1, String mqAnswer2
       this.mqScore2 = mqScore2;
    }
 
+
    //Method
-   
-   
-   public int getMqNum() {
-      return mqNum;
-   }
 
-   public void setMqNum(int mqNum) {
-      this.mqNum = mqNum;
-   }
 
-   public String getMqQuestion() {
-      return mqQuestion;
-   }
+public int getMqNum() {
+	return mqNum;
+}
 
-   public void setMqQuestion(String mqQuestion) {
-      this.mqQuestion = mqQuestion;
-   }
 
-   public String getMqType() {
-      return mqType;
-   }
 
-   public void setMqType(String mqType) {
-      this.mqType = mqType;
-   }
 
-   public String getMqAnswer1() {
-      return mqAnswer1;
-   }
+public void setMqNum(int mqNum) {
+	this.mqNum = mqNum;
+}
 
-   public void setMqAnswer1(String mqAnswer1) {
-      this.mqAnswer1 = mqAnswer1;
-   }
 
-   public String getMqAnswer2() {
-      return mqAnswer2;
-   }
 
-   public void setMqAnswer2(String mqAnswer2) {
-      this.mqAnswer2 = mqAnswer2;
-   }
 
-   public String getMqScore1() {
-      return mqScore1;
-   }
+public String getMqQuestion() {
+	return mqQuestion;
+}
 
-   public void setMqScore1(String mqScore1) {
-      this.mqScore1 = mqScore1;
-   }
 
-   public String getMqScore2() {
-      return mqScore2;
-   }
 
-   public void setMqScore2(String mqScore2) {
-      this.mqScore2 = mqScore2;
-   }
-   
-   
-   
-   
-   
-   
+
+public void setMqQuestion(String mqQuestion) {
+	this.mqQuestion = mqQuestion;
+}
+
+
+
+
+public String getMqType() {
+	return mqType;
+}
+
+
+
+
+public void setMqType(String mqType) {
+	this.mqType = mqType;
+}
+
+
+
+
+public String getMqAnswer1() {
+	return mqAnswer1;
+}
+
+
+
+
+public void setMqAnswer1(String mqAnswer1) {
+	this.mqAnswer1 = mqAnswer1;
+}
+
+
+
+
+public String getMqAnswer2() {
+	return mqAnswer2;
+}
+
+
+
+
+public void setMqAnswer2(String mqAnswer2) {
+	this.mqAnswer2 = mqAnswer2;
+}
+
+
+
+
+public String getMqScore1() {
+	return mqScore1;
+}
+
+
+
+
+public void setMqScore1(String mqScore1) {
+	this.mqScore1 = mqScore1;
+}
+
+
+
+
+public String getMqScore2() {
+	return mqScore2;
+}
+
+
+
+
+public void setMqScore2(String mqScore2) {
+	this.mqScore2 = mqScore2;
+}
+
    
    
 

@@ -497,12 +497,14 @@ public class PanelManageMbtiQuiz extends JPanel {
    			
    			MMQ_DbAction dbAction = new MMQ_DbAction(selectType);
    			ArrayList<MMQ_Bean> beanlList = dbAction.ConditionQueryAction();
-   				
    			
    				int listCount =beanlList.size();
+   				
+   				System.out.println(listCount);
+   				
    				for(int i=0; i<listCount; i++) {
    					String temp =Integer.toString(beanlList.get(i).getMqNum());
-   					String[] qtxt = {temp, beanlList.get(i).getMqQuestion(),beanlList.get(i).getMqAnswer1(),beanlList.get(i).getMqAnswer2()};
+   					String[] qtxt = {temp, beanlList.get(i).getMqType(), beanlList.get(i).getMqQuestion(), beanlList.get(i).getMqAnswer1(), beanlList.get(i).getMqAnswer2()};
    					Outer_Table_AdMBTIQA.addRow(qtxt);
    				}
    				
