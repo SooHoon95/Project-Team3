@@ -42,6 +42,7 @@ public class PanelUserAptitudeQuiz extends JPanel {
 		add(getBtnAptitudeNext());
 		add(getRbAptitudeResult2());
 		add(getRbAptitudeResult1());
+		uaq_dbAction.UAQ_CountQuiz();
 		UAQ_ShowQuiz();
 
 	}
@@ -93,7 +94,7 @@ public class PanelUserAptitudeQuiz extends JPanel {
 		uaq_dbAction.UAQ_ShowQuiz();
 		UAQ_Bean bean = uaq_dbAction.UAQ_ShowQuiz();
 		
-		taAptitudeQuiz.setText(bean.getAqQuestion());
+		taAptitudeQuiz.setText(uaq_dbAction.countQuizNum + ". " + bean.getAqQuestion());
 		rbAptitudeResult1.setText(bean.getAqAnswer1());
 		rbAptitudeResult2.setText(bean.getAqAnswer2());
 		
