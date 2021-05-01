@@ -107,17 +107,7 @@ public class UAQ_DbAction {
 		return bean;
 	}
 	
-	
-	//다음 문제출력
-//	public void UAQ_ShowNextQuiz() {
-//		if(countQuizNum>=countQuizMax) {	
-//			countQuizNum+=10;
-////			JOptionPane.showMessageDialog(null, "모든 문제를 풀었습니다");		
-//			
-//		}else {
-//		countQuizNum++;
-//		}	
-//	}
+
 
 	//문제 총 갯수 불러오기
 	public void UAQ_CountQuiz() {
