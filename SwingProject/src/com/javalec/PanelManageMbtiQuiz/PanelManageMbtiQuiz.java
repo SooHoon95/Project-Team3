@@ -263,10 +263,11 @@ public class PanelManageMbtiQuiz extends JPanel {
    //Table 초기화
   public void MMQ_TableInit() {
       Outer_Table_AdMBTIQA.addColumn("번호"); //mqNum
+      Outer_Table_AdMBTIQA.addColumn("타입"); //mqType
       Outer_Table_AdMBTIQA.addColumn("MBTI질문"); //mqQuestion
       Outer_Table_AdMBTIQA.addColumn("답1");   // mqAnswer1
       Outer_Table_AdMBTIQA.addColumn("답2");   //mqAnswer2
-      Outer_Table_AdMBTIQA.setColumnCount(4); // Column이 4개
+      Outer_Table_AdMBTIQA.setColumnCount(5); // Column이 4개
       
       int i = Outer_Table_AdMBTIQA.getRowCount();
       for(int j=0; j<i; j++) {
@@ -277,22 +278,27 @@ public class PanelManageMbtiQuiz extends JPanel {
       
       int vColIndex = 0; // 첫번째 행
       TableColumn col = inner_table_AdMBTIQA.getColumnModel().getColumn(vColIndex);
-      int width = 30; // 첫번째 행 가로
+      int width = 40; // 첫번째 행 가로
       col.setPreferredWidth(width);; // 첫번째 행 가로크기 설정
       
       vColIndex = 1; // 2번째 행
       col = inner_table_AdMBTIQA.getColumnModel().getColumn(vColIndex);
-      width = 246; // 2번째 행 가로
+      width = 30; // 2번째 행 가로
       col.setPreferredWidth(width);; // 2번째 행 가로크기 설정
       
       vColIndex = 2; // 3번째 행
       col = inner_table_AdMBTIQA.getColumnModel().getColumn(vColIndex);
-      width = 100; // 2번째 행 가로
+      width = 290; // 2번째 행 가로
       col.setPreferredWidth(width);; // 3번째 행 가로크기 설정
       
       vColIndex = 3; // 4번째 행
       col = inner_table_AdMBTIQA.getColumnModel().getColumn(vColIndex);
-      width = 100; // 3번째 행 가로
+      width = 50; // 3번째 행 가로
+      col.setPreferredWidth(width);; // 4번째 행 가로크기 설정
+      
+      vColIndex = 4; // 4번째 행
+      col = inner_table_AdMBTIQA.getColumnModel().getColumn(vColIndex);
+      width = 50; // 3번째 행 가로
       col.setPreferredWidth(width);; // 4번째 행 가로크기 설정
       
    }
@@ -307,7 +313,7 @@ public class PanelManageMbtiQuiz extends JPanel {
       
       for(int i=0; i<listCount; i++) {
          String temp =Integer.toString(beanlList.get(i).getMqNum());
-         String[] qtxt = {temp, beanlList.get(i).getMqQuestion(),beanlList.get(i).getMqAnswer1(),beanlList.get(i).getMqAnswer2()};
+         String[] qtxt = {temp, beanlList.get(i).getMqType(), beanlList.get(i).getMqQuestion(),beanlList.get(i).getMqAnswer1(),beanlList.get(i).getMqAnswer2()};
          Outer_Table_AdMBTIQA.addRow(qtxt);
       }
       
@@ -491,12 +497,13 @@ public class PanelManageMbtiQuiz extends JPanel {
    			
    			MMQ_DbAction dbAction = new MMQ_DbAction(selectType);
    			ArrayList<MMQ_Bean> beanlList = dbAction.ConditionQueryAction();
-   				
    			
    				int listCount =beanlList.size();
+   				
+   				
    				for(int i=0; i<listCount; i++) {
    					String temp =Integer.toString(beanlList.get(i).getMqNum());
-   					String[] qtxt = {temp, beanlList.get(i).getMqQuestion(),beanlList.get(i).getMqAnswer1(),beanlList.get(i).getMqAnswer2()};
+   					String[] qtxt = {temp, beanlList.get(i).getMqType(), beanlList.get(i).getMqQuestion(), beanlList.get(i).getMqAnswer1(), beanlList.get(i).getMqAnswer2()};
    					Outer_Table_AdMBTIQA.addRow(qtxt);
    				}
    				

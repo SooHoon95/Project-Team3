@@ -21,6 +21,7 @@ import java.sql.Statement;
 import java.util.DoubleSummaryStatistics;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
+import java.awt.SystemColor;
 
 public class PanelUserAptitudeQuiz extends JPanel {
 	private JButton btnAptitudeNext;
@@ -42,6 +43,7 @@ public class PanelUserAptitudeQuiz extends JPanel {
 		add(getBtnAptitudeNext());
 		add(getRbAptitudeResult2());
 		add(getRbAptitudeResult1());
+		uaq_dbAction.UAQ_CountQuiz();
 		UAQ_ShowQuiz();
 
 	}
@@ -50,10 +52,10 @@ public class PanelUserAptitudeQuiz extends JPanel {
 			btnAptitudeNext = new JButton("다음");
 			btnAptitudeNext.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					UAQ_UpdateResultA_SendDbAction();
-					UAQ_ShowNextQuiz();
+					UAQ_ShowQuiz();	
+					UAQ_ShowNextQuiz();			
 					UAQ_SendScore();
-					
+//					UAQ_UpdateResultA_SendDbAction();
 
 				}
 			});
@@ -80,6 +82,7 @@ public class PanelUserAptitudeQuiz extends JPanel {
 	private JTextArea getTaAptitudeQuiz() {
 		if (taAptitudeQuiz == null) {
 			taAptitudeQuiz = new JTextArea();
+			taAptitudeQuiz.setBackground(SystemColor.control);
 			taAptitudeQuiz.setBounds(30, 65, 437, 113);
 			taAptitudeQuiz.setLineWrap(true); // 줄바꿔주는 기능
 		}
@@ -89,20 +92,35 @@ public class PanelUserAptitudeQuiz extends JPanel {
 	
 	//------------------------------------------------
 	//문제 출력		
-	public void UAQ_ShowQuiz() { 		
-		uaq_dbAction.UAQ_ShowQuiz();
-		UAQ_Bean bean = uaq_dbAction.UAQ_ShowQuiz();
+	public void UAQ_ShowQuiz() { 				
+		if(uaq_dbAction.countQuizMax>uaq_dbAction.countQuizNum) {
+			uaq_dbAction.UAQ_ShowQuiz();
+			UAQ_Bean bean = uaq_dbAction.UAQ_ShowQuiz();
+			taAptitudeQuiz.setText(uaq_dbAction.countQuizNum + ". " + bean.getAqQuestion());
+			rbAptitudeResult1.setText(bean.getAqAnswer1());
+			rbAptitudeResult2.setText(bean.getAqAnswer2());
+			
+			uaq_dbAction.countQuizNum++;
+		}else {
+			uaq_dbAction.countQuizNum++;
+		}
 		
-		taAptitudeQuiz.setText(bean.getAqQuestion());
-		rbAptitudeResult1.setText(bean.getAqAnswer1());
-		rbAptitudeResult2.setText(bean.getAqAnswer2());
 		
 	}
 	
-	//버튼(다음 문제 출력)
-	public void UAQ_ShowNextQuiz() {
-		uaq_dbAction.UAQ_ShowNextQuiz();
-		UAQ_ShowQuiz();
+	//총계점수(sumScore)에 따른 userResultA DB 업데이트
+	public void UAQ_ShowNextQuiz() { 
+		if((uaq_dbAction.countQuizNum>uaq_dbAction.countQuizMax) && uaq_dbAction.sumScore>=7) {	//총계점수(sumScore)에 따른 userResultA DB 업데이트
+			uaq_dbAction.UAQ_UpdateResultA_Good();
+			uaq_dbAction.UAQ_UpdateResultA_SendDB();
+			EndAptitudeQuiz();
+		}else if((uaq_dbAction.countQuizNum>uaq_dbAction.countQuizMax) && uaq_dbAction.sumScore<7) {//총계점수(sumScore)에 따른 userResultA DB 업데이트
+			uaq_dbAction.UAQ_UpdateResultA_Bad();
+			uaq_dbAction.UAQ_UpdateResultA_SendDB();
+			EndAptitudeQuiz();
+		}
+		
+		
 	}
 	
 	
@@ -116,10 +134,15 @@ public class PanelUserAptitudeQuiz extends JPanel {
 		}
 	}
 	
-	//userResultA DB 업데이트
-	private void UAQ_UpdateResultA_SendDbAction() {
-		uaq_dbAction.UAQ_UpdateResultA_SendDbAction();		
-
+	//모든 문제를 다 푼 후 메세지 출력
+	private void EndAptitudeQuiz() {
+		taAptitudeQuiz.setText("수고하셨습니다.");
+		rbAptitudeResult1.setVisible(false);
+		rbAptitudeResult2.setVisible(false);
+		btnAptitudeNext.setVisible(false);
+		JOptionPane.showMessageDialog(null, "문제가 끝났습니다");
+		JOptionPane.showMessageDialog(null, "당신의 적성검사 결과는 "+ uaq_dbAction.userResultA + "입니다." + "\n" + "자세한 결과는 통계창에서 확인하세요.");
+		
 	}
 
 	

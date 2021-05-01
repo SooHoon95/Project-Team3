@@ -80,7 +80,7 @@ public class MMQ_DbAction {
    public ArrayList<MMQ_Bean> selectList(){
 	   
 	   ArrayList<MMQ_Bean> beanList = new ArrayList<MMQ_Bean>();
-	   String WhereDefault = "select mqNum, mqQuestion, mqAnswer1, mqAnswer2 from mbtiquestion ";
+	   String WhereDefault = "select mqNum, mqType, mqQuestion, mqAnswer1, mqAnswer2 from mbtiquestion ";
 	   
 	   try{
 		   Class.forName("com.mysql.cj.jdbc.Driver");
@@ -90,11 +90,12 @@ public class MMQ_DbAction {
 		   
 		   while(rs.next()){
 			   int mqNum =rs.getInt(1);
-			   String mqQuestion =rs.getString(2);
-			   String mqAnswer1 =rs.getString(3);
-			   String mqAnswer2 =rs.getString(4);
+			   String mqType = rs.getString(2);
+			   String mqQuestion =rs.getString(3);
+			   String mqAnswer1 =rs.getString(4);
+			   String mqAnswer2 =rs.getString(5);
 			   
-			   MMQ_Bean bean = new MMQ_Bean(mqNum, mqQuestion, mqAnswer1, mqAnswer2);
+			   MMQ_Bean bean = new MMQ_Bean(mqNum, mqType, mqQuestion, mqAnswer1, mqAnswer2);
 			   beanList.add(bean);
 		   }
 		   conn_mysql.close();
@@ -106,12 +107,12 @@ public class MMQ_DbAction {
 	   
    }
    
-   //검색
+   //조건 검색
    public ArrayList<MMQ_Bean> ConditionQueryAction() {
 	   
 	   
 	   ArrayList<MMQ_Bean> beanList = new ArrayList<MMQ_Bean>();
-	   String WhereDefault = "select mqNum, mqQuestion, mqAnswer1, mqAnswer2 from mbtiquestion where mqType = '" + selectType +"'";
+	   String WhereDefault = "select mqNum, mqType, mqQuestion, mqAnswer1, mqAnswer2 from mbtiquestion where mqType = '" + selectType + "'";
 	   try{
 		   Class.forName("com.mysql.cj.jdbc.Driver");
 		   Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
@@ -120,12 +121,13 @@ public class MMQ_DbAction {
 		   ResultSet rs = stmt_mysql.executeQuery(WhereDefault);
 		   
 		   while(rs.next()){
-			   int mqNum =rs.getInt(1);
-			   String mqQuestion =rs.getString(2);
-			   String mqAnswer1 =rs.getString(3);
-			   String mqAnswer2 =rs.getString(4);
+			   int mqNum = rs.getInt(1);
+			   String mqType = rs.getString(2);
+			   String mqQuestion = rs.getString(3);
+			   String mqAnswer1 = rs.getString(4);
+			   String mqAnswer2 = rs.getString(5);
 
-			   MMQ_Bean bean = new MMQ_Bean(mqNum, mqQuestion, mqAnswer1, mqAnswer2);
+			   MMQ_Bean bean = new MMQ_Bean(mqNum, mqType, mqQuestion, mqAnswer1, mqAnswer2);
 			   beanList.add(bean);
 		   }
 		   conn_mysql.close();

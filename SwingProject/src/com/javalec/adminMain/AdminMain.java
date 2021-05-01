@@ -52,7 +52,6 @@ public class AdminMain extends JDialog {
 	 * Create the dialog.
 	 */
 	public AdminMain() {
-		System.out.println("adminmain");
 		initialize(); 
 	}
 		private void initialize() {
