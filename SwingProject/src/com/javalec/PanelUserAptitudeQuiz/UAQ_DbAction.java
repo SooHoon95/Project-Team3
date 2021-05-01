@@ -101,7 +101,8 @@ public class UAQ_DbAction {
 		
 				
 		}catch(Exception e) {
-			e.printStackTrace();// 화면에 에러코드 보여주기
+//			countQuizNum+=10;
+			e.printStackTrace();// 화면에 에러코드 보여주기			
 		}
 		return bean;
 	}
@@ -109,8 +110,10 @@ public class UAQ_DbAction {
 	
 	//다음 문제출력
 	public void UAQ_ShowNextQuiz() {
-		if(countQuizNum>=countQuizMax) {
-			JOptionPane.showMessageDialog(null, "모든 문제를 풀었습니다");
+		if(countQuizNum>=countQuizMax) {	
+			countQuizNum+=10;
+//			JOptionPane.showMessageDialog(null, "모든 문제를 풀었습니다");		
+			
 		}else {
 		countQuizNum++;
 		}	
@@ -189,23 +192,12 @@ public class UAQ_DbAction {
 				}
 					
 		conn_mysql.close(); //DB 연결 끊기
-		System.out.println(sumScore);
 				
 		}catch(Exception e) {
 			e.printStackTrace();// 화면에 에러코드 보여주기
 		}
 	}
 	
-	//총계점수(sumScore)에 따른 userResultA DB 업데이트
-	public void UAQ_UpdateResultA_SendDbAction() {
-		if(countQuizNum>=countQuizMax+1 && sumScore>=7) {		
-			UAQ_UpdateResultA_Good();
-			UAQ_UpdateResultA_SendDB();
-		}else if(countQuizNum>=countQuizMax+1 && sumScore<7) {
-			UAQ_UpdateResultA_Bad();
-			UAQ_UpdateResultA_SendDB();
-		}
-	}
 	
 	//arName1 값 불러오기(score>=7)
 	public void UAQ_UpdateResultA_Good() {
@@ -224,7 +216,8 @@ public class UAQ_DbAction {
 						String resultA = rs.getString(1);
 						userResultA = resultA; // userResultA 값 설정
 						}
-					
+					System.out.println(countQuizNum);
+					System.out.println(userResultA);
 		         conn_mysql.close();
 		      }
 		      
@@ -252,7 +245,8 @@ public class UAQ_DbAction {
 					String resultA = rs.getString(1);
 					userResultA = resultA; // userResultA 값 설정
 					}
-
+				System.out.println(countQuizNum);
+				System.out.println(userResultA);
 	         conn_mysql.close();
 	      }
 	      
