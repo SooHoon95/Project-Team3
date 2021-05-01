@@ -52,7 +52,7 @@ public class PanelUserAptitudeQuiz extends JPanel {
 			btnAptitudeNext = new JButton("다음");
 			btnAptitudeNext.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-									
+					UAQ_ShowQuiz();	
 					UAQ_ShowNextQuiz();			
 					UAQ_SendScore();
 //					UAQ_UpdateResultA_SendDbAction();
@@ -92,18 +92,23 @@ public class PanelUserAptitudeQuiz extends JPanel {
 	
 	//------------------------------------------------
 	//문제 출력		
-	public void UAQ_ShowQuiz() { 		
-		uaq_dbAction.UAQ_ShowQuiz();
-		UAQ_Bean bean = uaq_dbAction.UAQ_ShowQuiz();
+	public void UAQ_ShowQuiz() { 				
+		if(uaq_dbAction.countQuizMax>uaq_dbAction.countQuizNum) {
+			uaq_dbAction.UAQ_ShowQuiz();
+			UAQ_Bean bean = uaq_dbAction.UAQ_ShowQuiz();
+			taAptitudeQuiz.setText(uaq_dbAction.countQuizNum + ". " + bean.getAqQuestion());
+			rbAptitudeResult1.setText(bean.getAqAnswer1());
+			rbAptitudeResult2.setText(bean.getAqAnswer2());
+			
+			uaq_dbAction.countQuizNum++;
+		}else {
+			uaq_dbAction.countQuizNum++;
+		}
 		
-		taAptitudeQuiz.setText(uaq_dbAction.countQuizNum + ". " + bean.getAqQuestion());
-		rbAptitudeResult1.setText(bean.getAqAnswer1());
-		rbAptitudeResult2.setText(bean.getAqAnswer2());
 		
 	}
 	
-	//버튼(다음 문제 출력) + 총계점수(sumScore)에 따른 userResultA DB 업데이트
-	//두 기능의 메소드를 분리하려 했으나 계속해서 DB전송이 안되므로 합침
+	//총계점수(sumScore)에 따른 userResultA DB 업데이트
 	public void UAQ_ShowNextQuiz() { 
 		if((uaq_dbAction.countQuizNum>uaq_dbAction.countQuizMax) && uaq_dbAction.sumScore>=7) {	//총계점수(sumScore)에 따른 userResultA DB 업데이트
 			uaq_dbAction.UAQ_UpdateResultA_Good();
@@ -114,8 +119,7 @@ public class PanelUserAptitudeQuiz extends JPanel {
 			uaq_dbAction.UAQ_UpdateResultA_SendDB();
 			EndAptitudeQuiz();
 		}
-		uaq_dbAction.UAQ_ShowNextQuiz();// 문제번호 +1
-		UAQ_ShowQuiz(); //문제, 답 출력	
+		
 		
 	}
 	
@@ -130,13 +134,15 @@ public class PanelUserAptitudeQuiz extends JPanel {
 		}
 	}
 	
+	//모든 문제를 다 푼 후 메세지 출력
 	private void EndAptitudeQuiz() {
-		JOptionPane.showMessageDialog(null, "문제가 끝났습니다");
-		JOptionPane.showMessageDialog(null, "당신의 적성검사 결과는 "+ uaq_dbAction.userResultA + "입니다." + "\n" + "자세한 결과는 통계창에서 확인하세요.");
 		taAptitudeQuiz.setText("수고하셨습니다.");
 		rbAptitudeResult1.setVisible(false);
 		rbAptitudeResult2.setVisible(false);
 		btnAptitudeNext.setVisible(false);
+		JOptionPane.showMessageDialog(null, "문제가 끝났습니다");
+		JOptionPane.showMessageDialog(null, "당신의 적성검사 결과는 "+ uaq_dbAction.userResultA + "입니다." + "\n" + "자세한 결과는 통계창에서 확인하세요.");
+		
 	}
 
 	
