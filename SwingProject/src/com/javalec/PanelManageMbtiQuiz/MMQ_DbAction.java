@@ -131,7 +131,6 @@ public class MMQ_DbAction {
 			   beanList.add(bean);
 		   }
 		   conn_mysql.close();
-		   System.out.println(beanList.size());
 	   }
 	   catch (Exception e){
 		   e.printStackTrace();
