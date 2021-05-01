@@ -42,6 +42,7 @@ public class PanelUserAptitudeQuiz extends JPanel {
 		add(getBtnAptitudeNext());
 		add(getRbAptitudeResult2());
 		add(getRbAptitudeResult1());
+		uaq_dbAction.UAQ_CountQuiz();
 		UAQ_ShowQuiz();
 
 	}
@@ -50,10 +51,10 @@ public class PanelUserAptitudeQuiz extends JPanel {
 			btnAptitudeNext = new JButton("다음");
 			btnAptitudeNext.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					UAQ_UpdateResultA_SendDbAction();
-					UAQ_ShowNextQuiz();
+									
+					UAQ_ShowNextQuiz();			
 					UAQ_SendScore();
-					
+//					UAQ_UpdateResultA_SendDbAction();
 
 				}
 			});
@@ -93,16 +94,27 @@ public class PanelUserAptitudeQuiz extends JPanel {
 		uaq_dbAction.UAQ_ShowQuiz();
 		UAQ_Bean bean = uaq_dbAction.UAQ_ShowQuiz();
 		
-		taAptitudeQuiz.setText(bean.getAqQuestion());
+		taAptitudeQuiz.setText(uaq_dbAction.countQuizNum + ". " + bean.getAqQuestion());
 		rbAptitudeResult1.setText(bean.getAqAnswer1());
 		rbAptitudeResult2.setText(bean.getAqAnswer2());
 		
 	}
 	
-	//버튼(다음 문제 출력)
-	public void UAQ_ShowNextQuiz() {
-		uaq_dbAction.UAQ_ShowNextQuiz();
-		UAQ_ShowQuiz();
+	//버튼(다음 문제 출력) + 총계점수(sumScore)에 따른 userResultA DB 업데이트
+	//두 기능의 메소드를 분리하려 했으나 계속해서 DB전송이 안되므로 합침
+	public void UAQ_ShowNextQuiz() { 
+		if((uaq_dbAction.countQuizNum>uaq_dbAction.countQuizMax) && uaq_dbAction.sumScore>=7) {	//총계점수(sumScore)에 따른 userResultA DB 업데이트
+			uaq_dbAction.UAQ_UpdateResultA_Good();
+			uaq_dbAction.UAQ_UpdateResultA_SendDB();
+			JOptionPane.showMessageDialog(null, "모든 문제를 풀었습니다");	
+		}else if((uaq_dbAction.countQuizNum>uaq_dbAction.countQuizMax) && uaq_dbAction.sumScore<7) {//총계점수(sumScore)에 따른 userResultA DB 업데이트
+			uaq_dbAction.UAQ_UpdateResultA_Bad();
+			uaq_dbAction.UAQ_UpdateResultA_SendDB();
+			JOptionPane.showMessageDialog(null, "모든 문제를 풀었습니다");	
+		}
+		uaq_dbAction.UAQ_ShowNextQuiz();// 문제번호 +1
+		UAQ_ShowQuiz(); //문제, 답 출력	
+		
 	}
 	
 	
@@ -116,11 +128,18 @@ public class PanelUserAptitudeQuiz extends JPanel {
 		}
 	}
 	
-	//userResultA DB 업데이트
-	private void UAQ_UpdateResultA_SendDbAction() {
-		uaq_dbAction.UAQ_UpdateResultA_SendDbAction();		
-
-	}
+	//
+//	private void UAQ_UpdateResultA_SendDbAction() { ****실행이 되지않아 주석처리*****
+//		if((uaq_dbAction.countQuizNum>uaq_dbAction.countQuizMax) && uaq_dbAction.sumScore>=7) {	//총계점수(sumScore)에 따른 userResultA DB 업데이트
+//			uaq_dbAction.UAQ_UpdateResultA_Good();
+//			uaq_dbAction.UAQ_UpdateResultA_SendDB();
+//			JOptionPane.showMessageDialog(null, "모든 문제를 풀었습니다");	
+//		}else if((uaq_dbAction.countQuizNum>uaq_dbAction.countQuizMax) && uaq_dbAction.sumScore<7) {//총계점수(sumScore)에 따른 userResultA DB 업데이트
+//			uaq_dbAction.UAQ_UpdateResultA_Bad();
+//			uaq_dbAction.UAQ_UpdateResultA_SendDB();
+//			JOptionPane.showMessageDialog(null, "모든 문제를 풀었습니다");	
+//		}
+//	}
 
 	
 }//------------------------------------------------------

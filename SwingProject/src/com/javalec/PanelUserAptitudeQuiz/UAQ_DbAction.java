@@ -29,10 +29,10 @@ public class UAQ_DbAction {
 	
 	
 	int countQuizNum = 1; // 문제번호 : 초기값 1번
+	int countQuizMax = 0; // 문제 갯수
 	int sumScore = 0; // score 합계
 	int userNum = data_Enviroment_define.userNum; // 유저번호
 	String userResultA = ""; //userResultA 값 초기화(천직 혹은 한번 더 의심하기가 들어감)
-//	String resultFinal = "";
 	
 	//----------------------------------------------------------
 	//Construction
@@ -101,7 +101,8 @@ public class UAQ_DbAction {
 		
 				
 		}catch(Exception e) {
-			e.printStackTrace();// 화면에 에러코드 보여주기
+//			countQuizNum+=10;
+			e.printStackTrace();// 화면에 에러코드 보여주기			
 		}
 		return bean;
 	}
@@ -109,15 +110,40 @@ public class UAQ_DbAction {
 	
 	//다음 문제출력
 	public void UAQ_ShowNextQuiz() {
-		if(countQuizNum>=11) {
-			JOptionPane.showMessageDialog(null, "모든 문제를 풀었습니다");
+		if(countQuizNum>=countQuizMax) {	
+			countQuizNum+=10;
+//			JOptionPane.showMessageDialog(null, "모든 문제를 풀었습니다");		
+			
 		}else {
 		countQuizNum++;
-//		UAQ_ShowQuiz();
 		}	
 	}
-	
 
+	//문제 총 갯수 불러오기
+	public void UAQ_CountQuiz() {
+		PreparedStatement ps = null;
+	    try{
+	  	  Class.forName("com.mysql.cj.jdbc.Driver");
+	        Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+	         @SuppressWarnings("unused")
+	        Statement stmt_mysql = conn_mysql.createStatement();
+	
+	        String countQuizMaxQuery = "select max(aqNum) from aptitudequestion";		          
+	      //arNum=1의 갯수를 불러옴
+	        ResultSet rs = stmt_mysql.executeQuery(countQuizMaxQuery); // 쿼리문장을 실행하여 ResultSet타입으로 변환 ->객체 rs에 결과값 저장
+	        
+				while(rs.next()) {
+					countQuizMax = Integer.parseInt(rs.getString(1));
+					}
+				
+	       conn_mysql.close();
+	    }
+	    
+	    catch (Exception e){
+	           e.printStackTrace();
+	       }            
+		
+	}
 	
 	
 	
@@ -141,8 +167,6 @@ public class UAQ_DbAction {
 				}
 					
 		conn_mysql.close(); //DB 연결 끊기
-		
-		System.out.println(sumScore);
 				
 		}catch(Exception e) {
 			e.printStackTrace();// 화면에 에러코드 보여주기
@@ -168,23 +192,12 @@ public class UAQ_DbAction {
 				}
 					
 		conn_mysql.close(); //DB 연결 끊기
-		System.out.println(sumScore);
 				
 		}catch(Exception e) {
 			e.printStackTrace();// 화면에 에러코드 보여주기
 		}
 	}
 	
-	//총계점수(sumScore)에 따른 userResultA DB 업데이트
-	public void UAQ_UpdateResultA_SendDbAction() {
-		if(countQuizNum>=11 && sumScore>=7) {		
-			UAQ_UpdateResultA_Good();
-			UAQ_UpdateResultA_SendDB();
-		}else if(countQuizNum>=11 && sumScore<7) {
-			UAQ_UpdateResultA_Bad();
-			UAQ_UpdateResultA_SendDB();
-		}
-	}
 	
 	//arName1 값 불러오기(score>=7)
 	public void UAQ_UpdateResultA_Good() {
@@ -203,7 +216,8 @@ public class UAQ_DbAction {
 						String resultA = rs.getString(1);
 						userResultA = resultA; // userResultA 값 설정
 						}
-					
+					System.out.println(countQuizNum);
+					System.out.println(userResultA);
 		         conn_mysql.close();
 		      }
 		      
@@ -231,7 +245,8 @@ public class UAQ_DbAction {
 					String resultA = rs.getString(1);
 					userResultA = resultA; // userResultA 값 설정
 					}
-
+				System.out.println(countQuizNum);
+				System.out.println(userResultA);
 	         conn_mysql.close();
 	      }
 	      
