@@ -10,9 +10,17 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.javalec.PanelManageUser.PanelManageUser;
+import com.javalec.login.Login;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AdminMain extends JDialog {
 	
@@ -24,6 +32,7 @@ public class AdminMain extends JDialog {
 	PanelManageUser panelManageUser = new PanelManageUser();
 	PanelManageQuiz panelManageQuiz = new PanelManageQuiz();
 	PanelManageResult panelManageResult = new PanelManageResult();
+	private final JLabel labelLogout = new JLabel("logout");
  
 
 	/**
@@ -60,6 +69,27 @@ public class AdminMain extends JDialog {
 			frame.getContentPane().add(panelManageUser);
 			frame.getContentPane().add(panelManageQuiz); 
 			frame.getContentPane().add(panelManageResult); 
+			labelLogout.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					int result = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?","로그아웃",JOptionPane.YES_NO_OPTION);
+					if(result ==JOptionPane.CLOSED_OPTION) { // 사용자가 선택 없이 x를 누른 경우.
+						
+					} else if(result == JOptionPane.YES_OPTION) { // 예를 선택한 경우 
+						RestPanel();
+						frame.setVisible(false);
+						Login login = new Login();
+						
+					} else { // 아니오를 선택한 경우
+						
+					}
+				}
+			});
+			labelLogout.setForeground(Color.BLACK);
+			labelLogout.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+			labelLogout.setBounds(62, 387, 66, 26);
+			
+			frame.getContentPane().add(labelLogout);
 			frame.setVisible(true);
 	}
 

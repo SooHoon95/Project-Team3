@@ -21,6 +21,9 @@ import com.javalec.Datadefine.data_Enviroment_define;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JComboBox;
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
@@ -41,7 +44,7 @@ public class SearchId extends JDialog {
 	public static void main(String[] args) {
 		try {
 			SearchId dialog = new SearchId();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); // 종료 버튼 기능 구현 위해 X 버튼 원래 기능을 막아놓는다. 
 			dialog.setVisible(true);
 			dialog.setTitle("아이디 찾기");
 		} catch (Exception e) {
@@ -53,6 +56,14 @@ public class SearchId extends JDialog {
 	 * Create the dialog.
 	 */
 	public SearchId() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) { // 새롭게 만든 윈도우 종료버튼 클릭 이벤트 
+				panelClean();
+				e.getWindow().dispose();
+			}
+		});
+		
 		setBounds(100, 100, 400, 480);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -191,4 +202,5 @@ public class SearchId extends JDialog {
 		tfUserName.setText("");
 		tfUserEmail.setText("");
 	}
+	
 }

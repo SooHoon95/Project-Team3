@@ -15,11 +15,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JSeparator;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -29,7 +33,7 @@ public class SignUp extends JDialog {
 	private JLabel lblNewLabel_2_1;
 	private JLabel lblNewLabel_2_2;
 	private JLabel lblNewLabel_2_3;
-	private JLabel labelPw;
+	private JLabel labelPWcheck;
 	private JLabel lblNewLabel;
 	private JTextField tfSignName;
 	private JTextField tfSignId;
@@ -44,10 +48,13 @@ public class SignUp extends JDialog {
 	private JSeparator separator_1_2;
 
 	private String checkID = "";
-	private JLabel label_check;
+	private JLabel label_IDcheck;
 	private JPasswordField pwSignPw_2;
 	private String Email[] = {"직접입력", "naver.com", "gmail.com", "hanmail.net", "nate.com"}; // 콤보 박스 내용
 	private JComboBox<String> cBEmail = new JComboBox(Email);
+	private String memberStr = "회원";
+	private String userResultM = "-";
+	private String userResultA = "-"; 
 	private data_Enviroment_define dataDefine = new data_Enviroment_define();
 	
 	/**
@@ -56,7 +63,7 @@ public class SignUp extends JDialog {
 	public static void main(String[] args) {
 		try {
 			SignUp dialog = new SignUp();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); // 종료 버튼 기능 구현 위해 X 버튼 원래 기능을 막아놓는다. 
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,10 +75,19 @@ public class SignUp extends JDialog {
 	 */
 	public SignUp() {
 		initialize();
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) { // 새롭게 만든 윈도우 종료버튼 클릭 이벤트 
+				panelClean();
+				e.getWindow().dispose();
+			}
+		});
+		
 	}
 
 	private void initialize() {
 		setBounds(100, 100, 430, 530);
+		getContentPane().setLayout(new BorderLayout());
 		getContentPane().setLayout(null);
 		getContentPane().add(getLblMBT());
 		getContentPane().add(getLoginLabelTitle());
@@ -123,18 +139,18 @@ public class SignUp extends JDialog {
 			panel.add(getSeparator_1());
 			panel.add(getSeparator_1_1());
 			panel.add(getSeparator_1_2());
-			panel.add(getLabelPw());
+			panel.add(getLabelPWcheck());
 			cBEmail.setBounds(250, 230, 110, 30);
 			panel.add(getCBEmail());
 			panel.add(getLblNewLabel());
-			panel.add(getLabel_check());
-
+			panel.add(getLabel_IDcheck());
+			
 			
 			pwSignPw_2 = new JPasswordField();
-			pwSignPw_2.addKeyListener(new KeyAdapter() {
+			pwSignPw_2.addKeyListener(new KeyAdapter() { // Pw 필드 2
 			
 				@Override
-				public void keyReleased(KeyEvent e) {
+				public void keyReleased(KeyEvent e) { // 비밀번호 체크하는 부분 
 					char[] pw = pwSignPw.getPassword();
 					String pwString = new String(pw); // 패스워드 char -> string
 					char[] pw2 = pwSignPw_2.getPassword();
@@ -143,12 +159,12 @@ public class SignUp extends JDialog {
 					if(pwString.equals("") || pwString2.equals("")) {
 					
 					}else {
-						if(pwString.equals(pwString2)) {
-							labelPw.setText("비밀번호가 일치합니다. ");
-							labelPw.setForeground(Color.green);
+						if(pwString2.equals(pwString)) {
+							labelPWcheck.setText("비밀번호가 일치합니다.");
+							labelPWcheck.setForeground(Color.green);
 						}else {
-							labelPw.setText("비밀번호가 일치하지 않습니다. ");
-							labelPw.setForeground(Color.red);
+							labelPWcheck.setText("비밀번호가 일치하지 않습니다.");
+							labelPWcheck.setForeground(Color.red);
 						}
 					}
 				}
@@ -160,11 +176,41 @@ public class SignUp extends JDialog {
 			lblNewLabel_2_2_1.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 			lblNewLabel_2_2_1.setBounds(18, 125, 114, 20);
 			panel.add(lblNewLabel_2_2_1);
-			
-			
+				
 		}
 		return panel;
 	}
+	
+	
+	private JPasswordField getPwSignPw() {
+		if (pwSignPw == null) {
+			pwSignPw = new JPasswordField();
+			pwSignPw.addKeyListener(new KeyAdapter() { 
+				@Override
+				public void keyReleased(KeyEvent e) { // 비밀번호 체크하는 부분 
+					char[] pw = pwSignPw.getPassword();
+					String pwString = new String(pw); // 패스워드 char -> string
+					char[] pw2 = pwSignPw_2.getPassword();
+					String pwString2 = new String(pw2); // 패스워드 char -> string
+					
+					if(pwString.equals("") || pwString2.equals("")) {
+					
+					}else {
+						if(pwString.equals(pwString2)) {
+							labelPWcheck.setText("비밀번호가 일치합니다.");
+							labelPWcheck.setForeground(Color.green);
+						}else {
+							labelPWcheck.setText("비밀번호가 일치하지 않습니다.");
+							labelPWcheck.setForeground(Color.red);
+						}
+					}
+				}
+			});
+			pwSignPw.setBounds(18, 90, 210, 30);
+		} 
+		return pwSignPw;
+	}
+	
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("이름 :");
@@ -212,7 +258,16 @@ public class SignUp extends JDialog {
 	}
 	private JTextField getTfSignId() {
 		if (tfSignId == null) {
-			tfSignId = new JTextField();
+			tfSignId = new JTextField(); 
+			tfSignId.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyReleased(KeyEvent e) { 
+					if(tfSignId.getText().equals(checkID) == false) { // tSignID에 있는 글자와 checkID가 다를 때
+						label_IDcheck.setText("X");
+						label_IDcheck.setForeground(Color.red);
+					}
+				}
+			});
 			tfSignId.setColumns(10);
 			tfSignId.setBounds(18, 25, 210, 30);
 		}
@@ -243,13 +298,7 @@ public class SignUp extends JDialog {
 		}
 		return btnOverlap;
 	}
-	private JPasswordField getPwSignPw() {
-		if (pwSignPw == null) {
-			pwSignPw = new JPasswordField();
-			pwSignPw.setBounds(18, 90, 210, 30);
-		} 
-		return pwSignPw;
-	}
+	
 	private JSeparator getSeparator_1() {
 		if (separator_1 == null) {
 			separator_1 = new JSeparator();
@@ -291,14 +340,14 @@ public class SignUp extends JDialog {
 		}
 		return separator_1_2;
 	}
-	private JLabel getLabelPw() {
-		if (labelPw == null) {
-			labelPw = new JLabel("");
-			labelPw.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-			labelPw.setForeground(new Color(255, 0, 0));
-			labelPw.setBounds(20, 180, 157, 16);
+	private JLabel getLabelPWcheck() {
+		if (labelPWcheck == null) {
+			labelPWcheck = new JLabel("");
+			labelPWcheck.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+			labelPWcheck.setForeground(new Color(255, 0, 0));
+			labelPWcheck.setBounds(20, 180, 157, 16);
 		}
-		return labelPw;
+		return labelPWcheck;
 	}
 	private JComboBox<String> getCBEmail(){
 		if (cBEmail == null) {
@@ -321,23 +370,27 @@ public class SignUp extends JDialog {
 	public void signUpAction() { // 가입 하기 버튼 기능 
 		PreparedStatement ps = null; 
 		
-		if(tfSignId.getText().equals("") || pwSignPw.getPassword().toString().equals("") || pwSignPw_2.getPassword().toString().equals("") || tfSignEmail.getText().equals("") || tfSignName.getText().equals("")) { // 중복체크 완료한 아이디와 가입하는 아이디 비교	
+		// tf에 빈칸이 하나라도 있으면 오류 메세지 
+		if(tfSignId.getText().equals("") || pwSignPw.getPassword().toString().equals("") || pwSignPw_2.getPassword().toString().equals("") || tfSignEmail.getText().equals("") || tfSignName.getText().equals("")) { 
 			JOptionPane.showMessageDialog(null,  "빈 칸 없이 다 채워주세요!", "오류 메세지", JOptionPane.ERROR_MESSAGE);
-		}else if(checkID.equals(tfSignId.getText().trim()) ) {			
+		} else if(label_IDcheck.getText().equals("O") && labelPWcheck.getText().equals("비밀번호가 일치합니다.") && checkID.equals(tfSignId.getText()) && (tfSignEmail.getText().contains("@") && tfSignEmail.getText().contains("@")) || cBEmail.getSelectedIndex()>0 ) { // 라벨 체크, 비밀번호 체크, 이메일(@) 포함할 때 	
 			try {
+				
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection conn_mysql = DriverManager.getConnection(dataDefine.url_mysql, dataDefine.id_mysql, dataDefine.pw_mysql);
 				Statement stmt_mysql = conn_mysql.createStatement();
 				
 				String cbEmailStr = cBEmail.getSelectedItem().toString(); // combobox에서 받아온 글자
+			
+				
 				if(cbEmailStr.equals("직접입력")) {
 					cbEmailStr = "";
 					} else {
 						cbEmailStr = "@" + cBEmail.getSelectedItem().toString();
 					}
-				
-				String query = "insert into user (userName, userId, userPw, userEmail, userState)\n"
-						+ "values (?,?,?,?,?);";
+							
+				String query = "insert into user (userName, userId, userPw, userEmail, userState, userResultM, userResultA)\n"
+						+ "values (?,?,?,?,?,?,?);";
 
 				ps = conn_mysql.prepareStatement(query); // 쿼리를 실행하여 ps 형태로 ?값에 가져오기 
 				ps.setString(1, tfSignName.getText().trim());
@@ -347,8 +400,10 @@ public class SignUp extends JDialog {
 				String pwString = new String(pw); // 패스워드 char -> string
 				ps.setString(3, pwString.trim());
 				
-				ps.setString(4, tfSignEmail.getText().trim());
-				ps.setString(5, "회원");
+				ps.setString(4, tfSignEmail.getText().trim()+ cbEmailStr);
+				ps.setString(5, memberStr);
+				ps.setString(6, userResultM);
+				ps.setString(7, userResultA);
 				ps.executeUpdate();
 				
 				JOptionPane.showMessageDialog(null,  tfSignName.getText() + " 님의 아이디가 저장되었습니다.");
@@ -356,18 +411,18 @@ public class SignUp extends JDialog {
 				dispose();
 				conn_mysql.close(); // DB 연결 끊기
 				
-				
-				
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace(); // 화면에 에러코드 보여주기
 			}
+		} else if(label_IDcheck.getText().equals("X")) { // 다 채웠지만 아이디 체크가 안되어 있으면 오류 메세지 
+			JOptionPane.showMessageDialog(null,  "아이디 체크를 해 주세요! ", "오류 메세지", JOptionPane.ERROR_MESSAGE);
 			
-		} else {
-			JOptionPane.showMessageDialog(null,  "아이디 중복 체크를 해주세요!" , "오류 메세지", JOptionPane.ERROR_MESSAGE);	
-			}
-		
 		}
+		else if(labelPWcheck.getText().equals("비밀번호가 일치하지 않습니다.")){ // 다 채웠지만 비밀번호 체크가 불일치 일 때 
+			JOptionPane.showMessageDialog(null,  "비밀번호 체크를 해 주세요! ", "오류 메세지", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
 
 	public void checkAction(){ // 아이디 중복 체크 기능 
@@ -391,29 +446,29 @@ public class SignUp extends JDialog {
 				checkID = "";
 				JOptionPane.showMessageDialog(null, searchedId + " 는 이미 있는 계정입니다. 아이디를 확인하세요. "  , "오류 메세지", JOptionPane.ERROR_MESSAGE); 
 				tfSignId.setText("");
-				label_check.setText("X");
-				label_check.setForeground(Color.red);
+				label_IDcheck.setText("X");
+				label_IDcheck.setForeground(Color.red);
 			}else {
 				JOptionPane.showMessageDialog(null,  "중복 체크 되었습니다. 다음으로 진행하세요! ");
 				checkID = tfSignId.getText().trim();
-				label_check.setText("O");
-				label_check.setForeground(Color.green);
+				label_IDcheck.setText("O");
+				label_IDcheck.setForeground(Color.green);
 			}
-			
+		
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 
 	}
 
-	private JLabel getLabel_check() {
-		if (label_check == null) {
-			label_check = new JLabel("");
+	private JLabel getLabel_IDcheck() {
+		if (label_IDcheck == null) {
+			label_IDcheck = new JLabel("");
 			
-			label_check.setFont(new Font("Lucida Grande", Font.PLAIN, 21));
-			label_check.setBounds(234, 30, 34, 23);
+			label_IDcheck.setFont(new Font("Lucida Grande", Font.PLAIN, 21));
+			label_IDcheck.setBounds(234, 30, 34, 23);
 		}
-		return label_check;
+		return label_IDcheck;
 	}
 	
 	public void panelClean() {
@@ -422,10 +477,7 @@ public class SignUp extends JDialog {
 		pwSignPw.setText("");
 		pwSignPw_2.setText("");
 		tfSignEmail.setText("");
-		label_check.setText("");
-		labelPw.setText("");
+		label_IDcheck.setText("");
+		labelPWcheck.setText("");
 	}
-	
-	
-
 }

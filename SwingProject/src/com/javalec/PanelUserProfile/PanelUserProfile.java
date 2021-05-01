@@ -14,6 +14,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import com.javalec.Datadefine.data_Enviroment_define;
+import com.javalec.login.Login;
+import com.javalec.userMain.UserMain;
+
 import javax.swing.UIManager;
 
 public class PanelUserProfile extends JPanel {
@@ -29,7 +32,6 @@ public class PanelUserProfile extends JPanel {
 	private JLabel lblNewLabel_1_1;
 	private JButton btuWithdrawal;
 
-	
 
 	/**
 	 * Create the panel.
@@ -49,6 +51,7 @@ public class PanelUserProfile extends JPanel {
 		add(getLblNewLabel_1_1());
 		add(getBtuWithdrawal());
 		UP_Show();
+		
 	}
 
 	private JLabel getLblNewLabel() {
@@ -151,7 +154,7 @@ public class PanelUserProfile extends JPanel {
 		}
 		return lblNewLabel_1_1;
 	}
-	private JButton getBtuWithdrawal() {
+	public JButton getBtuWithdrawal() {
 		if (btuWithdrawal == null) {
 			btuWithdrawal = new JButton("탈퇴");
 			btuWithdrawal.addActionListener(new ActionListener() {
@@ -190,20 +193,34 @@ public class PanelUserProfile extends JPanel {
 		UP_DbAction up_DbAction =new UP_DbAction(data_Enviroment_define.userNum);
 		boolean msg =  up_DbAction.UP_WithdrawalAction();
 		
-		if(msg=true) {
-				  JOptionPane.showMessageDialog(this,tfName.getText()+" 님이 탈퇴 되었습니다.! 프로그램 종료합니다!",
-			        	"탈퇴 완료!",JOptionPane.INFORMATION_MESSAGE);
-
-		}else if(msg=false){
-			JOptionPane.showMessageDialog(this, "DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!",
-				 "Critical Error!", 
-				 JOptionPane.ERROR_MESSAGE);  
-			}
+		int result = JOptionPane.showConfirmDialog(null, "정말 탈퇴 하시겠습니까?","경고",JOptionPane.YES_NO_OPTION);
 		
+		if(result ==JOptionPane.CLOSED_OPTION) { // 사용자가 선택 없이 x를 누른 경우.
+		} else if(result == JOptionPane.YES_OPTION) { // 예를 선택한 경우 
+			if(msg=true) {
+				  JOptionPane.showMessageDialog(this,tfName.getText()+" 님이 탈퇴 되었습니다.! 프로그램 종료합니다!",
+			      "탈퇴 완료!",JOptionPane.INFORMATION_MESSAGE);
+				  RestPanel(); // 패널 초기화  
+				  System.exit(0); // 이 패널을 끌수 있는 방법을 찾아야 함! 
+				  Login login = new Login(); // 로그인 화면 새로 키기
+				  
+			}else if(msg=false){
+				JOptionPane.showMessageDialog(this, "DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!",
+				"Critical Error!", 
+				JOptionPane.ERROR_MESSAGE);  
+			}
+		} else { // 아니오를 선택한 경우
+			
 		}
+	}
 	
-	
-	
+	private void RestPanel() {
+		tfAptitude.setText("");
+		tfEmail.setText("");
+		tfID.setText("");
+		tfMbti.setText("");
+		tfName.setText("");
+	}
 }////////////////////////////////////
 
 

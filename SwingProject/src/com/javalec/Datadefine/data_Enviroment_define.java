@@ -7,4 +7,6 @@ public class data_Enviroment_define {
 	public static final String pw_mysql = "qwer1234";
 	
 	public static int userNum = 0;
+	public static String userName = "";
+	
 }
