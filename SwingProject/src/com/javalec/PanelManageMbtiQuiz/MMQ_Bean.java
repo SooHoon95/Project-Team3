@@ -17,8 +17,23 @@ public class MMQ_Bean {
    public MMQ_Bean() {
       // TODO Auto-generated constructor stub
    }
+   
+   
+   
 
-   public MMQ_Bean(int mqNum, String mqQuestion, String mqAnswer1, String mqAnswer2) {
+   public MMQ_Bean(int mqNum, String mqType, String mqQuestion, String mqAnswer1, String mqAnswer2) {
+	super();
+	this.mqNum = mqNum;
+	this.mqQuestion = mqQuestion;
+	this.mqType = mqType;
+	this.mqAnswer1 = mqAnswer1;
+	this.mqAnswer2 = mqAnswer2;
+}
+
+
+
+
+public MMQ_Bean(int mqNum, String mqQuestion, String mqAnswer1, String mqAnswer2) {
       super();
       this.mqNum = mqNum;
       this.mqQuestion = mqQuestion;

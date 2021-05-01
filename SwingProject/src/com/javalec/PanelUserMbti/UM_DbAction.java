@@ -31,12 +31,14 @@ public class UM_DbAction {
 		this.Numchk = Numchk;
 	}
 	
-
-
+	
+//===============================
+//	메소드정의
+//===============================
 
 
 	//Method
-	public ArrayList<UM_Bean> UM_countMbtiNum() {
+	public ArrayList<UM_Bean> UM_countMbtiNum() {	// 마지막문제 풀고 끝내기 2. ( 문제 총 갯수구하기)
 			
 		ArrayList<UM_Bean> beanList1 = new ArrayList<UM_Bean>();
 		String countmqNum = "select count(mqNum) from mbtiquestion";
@@ -95,6 +97,34 @@ public class UM_DbAction {
 	   }
 	
 	
+	public ArrayList<UM_Bean> selectTypeScore() {
+		
+		ArrayList<UM_Bean> beanList = new ArrayList<UM_Bean>();
+		String eachType = "select mqType, mqScore1, mqScore2 from mbtiquestion where mqNum =" + Numchk;
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			
+			ResultSet rs = stmt_mysql.executeQuery(eachType);
+			
+			while(rs.next()) {
+				String mqType = rs.getString(1);
+				int mqScore1 = rs.getInt(2);
+				int mqScore2 = rs.getInt(3);
+				
+			
+			UM_Bean bean = new UM_Bean(mqType, mqScore1, mqScore2);
+			beanList.add(bean);
+			}
+			conn_mysql.close();
+			
+		} catch (Exception e) {
+			  e.printStackTrace();
+		}
+		return beanList;
+	}
 	
 	
 	
