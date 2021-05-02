@@ -33,6 +33,7 @@ public class AdminMain extends JDialog {
 	PanelManageQuiz panelManageQuiz = new PanelManageQuiz();
 	PanelManageResult panelManageResult = new PanelManageResult();
 	private final JLabel labelLogout = new JLabel("logout");
+	private final JLabel labelNickname = new JLabel(" 관리자님 반갑습니다!");
  
 
 	/**
@@ -85,10 +86,14 @@ public class AdminMain extends JDialog {
 				}
 			});
 			labelLogout.setForeground(Color.BLACK);
-			labelLogout.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-			labelLogout.setBounds(62, 387, 66, 26);
+			labelLogout.setFont(new Font("Andale Mono", Font.PLAIN, 13));
+			labelLogout.setBounds(100, 45, 66, 26);
 			
 			frame.getContentPane().add(labelLogout);
+			labelNickname.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+			labelNickname.setBounds(35, 18, 127, 19);
+			
+			frame.getContentPane().add(labelNickname);
 			frame.setVisible(true);
 	}
 
@@ -102,7 +107,7 @@ public class AdminMain extends JDialog {
 					
 				}
 			});
-			btnManageUser.setBounds(30, 84, 120, 35);
+			btnManageUser.setBounds(30, 110, 120, 35);
 		}
 		return btnManageUser;
 	}
@@ -116,7 +121,7 @@ public class AdminMain extends JDialog {
 				
 				}
 			});
-			btnManageQuiz.setBounds(30, 203, 120, 35);
+			btnManageQuiz.setBounds(30, 220, 120, 35);
 		}
 		return btnManageQuiz;
 	}
@@ -131,7 +136,7 @@ public class AdminMain extends JDialog {
 
 				}
 			});
-			btnManageResult.setBounds(30, 322, 120, 35);
+			btnManageResult.setBounds(30, 330, 120, 35);
 		}
 		return btnManageResult;
 	}

@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
+import java.awt.Font;
 
 public class PanelUserMbti extends JPanel {
 	
@@ -65,7 +66,8 @@ public class PanelUserMbti extends JPanel {
 	private JButton getBtnMbtiNext() {
 		if (btnMbtiNext == null) {
 			btnMbtiNext = new JButton("다음");
-			btnMbtiNext.setBounds(190, 303, 97, 23);
+			btnMbtiNext.setFont(new Font("LiHei Pro", Font.PLAIN, 13));
+			btnMbtiNext.setBounds(50, 320, 300, 23);
 			btnMbtiNext.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					made_EachType(Numchk);	// 버튼 누를 때 마다 방금 풀었던 문제 가중치 입력
@@ -91,7 +93,8 @@ public class PanelUserMbti extends JPanel {
 	private JRadioButton getRbMbtiResult1() {
 		if (rbMbtiResult1 == null) {
 			rbMbtiResult1 = new JRadioButton("New radio button");
-			rbMbtiResult1.setBounds(110, 219, 280, 23);
+			rbMbtiResult1.setFont(new Font("Didot", Font.PLAIN, 14));
+			rbMbtiResult1.setBounds(40, 205, 280, 23);
 			buttonGroup.add(rbMbtiResult1);
 		}
 		return rbMbtiResult1;
@@ -99,7 +102,8 @@ public class PanelUserMbti extends JPanel {
 	private JRadioButton getRbMbtiResult2() {
 		if (rbMbtiResult2 == null) {
 			rbMbtiResult2 = new JRadioButton("New radio button");
-			rbMbtiResult2.setBounds(110, 255, 280, 23);
+			rbMbtiResult2.setFont(new Font("Didot", Font.PLAIN, 14));
+			rbMbtiResult2.setBounds(40, 250, 280, 23);
 			buttonGroup.add(rbMbtiResult2);
 		}
 		return rbMbtiResult2;
@@ -107,7 +111,9 @@ public class PanelUserMbti extends JPanel {
 	private JLabel getLblMbtiQuestion() { 
 		if (lblMbtiQuestion == null) {
 			lblMbtiQuestion = new JLabel("New label");
-			lblMbtiQuestion.setBounds(40, 67, 420, 123);
+			lblMbtiQuestion.setFont(new Font("Al Bayan", Font.PLAIN, 15));
+			lblMbtiQuestion.setVerticalAlignment(SwingConstants.TOP);
+			lblMbtiQuestion.setBounds(40, 70, 420, 123);
 			lblMbtiQuestion.setHorizontalAlignment(SwingConstants.LEFT);
 		}
 		return lblMbtiQuestion;

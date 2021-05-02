@@ -22,6 +22,8 @@ import java.util.DoubleSummaryStatistics;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.SystemColor;
+import java.awt.Color;
+import java.awt.Font;
 
 public class PanelUserAptitudeQuiz extends JPanel {
 	private JButton btnAptitudeNext;
@@ -50,6 +52,7 @@ public class PanelUserAptitudeQuiz extends JPanel {
 	private JButton getBtnAptitudeNext() {
 		if (btnAptitudeNext == null) {
 			btnAptitudeNext = new JButton("다음");
+			btnAptitudeNext.setFont(new Font("LiHei Pro", Font.PLAIN, 13));
 			btnAptitudeNext.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					UAQ_ShowQuiz();	
@@ -59,31 +62,35 @@ public class PanelUserAptitudeQuiz extends JPanel {
 
 				}
 			});
-			btnAptitudeNext.setBounds(356, 319, 97, 23);
+			btnAptitudeNext.setBounds(50, 320, 300, 23);
 		}
 		return btnAptitudeNext;
 	}
 	private JRadioButton getRbAptitudeResult2() {
 		if (rbAptitudeResult2 == null) {
 			rbAptitudeResult2 = new JRadioButton("New radio button");
+			rbAptitudeResult2.setFont(new Font("Didot", Font.PLAIN, 14));
 			buttonGroup.add(rbAptitudeResult2);
-			rbAptitudeResult2.setBounds(40, 249, 414, 23);
+			rbAptitudeResult2.setBounds(40, 250, 414, 23);
 		}
 		return rbAptitudeResult2;
 	}
 	private JRadioButton getRbAptitudeResult1() {
 		if (rbAptitudeResult1 == null) {
 			rbAptitudeResult1 = new JRadioButton("New radio button");
+			rbAptitudeResult1.setFont(new Font("Didot", Font.PLAIN, 14));
 			buttonGroup.add(rbAptitudeResult1);
-			rbAptitudeResult1.setBounds(40, 203, 414, 23);
+			rbAptitudeResult1.setBounds(40, 205, 414, 23);
 		}
 		return rbAptitudeResult1;
 	}
 	private JTextArea getTaAptitudeQuiz() {
 		if (taAptitudeQuiz == null) {
 			taAptitudeQuiz = new JTextArea();
-			taAptitudeQuiz.setBackground(SystemColor.control);
-			taAptitudeQuiz.setBounds(30, 65, 437, 113);
+			taAptitudeQuiz.setFont(new Font("Al Bayan", Font.PLAIN, 15));
+			taAptitudeQuiz.setForeground(new Color(0, 0, 0));
+			taAptitudeQuiz.setBackground(new Color(238, 238, 238));
+			taAptitudeQuiz.setBounds(40, 70, 435, 107);
 			taAptitudeQuiz.setLineWrap(true); // 줄바꿔주는 기능
 		}
 		return taAptitudeQuiz;

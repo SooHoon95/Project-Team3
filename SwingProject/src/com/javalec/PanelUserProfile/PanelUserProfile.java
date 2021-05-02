@@ -56,8 +56,8 @@ public class PanelUserProfile extends JPanel {
 
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("이름       :");
-			lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 16));
+			lblNewLabel = new JLabel("이름   :");
+			lblNewLabel.setFont(new Font("Courier", Font.PLAIN, 16));
 			lblNewLabel.setForeground(Color.BLACK);
 			lblNewLabel.setBounds(37, 57, 94, 15);
 		}
@@ -66,29 +66,31 @@ public class PanelUserProfile extends JPanel {
 	private JTextField getTfName() {
 		if (tfName == null) {
 			tfName = new JTextField();
+			tfName.setFont(new Font("Avenir", Font.PLAIN, 15));
 			tfName.setEditable(false);
 			tfName.setSelectionColor(new Color(255, 255, 255));
 			tfName.setForeground(Color.BLACK);
 			tfName.setColumns(10);
-			tfName.setBounds(143, 52, 116, 21);
+			tfName.setBounds(143, 52, 115, 25);
 		}
 		return tfName;
 	}
 	private JTextField getTfEmail() {
 		if (tfEmail == null) {
 			tfEmail = new JTextField();
+			tfEmail.setFont(new Font("Avenir", Font.PLAIN, 15));
 			tfEmail.setEditable(false);
 			tfEmail.setSelectionColor(new Color(255, 255, 255));
 			tfEmail.setForeground(Color.BLACK);
 			tfEmail.setColumns(10);
-			tfEmail.setBounds(143, 198, 211, 21);
+			tfEmail.setBounds(143, 198, 215, 25);
 		}
 		return tfEmail;
 	}
 	private JLabel getLblNewLabel_3() {
 		if (lblNewLabel_3 == null) {
-			lblNewLabel_3 = new JLabel("MBTI      :");
-			lblNewLabel_3.setFont(new Font("굴림", Font.PLAIN, 16));
+			lblNewLabel_3 = new JLabel("MBTI   :");
+			lblNewLabel_3.setFont(new Font("Courier", Font.PLAIN, 16));
 			lblNewLabel_3.setForeground(Color.BLACK);
 			lblNewLabel_3.setBounds(37, 273, 94, 15);
 		}
@@ -97,18 +99,19 @@ public class PanelUserProfile extends JPanel {
 	private JTextField getTfMbti() {
 		if (tfMbti == null) {
 			tfMbti = new JTextField();
+			tfMbti.setFont(new Font("Avenir", Font.PLAIN, 15));
 			tfMbti.setEditable(false);
 			tfMbti.setSelectionColor(new Color(255, 255, 255));
 			tfMbti.setForeground(Color.BLACK);
 			tfMbti.setColumns(10);
-			tfMbti.setBounds(143, 271, 116, 21);
+			tfMbti.setBounds(143, 271, 110, 25);
 		}
 		return tfMbti;
 	}
 	private JLabel getLblNewLabel_4() {
 		if (lblNewLabel_4 == null) {
 			lblNewLabel_4 = new JLabel("적성검사  :");
-			lblNewLabel_4.setFont(new Font("굴림", Font.PLAIN, 16));
+			lblNewLabel_4.setFont(new Font("Courier", Font.PLAIN, 16));
 			lblNewLabel_4.setForeground(Color.BLACK);
 			lblNewLabel_4.setBounds(37, 345, 94, 15);
 		}
@@ -117,29 +120,31 @@ public class PanelUserProfile extends JPanel {
 	private JTextField getTfAptitude() {
 		if (tfAptitude == null) {
 			tfAptitude = new JTextField();
+			tfAptitude.setFont(new Font("Avenir", Font.PLAIN, 15));
 			tfAptitude.setEditable(false);
 			tfAptitude.setSelectionColor(new Color(255, 255, 255));
 			tfAptitude.setForeground(Color.BLACK);
 			tfAptitude.setColumns(10);
-			tfAptitude.setBounds(143, 344, 116, 21);
+			tfAptitude.setBounds(143, 344, 120, 25);
 		}
 		return tfAptitude;
 	}
 	private JTextField getTfID() {
 		if (tfID == null) {
 			tfID = new JTextField();
+			tfID.setFont(new Font("Avenir", Font.PLAIN, 15));
 			tfID.setEditable(false);
 			tfID.setSelectionColor(new Color(255, 255, 255));
 			tfID.setForeground(Color.BLACK);
 			tfID.setColumns(10);
-			tfID.setBounds(143, 125, 116, 21);
+			tfID.setBounds(143, 125, 120, 25);
 		}
 		return tfID;
 	}
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
-			lblNewLabel_2 = new JLabel("Email     :");
-			lblNewLabel_2.setFont(new Font("굴림", Font.PLAIN, 16));
+			lblNewLabel_2 = new JLabel("Email  :");
+			lblNewLabel_2.setFont(new Font("Courier", Font.PLAIN, 16));
 			lblNewLabel_2.setForeground(Color.BLACK);
 			lblNewLabel_2.setBounds(37, 201, 94, 15);
 		}
@@ -147,8 +152,8 @@ public class PanelUserProfile extends JPanel {
 	}
 	private JLabel getLblNewLabel_1_1() {
 		if (lblNewLabel_1_1 == null) {
-			lblNewLabel_1_1 = new JLabel("ID          :");
-			lblNewLabel_1_1.setFont(new Font("굴림", Font.PLAIN, 16));
+			lblNewLabel_1_1 = new JLabel("ID    :");
+			lblNewLabel_1_1.setFont(new Font("Courier", Font.PLAIN, 16));
 			lblNewLabel_1_1.setForeground(Color.BLACK);
 			lblNewLabel_1_1.setBounds(37, 129, 94, 15);
 		}
@@ -156,7 +161,7 @@ public class PanelUserProfile extends JPanel {
 	}
 	public JButton getBtuWithdrawal() {
 		if (btuWithdrawal == null) {
-			btuWithdrawal = new JButton("탈퇴");
+			btuWithdrawal = new JButton("탈퇴하기");
 			btuWithdrawal.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					WithdrawalAction();
@@ -201,7 +206,7 @@ public class PanelUserProfile extends JPanel {
 				  JOptionPane.showMessageDialog(this,tfName.getText()+" 님이 탈퇴 되었습니다.! 프로그램 종료합니다!",
 			      "탈퇴 완료!",JOptionPane.INFORMATION_MESSAGE);
 				  RestPanel(); // 패널 초기화  
-				  System.exit(0); // 이 패널을 끌수 있는 방법을 찾아야 함! 
+//				  System.exit(0); // 이 패널을 끌수 있는 방법을 찾아야 함! 
 				  Login login = new Login(); // 로그인 화면 새로 키기
 				  
 			}else if(msg=false){

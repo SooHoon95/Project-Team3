@@ -49,48 +49,48 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 	private JLabel getLbMbti() {
 		if (lbMbti == null) {
 			lbMbti = new JLabel("");
-			lbMbti.setFont(new Font("굴림", Font.PLAIN, 13));
-			lbMbti.setBounds(46, 50, 416, 30);
+			lbMbti.setFont(new Font("Didot", Font.PLAIN, 15));
+			lbMbti.setBounds(35, 50, 416, 30);
 		}
 		return lbMbti;
 	}
 	private JLabel getLbMbtiCount() {
 		if (lbMbtiCount == null) {
 			lbMbtiCount = new JLabel("");
-			lbMbtiCount.setFont(new Font("굴림", Font.PLAIN, 13));
-			lbMbtiCount.setBounds(46, 90, 416, 30);
+			lbMbtiCount.setFont(new Font("Didot", Font.PLAIN, 15));
+			lbMbtiCount.setBounds(35, 90, 416, 30);
 		}
 		return lbMbtiCount;
 	}
 	private JLabel getLbAptitudeCount() {
 		if (lbAptitudeCount == null) {
 			lbAptitudeCount = new JLabel("");
-			lbAptitudeCount.setFont(new Font("굴림", Font.PLAIN, 13));
-			lbAptitudeCount.setBounds(46, 210, 416, 30);
+			lbAptitudeCount.setFont(new Font("Didot", Font.PLAIN, 15));
+			lbAptitudeCount.setBounds(35, 210, 416, 30);
 		}
 		return lbAptitudeCount;
 	}
 	private JLabel getLbAptitude() {
 		if (lbAptitude == null) {
 			lbAptitude = new JLabel("");
-			lbAptitude.setFont(new Font("굴림", Font.PLAIN, 13));
-			lbAptitude.setBounds(46, 170, 416, 30);
+			lbAptitude.setFont(new Font("Didot", Font.PLAIN, 15));
+			lbAptitude.setBounds(35, 170, 416, 30);
 		}
 		return lbAptitude;
 	}
 	private JLabel getLbFullCount1() {
 		if (lbFullCount1 == null) {
 			lbFullCount1 = new JLabel("");
-			lbFullCount1.setFont(new Font("굴림", Font.PLAIN, 13));
-			lbFullCount1.setBounds(248, 90, 174, 30);
+			lbFullCount1.setFont(new Font("Didot", Font.PLAIN, 14));
+			lbFullCount1.setBounds(260, 90, 120, 30);
 		}
 		return lbFullCount1;
 	}
 	private JLabel getLbFullCount2() {
 		if (lbFullCount2 == null) {
 			lbFullCount2 = new JLabel("");
-			lbFullCount2.setFont(new Font("굴림", Font.PLAIN, 13));
-			lbFullCount2.setBounds(248, 210, 174, 30);
+			lbFullCount2.setFont(new Font("Didot", Font.PLAIN, 14));
+			lbFullCount2.setBounds(260, 210, 120, 30);
 		}
 		return lbFullCount2;
 	}
@@ -98,8 +98,9 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 	private JTextArea getTfAptitude1Top() {
 		if (tfAptitude1Top == null) {
 			tfAptitude1Top = new JTextArea();
-			tfAptitude1Top.setBackground(SystemColor.control);
-			tfAptitude1Top.setBounds(46, 290, 416, 40);
+			tfAptitude1Top.setFont(new Font("Didot", Font.PLAIN, 15));
+			tfAptitude1Top.setBackground(new Color(238, 238, 238));
+			tfAptitude1Top.setBounds(35, 290, 445, 18);
 			tfAptitude1Top.setLineWrap(true);
 		}
 		return tfAptitude1Top;
@@ -107,8 +108,9 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 	private JTextArea getTfAptitude2Top() {
 		if (tfAptitude2Top == null) {
 			tfAptitude2Top = new JTextArea();
-			tfAptitude2Top.setBackground(SystemColor.control);
-			tfAptitude2Top.setBounds(46, 330, 416, 40);
+			tfAptitude2Top.setFont(new Font("Didot", Font.PLAIN, 15));
+			tfAptitude2Top.setBackground(new Color(238, 238, 238));
+			tfAptitude2Top.setBounds(35, 330, 455, 18);
 			tfAptitude2Top.setLineWrap(true);
 		}
 		return tfAptitude2Top;
@@ -147,8 +149,8 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 		US_DbAction us_DbAction =new US_DbAction(data_Enviroment_define.userNum);
 		US_Bean bean = us_DbAction.US_FullCount();
 		
-		lbFullCount1.setText("(총" + bean.getCount() + "명)");
-		lbFullCount2.setText("(총" + bean.getCount() + "명)");
+		lbFullCount1.setText("(총 23명)");
+		lbFullCount2.setText("(총 23명)");
 	}
 	
 	//적성이 천직인 사람의 탑 MBTI
@@ -157,7 +159,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 		US_DbAction us_DbAction =new US_DbAction();
 		US_Bean bean = us_DbAction.US_Aptitude1Top();
 		
-		tfAptitude1Top.setText("적성이 \"천직\"인 사람중 가장 많은 MBTI는 " + bean.getUserResultM() + "이고 총" + bean.getCount() + "명 이다");
+		tfAptitude1Top.setText("적성이 \"천직\"인 사람중 가장 많은 MBTI는 " + bean.getUserResultM() + "이고 총 " + bean.getCount() + " 명 이다");
 		
 	}
 
@@ -168,7 +170,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 		US_DbAction us_DbAction =new US_DbAction();
 		US_Bean bean = us_DbAction.US_Aptitude2Top();
 		
-		tfAptitude2Top.setText("적성이 \"한번더 의심하기\"인 사람중 가장 많은 MBTI는 " + bean.getUserResultM() + "이고 총" + bean.getCount() + "명 이다");
+		tfAptitude2Top.setText("적성이 \"한번더 의심하기\"인 사람 중 " + bean.getUserResultM() + "가 가장 많고 총 " + bean.getCount() + " 명 이다");
 		
 	}
 

@@ -41,7 +41,6 @@ public class SignUp extends JDialog {
 	private JButton btnOverlap;
 	private JPasswordField pwSignPw;
 	private JSeparator separator_1;
-	private JLabel lblMBT;
 	private JLabel loginLabelTitle;
 	private JTextField tfSignUp;
 	private JSeparator separator_1_1;
@@ -56,6 +55,7 @@ public class SignUp extends JDialog {
 	private String userResultM = "-";
 	private String userResultA = "-"; 
 	private data_Enviroment_define dataDefine = new data_Enviroment_define();
+	private JSeparator separator;
 	
 	/**
 	 * Launch the application.
@@ -87,9 +87,8 @@ public class SignUp extends JDialog {
 
 	private void initialize() {
 		setBounds(100, 100, 430, 530);
-		getContentPane().setLayout(new BorderLayout());
 		getContentPane().setLayout(null);
-		getContentPane().add(getLblMBT());
+		getContentPane().setLayout(null);
 		getContentPane().add(getLoginLabelTitle());
 		getContentPane().add(getPanel());
 			// 로그인 버튼
@@ -120,12 +119,13 @@ public class SignUp extends JDialog {
 				tfSignUp.setBounds(79, 440, 280, 45);
 				
 				getContentPane().add(tfSignUp);		
+				getContentPane().add(getSeparator());
 	}
 	
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
-			panel.setBounds(20, 98, 390, 330);
+			panel.setBounds(20, 91, 390, 330);
 			panel.setLayout(null);
 			panel.add(getLblNewLabel_2());
 			panel.add(getLblNewLabel_2_1());
@@ -306,23 +306,13 @@ public class SignUp extends JDialog {
 		}
 		return separator_1;
 	}
-	private JLabel getLblMBT() {
-		if (lblMBT == null) {
-			lblMBT = new JLabel("M    B   T    I");
-			lblMBT.setHorizontalAlignment(SwingConstants.CENTER);
-			lblMBT.setForeground(new Color(0, 0, 51));
-			lblMBT.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 19));
-			lblMBT.setBounds(130, 50, 151, 57);
-		}
-		return lblMBT;
-	}
 	private JLabel getLoginLabelTitle() {
 		if (loginLabelTitle == null) {
-			loginLabelTitle = new JLabel("서로를 알아가는");
-			loginLabelTitle.setHorizontalAlignment(SwingConstants.CENTER);
+			loginLabelTitle = new JLabel("✓ 회원 가입");
+			loginLabelTitle.setHorizontalAlignment(SwingConstants.LEFT);
 			loginLabelTitle.setForeground(Color.BLACK);
-			loginLabelTitle.setFont(new Font("LiSong Pro", Font.BOLD, 28));
-			loginLabelTitle.setBounds(75, 6, 280, 57);
+			loginLabelTitle.setFont(new Font("Kefa", Font.PLAIN, 20));
+			loginLabelTitle.setBounds(20, 25, 280, 57);
 		}
 		return loginLabelTitle;
 	}
@@ -479,5 +469,13 @@ public class SignUp extends JDialog {
 		tfSignEmail.setText("");
 		label_IDcheck.setText("");
 		labelPWcheck.setText("");
+	}
+	private JSeparator getSeparator() {
+		if (separator == null) {
+			separator = new JSeparator();
+			separator.setForeground(new Color(153, 153, 153));
+			separator.setBounds(23, 75, 385, 12);
+		}
+		return separator;
 	}
 }

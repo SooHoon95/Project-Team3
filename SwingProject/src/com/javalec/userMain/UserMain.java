@@ -69,13 +69,13 @@ public class UserMain extends JDialog {
 		
 		JLabel labelNickname = new JLabel("");
 		labelNickname.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		labelNickname.setBounds(40, 18, 127, 19);
+		labelNickname.setBounds(35, 18, 127, 19);
 		labelNickname.setText( dataDefine.userName + " 님 반갑습니다!");
 		frame.getContentPane().add(labelNickname);
 		
 		JLabel labelLogout = new JLabel("logout");
 		labelLogout.setForeground(new Color(0, 0, 0));
-		labelLogout.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		labelLogout.setFont(new Font("Andale Mono", Font.PLAIN, 13));
 		labelLogout.addMouseListener(new MouseAdapter() {
 			int swtitchnum = 0;
 			
@@ -96,15 +96,17 @@ public class UserMain extends JDialog {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				labelLogout.setFont(new Font("Lucida Grande",Font.BOLD, 15));
+				labelLogout.setForeground(Color.RED);
+				
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				labelLogout.setFont(new Font("Lucida Grande",Font.PLAIN, 15));
+				labelLogout.setForeground(Color.BLACK);
+				labelLogout.setFont(new Font("Lucida Grande",Font.PLAIN, 13));
 			}
 		});
 		
-		labelLogout.setBounds(65, 400, 66, 26);
+		labelLogout.setBounds(100, 45, 51, 26);
 		frame.getContentPane().add(labelLogout);
 		
 		
@@ -122,7 +124,7 @@ public class UserMain extends JDialog {
 					panelUserPrifile.setVisible(true);
 				}
 			});
-			btnUserProfile.setBounds(30, 60, 120, 35);
+			btnUserProfile.setBounds(30, 100, 120, 35);
 		}
 		return btnUserProfile;
 	}
@@ -131,11 +133,21 @@ public class UserMain extends JDialog {
 			btnUserMbti = new JButton("MBTI");
 			btnUserMbti.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					RestPanel();
-					panelUserMbti.setVisible(true);
+			
+					// 선택 다이얼로그 옵션
+					int result = JOptionPane.showConfirmDialog(null, "MBTI 문항은 총 20문항이 출제 되며, 오래 고민 하시지 말고 첫 느낌대로 골라주시기 바랍니다. ", "확인",JOptionPane.YES_NO_OPTION);
+					if(result ==JOptionPane.CLOSED_OPTION) { // 사용자가 선택 없이 x를 누른 경우.
+						
+					} else if(result == JOptionPane.YES_OPTION) { // 예를 선택한 경우 
+						RestPanel();
+						panelUserMbti.setVisible(true);
+						
+					} else { // 아니오를 선택한 경우
+						
+					}
 				}
 			});
-			btnUserMbti.setBounds(30, 155, 120, 35);
+			btnUserMbti.setBounds(30, 190, 120, 35);
 		}
 		return btnUserMbti;
 	}
@@ -144,11 +156,21 @@ public class UserMain extends JDialog {
 			btnUserAptitudeQuiz = new JButton("적성검사");
 			btnUserAptitudeQuiz.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					RestPanel();
-					panelUserAptitudeQuiz.setVisible(true);
+					
+					// 선택 다이얼로그 옵션
+					int result = JOptionPane.showConfirmDialog(null, "적성 문항은 총 10문항이 출제 되며, 오래 고민 하시지 말고 첫 느낌대로 골라주시기 바랍니다. ", "확인",JOptionPane.YES_NO_OPTION);
+					if(result ==JOptionPane.CLOSED_OPTION) { // 사용자가 선택 없이 x를 누른 경우.
+						
+					} else if(result == JOptionPane.YES_OPTION) { // 예를 선택한 경우 
+						RestPanel();
+						panelUserAptitudeQuiz.setVisible(true);
+						
+					} else { // 아니오를 선택한 경우
+						
+					}				
 				}
 			});
-			btnUserAptitudeQuiz.setBounds(30, 250, 120, 35);
+			btnUserAptitudeQuiz.setBounds(30, 280, 120, 35);
 		}
 		return btnUserAptitudeQuiz;
 	}
@@ -161,7 +183,7 @@ public class UserMain extends JDialog {
 					panelUserStatistic.setVisible(true);
 				}
 			});
-			btnUserStatistic.setBounds(30, 345, 120, 35);
+			btnUserStatistic.setBounds(30, 370, 120, 35);
 		}
 		return btnUserStatistic;
 	}
