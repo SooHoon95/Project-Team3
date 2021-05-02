@@ -40,8 +40,8 @@ public class PanelManageAptitudeResult extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelManageAptitudeResult() {
-		setBackground(Color.RED);
-		setBounds(new Rectangle(65, 57, 370, 350));
+		setBackground(new Color(238, 238, 238));
+		setBounds(new Rectangle(0, 57, 500, 350));
 		setLayout(null);
 		add(getScrollPane_AdAptitideResult());
 		add(getLblAdAptitideResultName());
@@ -59,7 +59,7 @@ public class PanelManageAptitudeResult extends JPanel {
 	private JScrollPane getScrollPane_AdAptitideResult() {
 		if (scrollPane_AdAptitideResult == null) {
 			scrollPane_AdAptitideResult = new JScrollPane();
-			scrollPane_AdAptitideResult.setBounds(20, 17, 338, 156);
+			scrollPane_AdAptitideResult.setBounds(12, 17, 478, 156);
 			scrollPane_AdAptitideResult.setViewportView(inner_table_AdAptitideResult());
 		}
 		return scrollPane_AdAptitideResult;
@@ -85,14 +85,14 @@ public class PanelManageAptitudeResult extends JPanel {
 	private JLabel getLblAdAptitideResultName() {
 		if (lblAdAptitideResultName == null) {
 			lblAdAptitideResultName = new JLabel("적성");
-			lblAdAptitideResultName.setBounds(20, 230, 61, 16);
+			lblAdAptitideResultName.setBounds(12, 227, 60, 16);
 		}
 		return lblAdAptitideResultName;
 	}
 	private JLabel getlblAdMBTIResultExplanation() {
 		if (lblAdAptitideResultarExplain == null) {
 			lblAdAptitideResultarExplain = new JLabel("적성별설명");
-			lblAdAptitideResultarExplain.setBounds(20, 263, 61, 16);
+			lblAdAptitideResultarExplain.setBounds(12, 260, 61, 16);
 		}
 		return lblAdAptitideResultarExplain;
 	}
@@ -100,7 +100,7 @@ public class PanelManageAptitudeResult extends JPanel {
 	private JTextField getTfAdAptitideResultName() {
 		if (tfAdAptitideResultName == null) {
 			tfAdAptitideResultName = new JTextField();
-			tfAdAptitideResultName.setBounds(93, 225, 265, 26);
+			tfAdAptitideResultName.setBounds(90, 225, 398, 26);
 			tfAdAptitideResultName.setColumns(10);
 		}
 		return tfAdAptitideResultName;
@@ -109,7 +109,7 @@ public class PanelManageAptitudeResult extends JPanel {
 		if (tfAdAptitideResultarExplain == null) {
 			tfAdAptitideResultarExplain = new JTextField();
 			tfAdAptitideResultarExplain.setColumns(10);
-			tfAdAptitideResultarExplain.setBounds(93, 258, 265, 54);
+			tfAdAptitideResultarExplain.setBounds(90, 256, 398, 54);
 		}
 		return tfAdAptitideResultarExplain;
 	}
@@ -122,7 +122,7 @@ public class PanelManageAptitudeResult extends JPanel {
 					MAR_Action(1);
 				}
 			});
-			btnAdAptitideResultCreate.setBounds(20, 320, 60, 29);
+			btnAdAptitideResultCreate.setBounds(90, 320, 60, 29);
 		}
 		return btnAdAptitideResultCreate;
 	}
@@ -134,7 +134,7 @@ public class PanelManageAptitudeResult extends JPanel {
 					MAR_Action(2);
 				}
 			});
-			btnAdAptitideResultEdit.setBounds(155, 320, 60, 29);
+			btnAdAptitideResultEdit.setBounds(253, 320, 60, 29);
 		}
 		return btnAdAptitideResultEdit;
 	}
@@ -147,14 +147,14 @@ public class PanelManageAptitudeResult extends JPanel {
 					
 				}
 			});
-			btnAdAptitideResultRemove.setBounds(290, 320, 60, 29);
+			btnAdAptitideResultRemove.setBounds(428, 320, 60, 29);
 		}
 		return btnAdAptitideResultRemove;
 	}
 	private JLabel getLblAdAptitideResultNum() {
 		if (lblAdAptitideResultNum == null) {
 			lblAdAptitideResultNum = new JLabel("번호");
-			lblAdAptitideResultNum.setBounds(20, 194, 61, 16);
+			lblAdAptitideResultNum.setBounds(12, 191, 61, 16);
 		}
 		return lblAdAptitideResultNum;
 	}
@@ -163,7 +163,7 @@ public class PanelManageAptitudeResult extends JPanel {
 			tfAdAptitideResultNum = new JTextField();
 			tfAdAptitideResultNum.setEditable(false);
 			tfAdAptitideResultNum.setColumns(10);
-			tfAdAptitideResultNum.setBounds(93, 189, 60, 26);
+			tfAdAptitideResultNum.setBounds(90, 187, 60, 26);
 		}
 		return tfAdAptitideResultNum;
 	}
@@ -199,7 +199,7 @@ public class PanelManageAptitudeResult extends JPanel {
 			
 			vColIndex = 2; // 3번째 행
 			col = inner_table_AdAptitideResult.getColumnModel().getColumn(vColIndex);
-			width = 300; // 3번째 행 가로
+			width = 345; // 3번째 행 가로
 			col.setPreferredWidth(width);; // 3번째 행 가로크기 설정
 
 	}

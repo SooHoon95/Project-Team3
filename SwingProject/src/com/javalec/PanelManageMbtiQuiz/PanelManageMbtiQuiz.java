@@ -56,7 +56,7 @@ public class PanelManageMbtiQuiz extends JPanel {
     * Create the panel.
     */
    public PanelManageMbtiQuiz() {
-      setBackground(Color.BLUE);
+      setBackground(new Color(238, 238, 238));
       setBounds(new Rectangle(0, 57, 500, 350));
       setLayout(null);
       add(getScrollPane_AdMBTIQA());
@@ -219,7 +219,7 @@ public class PanelManageMbtiQuiz extends JPanel {
       if (cbType == null) {
          cbType = new JComboBox();
          cbType.setModel(new DefaultComboBoxModel(new String[] {"선택", "EI", "SN", "TF", "JP"}));
-         cbType.setBounds(243, 183, 62, 26);
+         cbType.setBounds(243, 187, 62, 26);
       }
       return cbType;
    }
@@ -241,7 +241,7 @@ public class PanelManageMbtiQuiz extends JPanel {
       if (cbMBTIAnswer1Score == null) {
          cbMBTIAnswer1Score = new JComboBox();
          cbMBTIAnswer1Score.setModel(new DefaultComboBoxModel(new String[] {"선택", "0", "1"}));
-         cbMBTIAnswer1Score.setBounds(426, 250, 62, 26);
+         cbMBTIAnswer1Score.setBounds(426, 256, 62, 26);
       }
       return cbMBTIAnswer1Score;
    }
@@ -249,7 +249,7 @@ public class PanelManageMbtiQuiz extends JPanel {
       if (cbMBTIAnswer2Score == null) {
          cbMBTIAnswer2Score = new JComboBox();
          cbMBTIAnswer2Score.setModel(new DefaultComboBoxModel(new String[] {"선택", "0", "1"}));
-         cbMBTIAnswer2Score.setBounds(427, 284, 61, 26);
+         cbMBTIAnswer2Score.setBounds(427, 290, 61, 26);
       }
       return cbMBTIAnswer2Score;
    }
@@ -278,7 +278,7 @@ public class PanelManageMbtiQuiz extends JPanel {
       
       int vColIndex = 0; // 첫번째 행
       TableColumn col = inner_table_AdMBTIQA.getColumnModel().getColumn(vColIndex);
-      int width = 40; // 첫번째 행 가로
+      int width = 30; // 첫번째 행 가로
       col.setPreferredWidth(width);; // 첫번째 행 가로크기 설정
       
       vColIndex = 1; // 2번째 행
@@ -288,7 +288,7 @@ public class PanelManageMbtiQuiz extends JPanel {
       
       vColIndex = 2; // 3번째 행
       col = inner_table_AdMBTIQA.getColumnModel().getColumn(vColIndex);
-      width = 290; // 2번째 행 가로
+      width = 295; // 2번째 행 가로
       col.setPreferredWidth(width);; // 3번째 행 가로크기 설정
       
       vColIndex = 3; // 4번째 행
