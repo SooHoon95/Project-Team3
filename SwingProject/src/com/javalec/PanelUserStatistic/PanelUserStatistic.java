@@ -248,9 +248,9 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 	private void US_FullCount() {
 		US_DbAction us_DbAction =new US_DbAction(data_Enviroment_define.userNum);
 		US_Bean bean = us_DbAction.US_FullCount();
-		
-		lbFullCount1.setText("(총 23명)");
-		lbFullCount2.setText("(총 23명)");
+		 
+		lbFullCount1.setText("총" + bean.getCount()+ "명");
+		lbFullCount2.setText("총" + bean.getCount()+ "명");
 	}
 	
 	//적성이 천직인 사람의 탑 MBTI
