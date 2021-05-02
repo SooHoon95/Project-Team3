@@ -163,7 +163,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 			innerTable.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					MMR_TableClick();
+					US_TableClick();
 				}
 			});
 			innerTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -241,7 +241,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 			}
 	}
 	
-	private void MMR_TableClick() {
+	private void US_TableClick() {
 		int i = innerTable.getSelectedRow();
 		String tmMrNum = (String)innerTable.getValueAt(i,0);
 		int wkMrNUM = Integer.parseInt(tmMrNum);
