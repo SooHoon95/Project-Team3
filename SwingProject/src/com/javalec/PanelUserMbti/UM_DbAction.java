@@ -158,6 +158,33 @@ public ArrayList<UM_Bean> selectExplain() {
 		}
 		return beanList;
 	}
+
+// MBTI 이름 불러오기
+	public ArrayList<UM_Bean> selectName() {
+		
+		ArrayList<UM_Bean> beanList = new ArrayList<UM_Bean>();
+		String name = "select mrName from mbtiresult where mrType = '" + MBTI + "'";
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			
+			ResultSet rs = stmt_mysql.executeQuery(name);
+			
+			while(rs.next()) {
+				String mrName = rs.getString(1);
+			
+			UM_Bean bean = new UM_Bean(mrName);
+			beanList.add(bean);
+			}
+			conn_mysql.close();
+			
+		} catch (Exception e) {
+			  e.printStackTrace();
+		}
+		return beanList;
+	}
 	
 	
 	

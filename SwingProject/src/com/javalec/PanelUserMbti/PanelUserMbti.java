@@ -46,6 +46,7 @@ public class PanelUserMbti extends JPanel {
 	int JP_Score = 0;
 	String MBTI = "";
 	String MBTI_Explain = "";
+	String MBTI_Name = "";
 	
 	UM_DbAction dbAction1 = new UM_DbAction();
     ArrayList<UM_Bean> beancount = dbAction1.UM_countMbtiNum();
@@ -82,9 +83,11 @@ public class PanelUserMbti extends JPanel {
 							made_MBTI();		
 							Final_MBTI(data_enviroment_define.userNum);// 마지막 문제 끝나고 Dialog 뜨고나서 최종 MBTI 형성 후 UserNum에 따른 DB에 MBTI 값 업데이트
 							showMbti_Explain(MBTI);
+							showMbti_Name(MBTI);
 							System.out.println(MBTI_Explain);
 							JOptionPane.showMessageDialog(null, "당신의 MBTI 유형 결과는 " + MBTI + " 입니다." + "\n"
-															+ MBTI + ": " + MBTI_Explain + "\n" + 
+															+ "\t" + MBTI_Name + "\n"
+															+ "설명: " + MBTI_Explain + "입니다.\n" + 
 															"자세한 결과는 통계창에서 확인하세요.");
 						}
 					 
@@ -260,9 +263,17 @@ public class PanelUserMbti extends JPanel {
 			 UM_DbAction dbAction = new UM_DbAction(MBTI);
 			 ArrayList<UM_Bean> beanList = dbAction.selectExplain();
 			 
-			MBTI_Explain = (beanList.get(0).getMrExplain());
+			MBTI_Explain = (beanList.get(0).getMrExName());
 			
 			return MBTI_Explain;
+		}
+		private String showMbti_Name(String MBTI) {
+			 UM_DbAction dbAction = new UM_DbAction(MBTI);
+			 ArrayList<UM_Bean> beanList = dbAction.selectName();
+			 
+			MBTI_Name = (beanList.get(0).getMrExName());
+			
+			return MBTI_Name;
 		}
 	
 	

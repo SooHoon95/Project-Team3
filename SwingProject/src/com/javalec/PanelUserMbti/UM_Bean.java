@@ -7,7 +7,7 @@ public class UM_Bean {
 	int mqNum;
 	int countNum;
 	
-	String mrExplain;
+	String mrExName;
 	String mqQuiestion;
 	String mqType;
 	String mqAnswer1;
@@ -42,10 +42,14 @@ public class UM_Bean {
 		this.countNum = countNum;
 	}
 	
-	public UM_Bean(String mrExplain) {
+	public UM_Bean(String mrExName) {
 		super();
-		this.mrExplain = mrExplain;
+		this.mrExName = mrExName;
+
 	}
+
+
+
 	//Method
 
 
@@ -112,18 +116,17 @@ public class UM_Bean {
 	public void setCountNum(int countNum) {
 		this.countNum = countNum;
 	}
-	
-	
-	public String getMrExplain() {
-		return mrExplain;
+
+
+	public String getMrExName() {
+		return mrExName;
 	}
 
 
-	public void setMrExplain(String mrExplain) {
-		this.mrExplain = mrExplain;
+	public void setMrExName(String mrExName) {
+		this.mrExName = mrExName;
 	}
-	
-	
-	
 
-}
+	
+	
+}///////////////////////
