@@ -36,6 +36,8 @@ public class AdminMain extends JDialog {
 	private final JLabel labelLogout = new JLabel("logout");
 	private final JLabel labelNickname = new JLabel(" 관리자님 반갑습니다!");
 	private final JLabel lblogo = new JLabel("");
+	private final JLabel lblength = new JLabel("");
+	private final JLabel widh = new JLabel("");
  
 
 	/**
@@ -110,6 +112,14 @@ public class AdminMain extends JDialog {
 			lblogo.setBounds(260, 140, 330, 200);
 			
 			frame.getContentPane().add(lblogo);
+			lblength.setIcon(new ImageIcon(AdminMain.class.getResource("/com/javalec/resources/length.png")));
+			lblength.setBounds(165, 10, 20, 420);
+			
+			frame.getContentPane().add(lblength);
+			widh.setIcon(new ImageIcon(AdminMain.class.getResource("/com/javalec/resources/width.png")));
+			widh.setBounds(12, 70, 147, 15);
+			
+			frame.getContentPane().add(widh);
 			frame.setVisible(true);
 	}
 

@@ -32,7 +32,9 @@ public class UserMain extends JDialog {
 	PanelUserAptitudeQuiz panelUserAptitudeQuiz = new PanelUserAptitudeQuiz();
 	PanelUserStatistic panelUserStatistic = new PanelUserStatistic();
 	data_Enviroment_define dataDefine = new data_Enviroment_define();
-	private final JLabel lbBackgrund = new JLabel("New label");
+	private JLabel lblogo;
+	private JLabel lbLength;
+	private JLabel lbwidh;
 	/**
 	 * Launch the application.
 	 */
@@ -110,10 +112,9 @@ public class UserMain extends JDialog {
 		
 		labelLogout.setBounds(100, 45, 51, 26);
 		frame.getContentPane().add(labelLogout);
-		lbBackgrund.setIcon(new ImageIcon(UserMain.class.getResource("/com/javalec/resources/main1.png")));
-		lbBackgrund.setBounds(260, 140, 330, 200);
-		
-		frame.getContentPane().add(lbBackgrund);
+		frame.getContentPane().add(getLblogo());
+		frame.getContentPane().add(getLbLength());
+		frame.getContentPane().add(getLbwidh());
 		
 		
 		RestPanel();
@@ -199,5 +200,29 @@ public class UserMain extends JDialog {
 		panelUserMbti.setVisible(false);
 		panelUserAptitudeQuiz.setVisible(false);
 		panelUserStatistic.setVisible(false);
+	}
+	private JLabel getLblogo() {
+		if (lblogo == null) {
+			lblogo = new JLabel("");
+			lblogo.setIcon(new ImageIcon(UserMain.class.getResource("/com/javalec/resources/main1.png")));
+			lblogo.setBounds(260, 140, 330, 200);
+		}
+		return lblogo;
+	}
+	private JLabel getLbLength() {
+		if (lbLength == null) {
+			lbLength = new JLabel("");
+			lbLength.setIcon(new ImageIcon(UserMain.class.getResource("/com/javalec/resources/length.png")));
+			lbLength.setBounds(165, 10, 20, 420);
+		}
+		return lbLength;
+	}
+	private JLabel getLbwidh() {
+		if (lbwidh == null) {
+			lbwidh = new JLabel("");
+			lbwidh.setIcon(new ImageIcon(UserMain.class.getResource("/com/javalec/resources/width.png")));
+			lbwidh.setBounds(12, 70, 147, 15);
+		}
+		return lbwidh;
 	}
 }
