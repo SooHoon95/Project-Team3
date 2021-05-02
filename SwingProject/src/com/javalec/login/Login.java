@@ -15,6 +15,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -32,7 +33,6 @@ public class Login extends JFrame {
 	// Field
 	private JFrame frame;
 	private JPanel loginPanel;
-	private JLabel loginLabelTitle;
 	private JLabel loginLabelDiv;
 	private JLabel loginLabelFindId;
 	private JLabel loginLabelFindPw;
@@ -48,12 +48,13 @@ public class Login extends JFrame {
 	private String searchedUserName = "";
 	
 	BufferedImage img = null;
-	
+	ImageIcon backgrund =new ImageIcon("login.png");
 	// Constructor
 	data_Enviroment_define dataDefine = new data_Enviroment_define(); // DB 환경 정의 
 	SearchId searchID = new SearchId();
 	SearchPW searchPW = new SearchPW();
 	SignUp signUp = new SignUp();
+	private JLabel lblImage;
 
 
 	// Method
@@ -107,20 +108,13 @@ public class Login extends JFrame {
 			loginPanel.add(getLoginLabelDiv());
 			loginPanel.add(getLoginLabelFindId());
 			loginPanel.add(getLoginLabelFindPw());
-			loginPanel.add(getLoginLabelTitle());
 			loginPanel.add(getLoginTextClick());
 			loginPanel.add(getTfLoginId());
 			loginPanel.add(getLoginTextLogin());
 			loginPanel.add(getLoginTextNoId());
 			loginPanel.add(getTfLoginPw());
 			loginPanel.setLayout(null);
-			
-			JLabel lblMBT = new JLabel("M    B   T    I");
-			lblMBT.setHorizontalAlignment(SwingConstants.CENTER);
-			lblMBT.setForeground(new Color(0, 0, 51));
-			lblMBT.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 20));
-			lblMBT.setBounds(70, 100, 280, 57);
-			loginPanel.add(lblMBT);
+			loginPanel.add(getLblImage());
 			
 			setResizable(false); // 창 크기 변경 불가 
 			setLocationRelativeTo(null); // 창 크기를 변경하지 못하게 함 
@@ -128,18 +122,6 @@ public class Login extends JFrame {
 		}
 		return loginPanel;
 	}
-	
-	//----------- Loginpanel
-		private JLabel getLoginLabelTitle() {
-			if (loginLabelTitle == null) {
-				loginLabelTitle = new JLabel("서로를 알아가는");
-				loginLabelTitle.setForeground(new Color(0, 0, 0));
-				loginLabelTitle.setBounds(70, 20, 280, 85);
-				loginLabelTitle.setHorizontalAlignment(SwingConstants.CENTER);
-				loginLabelTitle.setFont(new Font("LiSong Pro", Font.BOLD, 28));
-			}
-			return loginLabelTitle;
-		}
 		private JTextField getTfLoginId() {
 			if (tfLoginId == null) {
 				tfLoginId = new JTextField();
@@ -362,5 +344,18 @@ public class Login extends JFrame {
 			tfLoginId.setText("");
 			pfLoginPw.setText("");
 		}
+	
+		
+		
+		
+		private JLabel getLblImage() {
+		if (lblImage == null) {
+			lblImage = new JLabel("");
+			lblImage.setIcon(new ImageIcon(Login.class.getResource("/com/javalec/resources/login.png")));
+			lblImage.setHorizontalAlignment(SwingConstants.CENTER);
+			lblImage.setBounds(0, 0, 412, 490);
+		}
+		return lblImage;
+	}
 }
 

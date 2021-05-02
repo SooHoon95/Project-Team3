@@ -21,6 +21,7 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 public class AdminMain extends JDialog {
 	
@@ -34,6 +35,7 @@ public class AdminMain extends JDialog {
 	PanelManageResult panelManageResult = new PanelManageResult();
 	private final JLabel labelLogout = new JLabel("logout");
 	private final JLabel labelNickname = new JLabel(" 관리자님 반갑습니다!");
+	private final JLabel lblogo = new JLabel("");
  
 
 	/**
@@ -104,6 +106,10 @@ public class AdminMain extends JDialog {
 			labelNickname.setBounds(35, 18, 127, 19);
 			
 			frame.getContentPane().add(labelNickname);
+			lblogo.setIcon(new ImageIcon(AdminMain.class.getResource("/com/javalec/resources/main1.png")));
+			lblogo.setBounds(260, 140, 330, 200);
+			
+			frame.getContentPane().add(lblogo);
 			frame.setVisible(true);
 	}
 

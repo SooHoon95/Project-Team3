@@ -10,12 +10,15 @@ import com.javalec.PanelManageMbtiQuiz.PanelManageMbtiQuiz;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class PanelManageQuiz extends JPanel {
 	private JButton btnManageMbtiQuiz;
 	private JButton btnManageAptitudeQuiz;
 	PanelManageMbtiQuiz panelManageMbtiQuiz = new PanelManageMbtiQuiz();
 	PanelManageAptitudeQuiz panelManageAptitudeQuiz = new PanelManageAptitudeQuiz();
+	private final JLabel lblogo = new JLabel("");
 	
 	/**
 	 * Create the panel.
@@ -28,6 +31,11 @@ public class PanelManageQuiz extends JPanel {
 		add(getBtnManageAptitudeQuiz());
 		add(panelManageMbtiQuiz);
 		add(panelManageAptitudeQuiz);
+		{
+			lblogo.setIcon(new ImageIcon(PanelManageQuiz.class.getResource("/com/javalec/resources/main1.png")));
+			lblogo.setBounds(80, 130, 330, 200);
+			add(lblogo);
+		}
 	}
 
 	private JButton getBtnManageMbtiQuiz() {

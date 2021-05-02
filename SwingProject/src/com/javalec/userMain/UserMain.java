@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class UserMain extends JDialog {
 	
@@ -31,6 +32,7 @@ public class UserMain extends JDialog {
 	PanelUserAptitudeQuiz panelUserAptitudeQuiz = new PanelUserAptitudeQuiz();
 	PanelUserStatistic panelUserStatistic = new PanelUserStatistic();
 	data_Enviroment_define dataDefine = new data_Enviroment_define();
+	private final JLabel lbBackgrund = new JLabel("New label");
 	/**
 	 * Launch the application.
 	 */
@@ -108,6 +110,10 @@ public class UserMain extends JDialog {
 		
 		labelLogout.setBounds(100, 45, 51, 26);
 		frame.getContentPane().add(labelLogout);
+		lbBackgrund.setIcon(new ImageIcon(UserMain.class.getResource("/com/javalec/resources/main1.png")));
+		lbBackgrund.setBounds(260, 140, 330, 200);
+		
+		frame.getContentPane().add(lbBackgrund);
 		
 		
 		RestPanel();
