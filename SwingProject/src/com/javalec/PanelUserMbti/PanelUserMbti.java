@@ -25,6 +25,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import java.awt.Font;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 public class PanelUserMbti extends JPanel {
 	
@@ -35,7 +37,7 @@ public class PanelUserMbti extends JPanel {
 	private JRadioButton rbMbtiResult1;
 	private JRadioButton rbMbtiResult2;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JLabel lblMbtiQuestion;
+	private JTextArea taMbtiQuestion;
 	
 	UM_DbAction um_DbAction = new UM_DbAction();
 	public int Numchk = 1;
@@ -61,7 +63,7 @@ public class PanelUserMbti extends JPanel {
 		add(getBtnMbtiNext());
 		add(getRbMbtiResult1());
 		add(getRbMbtiResult2());
-		add(getLblMbtiQuestion());
+		add(getTaMbtiQuestion());
 		UM_inputAction(Numchk);
 	}
 	private JButton getBtnMbtiNext() {
@@ -91,7 +93,6 @@ public class PanelUserMbti extends JPanel {
 								Final_MBTI(data_enviroment_define.userNum);// 마지막 문제 끝나고 Dialog 뜨고나서 최종 MBTI 형성 후 UserNum에 따른 DB에 MBTI 값 업데이트
 								showMbti_Explain(MBTI);
 								showMbti_Name(MBTI);
-								System.out.println(MBTI_Explain);
 								JOptionPane.showMessageDialog(null, "당신의 MBTI 유형 결과는 " + MBTI + " 입니다." + "\n"
 																+ "\t" + MBTI_Name + "\n"
 																+ "설명: " + MBTI_Explain + "입니다.\n" + 
@@ -127,16 +128,6 @@ public class PanelUserMbti extends JPanel {
 		}
 		return rbMbtiResult2;
 	}
-	private JLabel getLblMbtiQuestion() { 
-		if (lblMbtiQuestion == null) {
-			lblMbtiQuestion = new JLabel("New label");
-			lblMbtiQuestion.setFont(new Font("Al Bayan", Font.PLAIN, 15));
-			lblMbtiQuestion.setVerticalAlignment(SwingConstants.TOP);
-			lblMbtiQuestion.setBounds(40, 70, 420, 123);
-			lblMbtiQuestion.setHorizontalAlignment(SwingConstants.LEFT);
-		}
-		return lblMbtiQuestion;
-	}
 	
 	/* 
 	 * =========================
@@ -151,7 +142,7 @@ public class PanelUserMbti extends JPanel {
 	    UM_DbAction dbAction = new UM_DbAction(Numchk);
 	    ArrayList<UM_Bean> beanList = dbAction.selectMbtiQuiz();
 
-	    lblMbtiQuestion.setText(Integer.toString(Numchk)+ ". " + beanList.get(0).getMqQuiestion());
+	    taMbtiQuestion.setText(Integer.toString(Numchk)+ ". " + beanList.get(0).getMqQuiestion());
 	    rbMbtiResult1.setText(beanList.get(0).getMqAnswer1());
 	    rbMbtiResult2.setText(beanList.get(0).getMqAnswer2());
 	    
@@ -161,8 +152,7 @@ public class PanelUserMbti extends JPanel {
 		
 	    System.out.println(countNum);
 	    	JOptionPane.showMessageDialog(null, "문제가 끝났습니다");
-	    	lblMbtiQuestion.setHorizontalAlignment(JLabel.CENTER);
-	    	lblMbtiQuestion.setText("수고하셨습니다.");
+	    	taMbtiQuestion.setText("수고하셨습니다.");
 	    	btnMbtiNext.setVisible(false);
 	    	rbMbtiResult1.setVisible(false);
 			rbMbtiResult2.setVisible(false);
@@ -291,10 +281,21 @@ public class PanelUserMbti extends JPanel {
 	
 	
 	public void UM_ClearPanel() {
-		lblMbtiQuestion.setText("");
+		taMbtiQuestion.setText("");
 		rbMbtiResult1.setText("");
 		rbMbtiResult2.setText("");
 		rbMbtiResult1.setSelected(false);
 		rbMbtiResult2.setSelected(false);
+	}
+	private JTextArea getTaMbtiQuestion() {
+		if (taMbtiQuestion == null) {
+			taMbtiQuestion = new JTextArea();
+			taMbtiQuestion.setEditable(false);
+			taMbtiQuestion.setLineWrap(true);
+			taMbtiQuestion.setFont(new Font("Al Bayan", Font.PLAIN, 15));
+			taMbtiQuestion.setBackground(UIManager.getColor("Label.background"));
+			taMbtiQuestion.setBounds(40, 70, 420, 127);
+		}
+		return taMbtiQuestion;
 	}
 }//======================================================
