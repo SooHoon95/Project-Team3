@@ -71,38 +71,26 @@ public class PanelUserMbti extends JPanel {
 			btnMbtiNext.setBounds(50, 320, 300, 23);
 			btnMbtiNext.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-//					made_EachType(Numchk);	// 버튼 누를 때 마다 방금 풀었던 문제 가중치 입력
-//					UM_ClearPanel();
+					made_EachType(Numchk);	// 버튼 누를 때 마다 방금 풀었던 문제 가중치 입력
+					UM_ClearPanel();
 					
-					if( rbMbtiResult1.isSelected() == false && rbMbtiResult2.isSelected() == false) {	// 라디오 버튼 클릭 안돼있으면 메세지 띄우기
-						JOptionPane.showMessageDialog(null, "답변을 클릭하세요.");
-					}
-					
-					else if (rbMbtiResult1.isSelected() == true || rbMbtiResult2.isSelected() == true) {	// 라디오 버튼 하나라도 클릭 돼있으면 그대로 진행
 						if ( countNum > Numchk) {	// 문제 갯수가 반복횟수보다 많을 경우 메세지 띄우고, 모든 창 가리기
-							made_EachType(Numchk);	// 버튼 누를 때 마다 방금 풀었던 문제 가중치 입력
-							UM_ClearPanel();	
 							Numchk++;
-								UM_inputAction(Numchk);	// 버튼에 int값을 줘서 문제번호를 설정한다.(몇 번째 문제인지)
-							}
-							else {
-								EndMbtiQuestion();
-								made_MBTI();		
-								Final_MBTI(data_enviroment_define.userNum);// 마지막 문제 끝나고 Dialog 뜨고나서 최종 MBTI 형성 후 UserNum에 따른 DB에 MBTI 값 업데이트
-								showMbti_Explain(MBTI);
-								showMbti_Name(MBTI);
-								System.out.println(MBTI_Explain);
-								JOptionPane.showMessageDialog(null, "당신의 MBTI 유형 결과는 " + MBTI + " 입니다." + "\n"
-																+ "\t" + MBTI_Name + "\n"
-																+ "설명: " + MBTI_Explain + "입니다.\n" + 
-																"자세한 결과는 통계창에서 확인하세요.");
-//								boolean rb1 = rbMbtiResult1.isSelected();
-//								boolean rb2 = rbMbtiResult2.isSelected();
-//								rb1 = false;
-//								rb2 = false;
-//								rbMbtiResult2.setSelected(false);							
-								}
-					}
+							UM_inputAction(Numchk);	// 버튼에 int값을 줘서 문제번호를 설정한다.(몇 번째 문제인지)
+						}
+						else {
+							EndMbtiQuestion();
+							made_MBTI();		
+							Final_MBTI(data_enviroment_define.userNum);// 마지막 문제 끝나고 Dialog 뜨고나서 최종 MBTI 형성 후 UserNum에 따른 DB에 MBTI 값 업데이트
+							showMbti_Explain(MBTI);
+							showMbti_Name(MBTI);
+							System.out.println(MBTI_Explain);
+							JOptionPane.showMessageDialog(null, "당신의 MBTI 유형 결과는 " + MBTI + " 입니다." + "\n"
+															+ "\t" + MBTI_Name + "\n"
+															+ "설명: " + MBTI_Explain + "입니다.\n" + 
+															"자세한 결과는 통계창에서 확인하세요.");
+						}
+					 
 				}
 			});
 		}
