@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.javalec.Datadefine.data_Enviroment_define;
+import com.javalec.PanelManageMbtiResult.MMR_Bean;
 import com.javalec.PanelUserProfile.UP_Bean;
 
 public class US_DbAction {
@@ -22,6 +23,10 @@ public class US_DbAction {
 		private final String pw_mysql = data_Enviroment_define.pw_mysql;
 		
 		int userNum;
+		int mrNum;
+		String mrType;
+		String mrName;
+		String mrExplain;
 		
 		
 	//-----------------
@@ -40,6 +45,39 @@ public class US_DbAction {
 	//-----------------
 	//Method
 	//-----------------	
+	
+	//전체검색
+	public ArrayList<US_Bean> US_selectList(){
+		
+		ArrayList<US_Bean> beanList = new ArrayList<US_Bean>();
+		String A = "select mrNum, mrType, mrName, mrExplain from mbtiresult" ;
+	   
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+	        Connection conn_mysql = DriverManager.getConnection(url_mysql,id_mysql,pw_mysql);
+	        Statement stmt_mysql =conn_mysql.createStatement();
+	        ResultSet rs = stmt_mysql.executeQuery(A);
+	        
+	        while(rs.next()){
+	        	int wkMrNum =rs.getInt(1);
+	        	String wkMrType =rs.getString(2);
+	        	String wkMrName =rs.getString(3);
+	        	String wkMrExplain =rs.getString(4);
+	        	
+	        	
+	        	US_Bean bean = new US_Bean(wkMrNum, wkMrType, wkMrName, wkMrExplain);
+	        	beanList.add(bean);
+	        }
+	          conn_mysql.close();
+	        
+	    }
+	    catch (Exception e){
+	          e.printStackTrace();
+	    }
+	    return beanList;
+		
+	}
+	
 	
 	//유저정보
 	public US_Bean US_Infor() {

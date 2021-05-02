@@ -9,6 +9,10 @@ public class US_Bean { 	//Dowoo 2021.04.30 완료
 	String userResultM;
 	String userResultA;
 	String count;
+	int mrNum;
+	String mrType;
+	String mrName;
+	String mrExplain;
 
 	
 
@@ -41,6 +45,14 @@ public class US_Bean { 	//Dowoo 2021.04.30 완료
 		super();
 		this.userResultM = userResultM;
 		this.count = count;
+	}
+
+	public US_Bean(int mrNum, String mrType, String mrName, String mrExplain) {
+		super();
+		this.mrNum = mrNum;
+		this.mrType = mrType;
+		this.mrName = mrName;
+		this.mrExplain = mrExplain;
 	}
 
 
@@ -90,6 +102,46 @@ public class US_Bean { 	//Dowoo 2021.04.30 완료
 	public void setCount(String count) {
 		this.count = count;
 	}
+	public int getMrNum() {
+		return mrNum;
+	}
+
+
+	public void setMrNum(int mrNum) {
+		this.mrNum = mrNum;
+	}
+
+
+	public String getMrType() {
+		return mrType;
+	}
+
+
+	public void setMrType(String mrType) {
+		this.mrType = mrType;
+	}
+
+
+	public String getMrName() {
+		return mrName;
+	}
+
+
+	public void setMrName(String mrName) {
+		this.mrName = mrName;
+	}
+
+
+	public String getMrExplain() {
+		return mrExplain;
+	}
+
+
+	public void setMrExplain(String mrExplain) {
+		this.mrExplain = mrExplain;
+	}
+
+
 
 		
 

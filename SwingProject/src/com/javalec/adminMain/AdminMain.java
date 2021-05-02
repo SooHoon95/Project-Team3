@@ -84,6 +84,16 @@ public class AdminMain extends JDialog {
 						
 					}
 				}
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					labelLogout.setForeground(Color.RED);
+					
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					labelLogout.setForeground(Color.BLACK);
+					labelLogout.setFont(new Font("Lucida Grande",Font.PLAIN, 13));
+				}
 			});
 			labelLogout.setForeground(Color.BLACK);
 			labelLogout.setFont(new Font("Andale Mono", Font.PLAIN, 13));
