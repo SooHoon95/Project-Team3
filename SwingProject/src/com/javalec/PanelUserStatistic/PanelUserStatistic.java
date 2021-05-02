@@ -51,12 +51,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 		add(getLblNewLabel());
 		add(getLblNewLabel_1());
 		add(getScrollPane_1());
-		US_Infor();
-		US_MbtiCount();
-		US_AptitudeCount();
-		US_FullCount();
-		US_Aptitude1Top();
-		US_Aptitude2Top();
+	
 		
 	}
 	private JLabel getLbMbti() {
@@ -274,4 +269,23 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 		
 	}
 
+	public void Restart() {
+		lbAptitude.setText("");
+		lbAptitudeCount.setText("");
+		lbFullCount1.setText("");
+		lbFullCount2.setText("");
+		lbMbti.setText("");
+		lbMbtiCount.setText("");
+		tfAptitude1Top.setText("");
+		tfAptitude2Top.setText("");
+		US_Infor();
+		US_MbtiCount();
+		US_AptitudeCount();
+		US_FullCount();
+		US_Aptitude1Top();
+		US_Aptitude2Top();
+	}
+	
+	
+	
 }/////////////////

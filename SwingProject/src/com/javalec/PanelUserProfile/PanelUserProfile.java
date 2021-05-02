@@ -205,9 +205,6 @@ public class PanelUserProfile extends JPanel {
 			if(msg=true) {
 				  JOptionPane.showMessageDialog(this,tfName.getText()+" 님이 탈퇴 되었습니다.! 프로그램 종료합니다!",
 			      "탈퇴 완료!",JOptionPane.INFORMATION_MESSAGE);
-				  RestPanel(); // 패널 초기화  
-//				  System.exit(0); // 이 패널을 끌수 있는 방법을 찾아야 함! 
-				  Login login = new Login(); // 로그인 화면 새로 키기
 				  
 			}else if(msg=false){
 				JOptionPane.showMessageDialog(this, "DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!",
@@ -219,13 +216,15 @@ public class PanelUserProfile extends JPanel {
 		}
 	}
 	
-	private void RestPanel() {
+	public void Restart() {
 		tfAptitude.setText("");
 		tfEmail.setText("");
 		tfID.setText("");
 		tfMbti.setText("");
 		tfName.setText("");
+		UP_Show();
 	}
+	
 }////////////////////////////////////
 
 

@@ -129,6 +129,9 @@ public class UserMain extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					RestPanel();
 					panelUserPrifile.setVisible(true);
+					panelUserPrifile.Restart();
+					
+					
 				}
 			});
 			btnUserProfile.setBounds(30, 100, 120, 35);
@@ -140,7 +143,7 @@ public class UserMain extends JDialog {
 			btnUserMbti = new JButton("MBTI");
 			btnUserMbti.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-			
+
 					// 선택 다이얼로그 옵션
 					int result = JOptionPane.showConfirmDialog(null, "MBTI 문항은 총 20문항이 출제 되며, 오래 고민 하시지 말고 첫 느낌대로 골라주시기 바랍니다. ", "확인",JOptionPane.YES_NO_OPTION);
 					if(result ==JOptionPane.CLOSED_OPTION) { // 사용자가 선택 없이 x를 누른 경우.
@@ -163,6 +166,7 @@ public class UserMain extends JDialog {
 			btnUserAptitudeQuiz = new JButton("적성검사");
 			btnUserAptitudeQuiz.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
 					
 					// 선택 다이얼로그 옵션
 					int result = JOptionPane.showConfirmDialog(null, "적성 문항은 총 10문항이 출제 되며, 오래 고민 하시지 말고 첫 느낌대로 골라주시기 바랍니다. ", "확인",JOptionPane.YES_NO_OPTION);
@@ -188,6 +192,8 @@ public class UserMain extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					RestPanel();
 					panelUserStatistic.setVisible(true);
+					panelUserStatistic.Restart();
+					
 				}
 			});
 			btnUserStatistic.setBounds(30, 370, 120, 35);
