@@ -78,6 +78,7 @@ public class PanelUserAptitudeQuiz extends JPanel {
 	private JRadioButton getRbAptitudeResult1() {
 		if (rbAptitudeResult1 == null) {
 			rbAptitudeResult1 = new JRadioButton("New radio button");
+			rbAptitudeResult1.setSelected(true);
 			rbAptitudeResult1.setFont(new Font("Didot", Font.PLAIN, 14));
 			buttonGroup.add(rbAptitudeResult1);
 			rbAptitudeResult1.setBounds(40, 205, 414, 23);
@@ -101,15 +102,16 @@ public class PanelUserAptitudeQuiz extends JPanel {
 	//문제 출력		
 	public void UAQ_ShowQuiz() { 				
 		if(uaq_dbAction.countQuizMax>uaq_dbAction.countQuizNum) {
+			uaq_dbAction.countQuizNum++;
 			uaq_dbAction.UAQ_ShowQuiz();
 			UAQ_Bean bean = uaq_dbAction.UAQ_ShowQuiz();
 			taAptitudeQuiz.setText(uaq_dbAction.countQuizNum + ". " + bean.getAqQuestion());
 			rbAptitudeResult1.setText(bean.getAqAnswer1());
 			rbAptitudeResult2.setText(bean.getAqAnswer2());
 			
-			uaq_dbAction.countQuizNum++;
+			
 		}else {
-			uaq_dbAction.countQuizNum++;
+			uaq_dbAction.countQuizNum+=10;
 		}
 		
 		
