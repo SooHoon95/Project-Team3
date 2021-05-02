@@ -224,7 +224,7 @@ public class US_DbAction {
 		
 		US_Bean bean =null;
 		
-		String A ="select userResultM, count(*) from user where userResultA = '한번더 의심하기' group by userResultM order by count(*) DESC limit 1";
+		String A ="select userResultM, count(*) from user where userResultA = '한번 더 의심하기' group by userResultM order by count(*) DESC limit 1";
 		
 		try{
 	          Class.forName("com.mysql.cj.jdbc.Driver");
