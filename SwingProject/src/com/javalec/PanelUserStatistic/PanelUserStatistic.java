@@ -1,15 +1,19 @@
 package com.javalec.PanelUserStatistic;
 
 import java.awt.Rectangle;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import com.javalec.Datadefine.data_Enviroment_define;
+import com.javalec.PanelManageMbtiResult.MMR_Bean;
+import com.javalec.PanelManageMbtiResult.MMR_DbAction;
 
 import java.awt.Font;
 import javax.swing.JTextArea;
@@ -18,6 +22,9 @@ import java.awt.Color;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 	private JLabel lbMbti;
@@ -33,6 +40,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 	private JScrollPane scrollPane;
 	private JTable innerTable;
 	private final DefaultTableModel Outer_Table = new DefaultTableModel(); //
+	private JLabel lbImage;
 
 	/**
 	 * Create the panel.
@@ -51,6 +59,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 		add(getLblNewLabel());
 		add(getLblNewLabel_1());
 		add(getScrollPane_1());
+		add(getLbImage());
 	
 		
 	}
@@ -143,7 +152,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 	private JScrollPane getScrollPane_1() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
-			scrollPane.setBounds(33, 64, 445, 146);
+			scrollPane.setBounds(33, 64, 340, 125);
 			scrollPane.setViewportView(getInnerTable());
 		}
 		return scrollPane;
@@ -151,6 +160,12 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 	private JTable getInnerTable() {
 		if (innerTable == null) {
 			innerTable = new JTable();
+			innerTable.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					MMR_TableClick();
+				}
+			});
 			innerTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			innerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			innerTable.setModel(Outer_Table); // 테이블을 불러오기 위해 ******꼭 써야할 것*****
@@ -158,6 +173,16 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 			US_selectList();
 		}
 		return innerTable;
+	}
+	
+	private JLabel getLbImage() {
+		if (lbImage == null) {
+			lbImage = new JLabel("");
+			lbImage.setIcon(new ImageIcon(""));
+			lbImage.setHorizontalAlignment(SwingConstants.CENTER);
+			lbImage.setBounds(378, 64, 100, 125);
+		}
+		return lbImage;
 	}
 
 	//----------------
@@ -215,6 +240,25 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 			Outer_Table.addRow(qtxt);
 			}
 	}
+	
+	private void MMR_TableClick() {
+		int i = innerTable.getSelectedRow();
+		String tmMrNum = (String)innerTable.getValueAt(i,0);
+		int wkMrNUM = Integer.parseInt(tmMrNum);
+		
+		MMR_DbAction mmr_DbAction =new MMR_DbAction(wkMrNUM);
+		MMR_Bean bean =mmr_DbAction.MMR_TableClick();
+		
+		//Image처리
+		String filePath = Integer.toString(data_Enviroment_define.filename);
+		
+		lbImage.setIcon(new ImageIcon(filePath));
+		lbImage.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		File file = new File(filePath);
+		file.delete();
+		
+		}
 
 	//MBTI와 적성 보여주는 기능. 
 	private void US_Infor() {
@@ -285,7 +329,5 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 		US_Aptitude1Top();
 		US_Aptitude2Top();
 	}
-	
-	
 	
 }/////////////////
