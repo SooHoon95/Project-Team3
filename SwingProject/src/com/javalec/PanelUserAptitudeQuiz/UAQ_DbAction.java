@@ -28,7 +28,7 @@ public class UAQ_DbAction {
 	String aqScore2;
 	
 	
-	int countQuizNum = 0; // 문제번호 : 초기값 0번
+	int countQuizNum = 1; // 문제번호 : 초기값 1번
 	int countQuizMax = 0; // 문제 갯수
 	int sumScore = 0; // score 합계
 	int userNum = data_Enviroment_define.userNum; // 유저번호
