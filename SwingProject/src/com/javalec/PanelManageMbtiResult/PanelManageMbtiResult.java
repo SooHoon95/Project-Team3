@@ -3,7 +3,9 @@ package com.javalec.PanelManageMbtiResult;
 import java.awt.Color;
 import java.awt.Rectangle;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -11,17 +13,21 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import com.javalec.PanelManageAptitudeResult.MAR_Bean;
-import com.javalec.PanelManageAptitudeResult.MAR_DbAction;
+import com.javalec.Datadefine.data_Enviroment_define;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.awt.SystemColor;
 
 public class PanelManageMbtiResult extends JPanel {
 	private JScrollPane scrollPane_AdMBTIResult;
@@ -36,9 +42,12 @@ public class PanelManageMbtiResult extends JPanel {
 	private JButton btnAdMBTIResultRemove;
 	private JLabel lblAdMBTIResultNum;
 	private JTextField tfAdMBTIResultNum;
-	private JPanel panelAdMBTIimage;
 	private JLabel lblMbti;
 	private JTextField tfAdMBTIResultType;
+	private JLabel lblMbti_1;
+	private JTextField tfFilePath;
+	private JButton btnFilePath;
+	private JLabel lbImage;
 
 	/**
 	 * Create the panel.
@@ -57,9 +66,12 @@ public class PanelManageMbtiResult extends JPanel {
 		add(getBtnAdMBTIResultRemove());
 		add(getLblAdMBTIResultNum());
 		add(getTfAdMBTIResultNum());
-		add(getPanelAdMBTIimage());
 		add(getLblMbti());
 		add(getTfAdMBTIResultType());
+		add(getLblMbti_1());
+		add(getTfFilePath());
+		add(getBtnFilePath());
+		add(getLbImage());
 		
 		
 
@@ -67,7 +79,7 @@ public class PanelManageMbtiResult extends JPanel {
 	private JScrollPane getScrollPane_AdMBTIResult() {
 		if (scrollPane_AdMBTIResult == null) {
 			scrollPane_AdMBTIResult = new JScrollPane();
-			scrollPane_AdMBTIResult.setBounds(12, 17, 358, 156);
+			scrollPane_AdMBTIResult.setBounds(12, 17, 360, 125);
 			scrollPane_AdMBTIResult.setViewportView(getInner_table_AdMBTIResult());
 		}
 		return scrollPane_AdMBTIResult;
@@ -160,7 +172,7 @@ public class PanelManageMbtiResult extends JPanel {
 	private JLabel getLblAdMBTIResultNum() {
 		if (lblAdMBTIResultNum == null) {
 			lblAdMBTIResultNum = new JLabel("번호");
-			lblAdMBTIResultNum.setBounds(12, 191, 27, 16);
+			lblAdMBTIResultNum.setBounds(12, 158, 27, 16);
 		}
 		return lblAdMBTIResultNum;
 	}
@@ -169,23 +181,15 @@ public class PanelManageMbtiResult extends JPanel {
 			tfAdMBTIResultNum = new JTextField();
 			tfAdMBTIResultNum.setEditable(false);
 			tfAdMBTIResultNum.setColumns(10);
-			tfAdMBTIResultNum.setBounds(90, 187, 60, 26);
+			tfAdMBTIResultNum.setBounds(90, 154, 66, 26);
 		}
 		return tfAdMBTIResultNum;
-	}
-	private JPanel getPanelAdMBTIimage() {
-		if (panelAdMBTIimage == null) {
-			panelAdMBTIimage = new JPanel();
-			panelAdMBTIimage.setBackground(SystemColor.window);
-			panelAdMBTIimage.setBounds(382, 17, 106, 156);
-		}
-		return panelAdMBTIimage;
 	}
 	
 	private JLabel getLblMbti() {
 		if (lblMbti == null) {
 			lblMbti = new JLabel("MBTI유형");
-			lblMbti.setBounds(185, 192, 60, 16);
+			lblMbti.setBounds(12, 195, 60, 16);
 		}
 		return lblMbti;
 	}
@@ -193,9 +197,46 @@ public class PanelManageMbtiResult extends JPanel {
 		if (tfAdMBTIResultType == null) {
 			tfAdMBTIResultType = new JTextField();
 			tfAdMBTIResultType.setColumns(10);
-			tfAdMBTIResultType.setBounds(250, 187, 106, 26);
+			tfAdMBTIResultType.setBounds(90, 191, 66, 26);
 		}
 		return tfAdMBTIResultType;
+	}
+	
+	private JLabel getLblMbti_1() {
+		if (lblMbti_1 == null) {
+			lblMbti_1 = new JLabel("이미지 파일경로");
+			lblMbti_1.setBounds(196, 159, 96, 16);
+		}
+		return lblMbti_1;
+	}
+	private JTextField getTfFilePath() {
+		if (tfFilePath == null) {
+			tfFilePath = new JTextField();
+			tfFilePath.setBounds(298, 154, 190, 26);
+			tfFilePath.setColumns(10);
+		}
+		return tfFilePath;
+	}
+	private JButton getBtnFilePath() {
+		if (btnFilePath == null) {
+			btnFilePath = new JButton("파일경로");
+			btnFilePath.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					FilePath();;
+				}
+			});
+			btnFilePath.setBounds(391, 184, 97, 23);
+		}
+		return btnFilePath;
+	}
+	private JLabel getLbImage() {
+		if (lbImage == null) {
+			lbImage = new JLabel("");
+			lbImage.setIcon(new ImageIcon(""));
+			lbImage.setHorizontalAlignment(SwingConstants.CENTER);
+			lbImage.setBounds(384, 17, 100, 125);
+		}
+		return lbImage;
 	}
 	
 	//-------------------------------
@@ -278,7 +319,19 @@ public class PanelManageMbtiResult extends JPanel {
 		tfAdMBTIResultType.setText(bean.getMrType());
 		tfAdMBTIResultName.setText(bean.getMrName()); 
 		tfAdMBTIResultarExplain.setText(bean.getMrExplain());
-			
+		
+		//Image처리
+		String filePath = Integer.toString(data_Enviroment_define.filename);
+		
+		lbImage.setIcon(new ImageIcon(filePath));
+		lbImage.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		File file = new File(filePath);
+		file.delete();
+		
+		tfFilePath.setText("");
+		
+		
 		}
 		
 		// 공란불가 입력
@@ -311,8 +364,18 @@ public class PanelManageMbtiResult extends JPanel {
 			String mrName = tfAdMBTIResultName.getText().trim();
 			String mrExplain = tfAdMBTIResultarExplain.getText().trim();
 			
+			// Image File
+			FileInputStream input = null;
+			File file = new File(tfFilePath.getText());
+			try {
+				input = new FileInputStream(file);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		
-			MMR_DbAction mmr_DbAction =new MMR_DbAction(mrType, mrName, mrExplain);
+			MMR_DbAction mmr_DbAction =new MMR_DbAction(mrType, mrName, mrExplain, input);
 			boolean msg = mmr_DbAction.MMR_insertAction();
 			
 			if(msg=true) {
@@ -356,7 +419,17 @@ public class PanelManageMbtiResult extends JPanel {
 			String mrName = tfAdMBTIResultName.getText().trim();
 			String mrExplain = tfAdMBTIResultarExplain.getText().trim();
 			
-			MMR_DbAction mmr_DbAction =new MMR_DbAction(mrNum, mrType, mrName, mrExplain);
+			// Image File
+			FileInputStream input = null;
+			File file = new File(tfFilePath.getText());
+			try {
+				input = new FileInputStream(file);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			MMR_DbAction mmr_DbAction =new MMR_DbAction(mrNum, mrType, mrName, mrExplain, input);
 			boolean msg = mmr_DbAction.MMR_UpdateAction();
 			
 			if(msg=true) {
@@ -371,7 +444,7 @@ public class PanelManageMbtiResult extends JPanel {
 		}
 		
 		
-
+		//삭제
 	private void MMR_DeleteAction() {
 		
 		int mNum  = Integer.parseInt(tfAdMBTIResultNum.getText());
@@ -389,4 +462,25 @@ public class PanelManageMbtiResult extends JPanel {
 			}
 		}
 
+	
+	// 파일찾기
+	private void FilePath() {
+		JFileChooser chooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG, PNG, BMP", "jpg","png","bmp");
+		chooser.setFileFilter(filter);
+		
+		int ret = chooser.showOpenDialog(null);
+		if(ret != JFileChooser.APPROVE_OPTION) {
+			JOptionPane.showMessageDialog(null, "파일을 선택하지 않았습니다!", "경고", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		String filePath = chooser.getSelectedFile().getPath();
+		tfFilePath.setText(filePath);
+		lbImage.setIcon(new ImageIcon(filePath));
+		lbImage.setHorizontalAlignment(SwingConstants.CENTER);
+	}
+	
+	
+	
+	
 }//---------------------------------

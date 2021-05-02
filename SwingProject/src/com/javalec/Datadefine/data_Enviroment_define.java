@@ -8,5 +8,5 @@ public class data_Enviroment_define {
 	
 	public static int userNum = 0;
 	public static String userName = "";
-	
+	public static int filename = 0;
 }

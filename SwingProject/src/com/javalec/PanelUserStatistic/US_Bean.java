@@ -63,8 +63,6 @@ public class US_Bean { 	//Dowoo 2021.04.30 완료
 		return userResultM;
 	}
 
-
-
 	public void setUserResultM(String userResultM) {
 		this.userResultM = userResultM;
 	}
