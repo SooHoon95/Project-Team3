@@ -165,7 +165,7 @@ public class PanelUserProfile extends JPanel {
 			btuWithdrawal.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					WithdrawalAction();
-					System.exit(0);
+					
 				}
 			});
 			btuWithdrawal.setBounds(391, 387, 97, 23);
@@ -205,6 +205,7 @@ public class PanelUserProfile extends JPanel {
 			if(msg=true) {
 				  JOptionPane.showMessageDialog(this,tfName.getText()+" 님이 탈퇴 되었습니다.! 프로그램 종료합니다!",
 			      "탈퇴 완료!",JOptionPane.INFORMATION_MESSAGE);
+				  System.exit(0);
 				  
 			}else if(msg=false){
 				JOptionPane.showMessageDialog(this, "DB에 자료 입력중 에러가 발생했습니다! \n 시스템관리자에 문의하세요!",
