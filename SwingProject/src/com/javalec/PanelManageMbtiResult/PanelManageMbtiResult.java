@@ -37,7 +37,6 @@ public class PanelManageMbtiResult extends JPanel {
 	private JLabel lbAdMBTIResultarExplain;
 	private JTextField tfAdMBTIResultName;
 	private JTextField tfAdMBTIResultarExplain;
-	private JButton btnAdMBTIQResultCreate;
 	private JButton btnAdMBTIResultEdit;
 	private JButton btnAdMBTIResultRemove;
 	private JLabel lblAdMBTIResultNum;
@@ -61,7 +60,6 @@ public class PanelManageMbtiResult extends JPanel {
 		add(getlblAdMBTIResultExplanation());
 		add(getTfAdMBTIResultName());
 		add(getTfAdMBTIResultarExplain());
-		add(getBtnAdMBTIResultCreate());
 		add(getBtnAdMBTIResultEdit());
 		add(getBtnAdMBTIResultRemove());
 		add(getLblAdMBTIResultNum());
@@ -131,19 +129,6 @@ public class PanelManageMbtiResult extends JPanel {
 			tfAdMBTIResultarExplain.setBounds(90, 256, 398, 54);
 		}
 		return tfAdMBTIResultarExplain;
-	}
-	
-	private JButton getBtnAdMBTIResultCreate() {
-		if (btnAdMBTIQResultCreate == null) {
-			btnAdMBTIQResultCreate = new JButton("생성");
-			btnAdMBTIQResultCreate.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					MMR_Action(1);
-				}
-			});
-			btnAdMBTIQResultCreate.setBounds(90, 320, 60, 29);
-		}
-		return btnAdMBTIQResultCreate;
 	}
 	private JButton getBtnAdMBTIResultEdit() {
 		if (btnAdMBTIResultEdit == null) {

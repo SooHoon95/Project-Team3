@@ -216,10 +216,10 @@ public class PanelManageMbtiQuiz extends JPanel {
       return lblAdMBTIGroup;
    }
    private JComboBox getCbType() {
-      if (cbType == null) {
+      if (cbType == null) { 
          cbType = new JComboBox();
          cbType.setModel(new DefaultComboBoxModel(new String[] {"선택", "EI", "SN", "TF", "JP"}));
-         cbType.setBounds(243, 187, 62, 26);
+         cbType.setBounds(243, 187, 73, 26);
       }
       return cbType;
    }
@@ -241,7 +241,7 @@ public class PanelManageMbtiQuiz extends JPanel {
       if (cbMBTIAnswer1Score == null) {
          cbMBTIAnswer1Score = new JComboBox();
          cbMBTIAnswer1Score.setModel(new DefaultComboBoxModel(new String[] {"선택", "0", "1"}));
-         cbMBTIAnswer1Score.setBounds(426, 256, 62, 26);
+         cbMBTIAnswer1Score.setBounds(420, 256, 73, 26);
       }
       return cbMBTIAnswer1Score;
    }
@@ -249,7 +249,7 @@ public class PanelManageMbtiQuiz extends JPanel {
       if (cbMBTIAnswer2Score == null) {
          cbMBTIAnswer2Score = new JComboBox();
          cbMBTIAnswer2Score.setModel(new DefaultComboBoxModel(new String[] {"선택", "0", "1"}));
-         cbMBTIAnswer2Score.setBounds(427, 290, 61, 26);
+         cbMBTIAnswer2Score.setBounds(420, 290, 73, 26);
       }
       return cbMBTIAnswer2Score;
    }

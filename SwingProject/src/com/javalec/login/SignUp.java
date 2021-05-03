@@ -412,6 +412,9 @@ public class SignUp extends JDialog {
 		else if(labelPWcheck.getText().equals("비밀번호가 일치하지 않습니다.")){ // 다 채웠지만 비밀번호 체크가 불일치 일 때 
 			JOptionPane.showMessageDialog(null,  "비밀번호 체크를 해 주세요! ", "오류 메세지", JOptionPane.ERROR_MESSAGE);
 		}
+		else {
+			JOptionPane.showMessageDialog(null, "이메일을 확인해 주세요 ", "오류 메세지", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 

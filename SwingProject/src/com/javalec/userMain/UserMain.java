@@ -106,7 +106,7 @@ public class UserMain extends JDialog {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				labelLogout.setForeground(Color.BLACK);
-				labelLogout.setFont(new Font("Lucida Grande",Font.PLAIN, 13));
+				labelLogout.setFont(new Font("Andale Mono",Font.PLAIN, 13));
 			}
 		});
 		
