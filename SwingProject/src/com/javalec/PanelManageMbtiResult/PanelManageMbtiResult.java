@@ -278,7 +278,7 @@ public class PanelManageMbtiResult extends JPanel {
 			
 			vColIndex = 3; // 4번째 행
 			col = inner_table_AdMBTIResult.getColumnModel().getColumn(vColIndex);
-			width = 200; // 4번째 행 가로
+			width = 250; // 4번째 행 가로
 			col.setPreferredWidth(width);; // 4번째 행 가로크기 설정
 
 			
