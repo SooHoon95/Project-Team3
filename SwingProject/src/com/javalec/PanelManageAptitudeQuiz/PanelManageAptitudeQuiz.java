@@ -220,7 +220,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 		if (cbAptitideAnswer1Score == null) {
 			cbAptitideAnswer1Score = new JComboBox();
 			cbAptitideAnswer1Score.setModel(new DefaultComboBoxModel(new String[] {"선택", "0", "1"}));
-			cbAptitideAnswer1Score.setBounds(426, 256, 62, 26);
+			cbAptitideAnswer1Score.setBounds(415, 256, 73, 26);
 		}
 		return cbAptitideAnswer1Score;
 	}
@@ -228,7 +228,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 		if (cbAptitideAnswer2Score == null) {
 			cbAptitideAnswer2Score = new JComboBox();
 			cbAptitideAnswer2Score.setModel(new DefaultComboBoxModel(new String[] {"선택", "0", "1"}));
-			cbAptitideAnswer2Score.setBounds(427, 290, 61, 26);
+			cbAptitideAnswer2Score.setBounds(415, 290, 73, 26);
 		}
 		return cbAptitideAnswer2Score;
 	}

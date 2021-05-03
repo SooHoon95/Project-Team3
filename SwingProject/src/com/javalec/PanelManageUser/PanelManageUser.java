@@ -218,7 +218,7 @@ public class PanelManageUser extends JPanel {
 		if (cbadUserSearch == null) {
 			cbadUserSearch = new JComboBox();
 			cbadUserSearch.setModel(new DefaultComboBoxModel(new String[] {"상태", "이름", "Id", "E-mail"}));
-			cbadUserSearch.setBounds(20, 162, 64, 23);
+			cbadUserSearch.setBounds(10, 167, 90, 23);
 		}
 		return cbadUserSearch;
 	}
