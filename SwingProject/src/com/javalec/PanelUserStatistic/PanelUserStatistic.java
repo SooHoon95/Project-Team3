@@ -67,7 +67,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 		if (lbMbti == null) {
 			lbMbti = new JLabel("");
 			lbMbti.setFont(new Font("Dialog", Font.PLAIN, 13));
-			lbMbti.setBounds(33, 252, 416, 30);
+			lbMbti.setBounds(33, 250, 416, 30);
 		}
 		return lbMbti;
 	}
@@ -75,7 +75,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 		if (lbMbtiCount == null) {
 			lbMbtiCount = new JLabel("");
 			lbMbtiCount.setFont(new Font("Dialog", Font.PLAIN, 13));
-			lbMbtiCount.setBounds(33, 277, 416, 30);
+			lbMbtiCount.setBounds(33, 270, 416, 30);
 		}
 		return lbMbtiCount;
 	}
@@ -83,7 +83,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 		if (lbAptitudeCount == null) {
 			lbAptitudeCount = new JLabel("");
 			lbAptitudeCount.setFont(new Font("Dialog", Font.PLAIN, 13));
-			lbAptitudeCount.setBounds(33, 327, 416, 30);
+			lbAptitudeCount.setBounds(33, 320, 416, 30);
 		}
 		return lbAptitudeCount;
 	}
@@ -91,7 +91,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 		if (lbAptitude == null) {
 			lbAptitude = new JLabel("");
 			lbAptitude.setFont(new Font("Dialog", Font.PLAIN, 13));
-			lbAptitude.setBounds(33, 302, 416, 30);
+			lbAptitude.setBounds(33, 300, 416, 30);
 		}
 		return lbAptitude;
 	}
@@ -99,7 +99,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 		if (lbFullCount1 == null) {
 			lbFullCount1 = new JLabel("");
 			lbFullCount1.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbFullCount1.setBounds(258, 277, 120, 30);
+			lbFullCount1.setBounds(227, 270, 120, 30);
 		}
 		return lbFullCount1;
 	}
@@ -107,7 +107,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 		if (lbFullCount2 == null) {
 			lbFullCount2 = new JLabel("");
 			lbFullCount2.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbFullCount2.setBounds(258, 327, 120, 30);
+			lbFullCount2.setBounds(227, 320, 120, 30);
 		}
 		return lbFullCount2;
 	}
@@ -117,7 +117,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 			tfAptitude1Top = new JTextArea();
 			tfAptitude1Top.setFont(new Font("Dialog", Font.PLAIN, 13));
 			tfAptitude1Top.setBackground(new Color(238, 238, 238));
-			tfAptitude1Top.setBounds(33, 352, 445, 18);
+			tfAptitude1Top.setBounds(33, 360, 445, 18);
 			tfAptitude1Top.setLineWrap(true);
 		}
 		return tfAptitude1Top;
@@ -127,7 +127,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 			tfAptitude2Top = new JTextArea();
 			tfAptitude2Top.setFont(new Font("Dialog", Font.PLAIN, 13));
 			tfAptitude2Top.setBackground(new Color(238, 238, 238));
-			tfAptitude2Top.setBounds(33, 377, 455, 18);
+			tfAptitude2Top.setBounds(33, 380, 455, 18);
 			tfAptitude2Top.setLineWrap(true);
 		}
 		return tfAptitude2Top;
@@ -329,5 +329,4 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 		US_Aptitude1Top();
 		US_Aptitude2Top();
 	}
-	
 }/////////////////
