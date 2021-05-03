@@ -309,7 +309,7 @@ public class PanelUserStatistic extends JPanel { 	//Dowoo 2021.04.30 완료
 		US_DbAction us_DbAction =new US_DbAction();
 		US_Bean bean = us_DbAction.US_Aptitude2Top();
 		
-		tfAptitude2Top.setText("적성이 \"한번더 의심하기\"인 사람 중 " + bean.getUserResultM() + "가 가장 많고 총 " + bean.getCount() + " 명 입니다");
+		tfAptitude2Top.setText("적성이 \"한번더 의심하기\"인 사람중 가장 많은 MBTI는 " + bean.getUserResultM() + "이고 총 " + bean.getCount() + " 명 입니다");
 		
 	}
 
