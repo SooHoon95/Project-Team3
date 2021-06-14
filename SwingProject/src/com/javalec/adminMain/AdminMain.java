@@ -10,9 +10,18 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.javalec.PanelManageUser.PanelManageUser;
+import com.javalec.login.Login;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 public class AdminMain extends JDialog {
 	
@@ -24,6 +33,11 @@ public class AdminMain extends JDialog {
 	PanelManageUser panelManageUser = new PanelManageUser();
 	PanelManageQuiz panelManageQuiz = new PanelManageQuiz();
 	PanelManageResult panelManageResult = new PanelManageResult();
+	private final JLabel labelLogout = new JLabel("logout");
+	private final JLabel labelNickname = new JLabel(" 관리자님 반갑습니다!");
+	private final JLabel lblogo = new JLabel("");
+	private final JLabel lblength = new JLabel("");
+	private final JLabel widh = new JLabel("");
  
 
 	/**
@@ -43,7 +57,6 @@ public class AdminMain extends JDialog {
 	 * Create the dialog.
 	 */
 	public AdminMain() {
-		System.out.println("adminmain");
 		initialize(); 
 	}
 		private void initialize() {
@@ -60,6 +73,53 @@ public class AdminMain extends JDialog {
 			frame.getContentPane().add(panelManageUser);
 			frame.getContentPane().add(panelManageQuiz); 
 			frame.getContentPane().add(panelManageResult); 
+			labelLogout.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					int result = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?","로그아웃",JOptionPane.YES_NO_OPTION);
+					if(result ==JOptionPane.CLOSED_OPTION) { // 사용자가 선택 없이 x를 누른 경우.
+						
+					} else if(result == JOptionPane.YES_OPTION) { // 예를 선택한 경우 
+						RestPanel();
+						frame.setVisible(false);
+						Login login = new Login();
+						
+					} else { // 아니오를 선택한 경우
+						
+					}
+				}
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					labelLogout.setForeground(Color.RED);
+					
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					labelLogout.setForeground(Color.BLACK);
+					labelLogout.setFont(new Font("Lucida Grande",Font.PLAIN, 13));
+				}
+			});
+			labelLogout.setForeground(Color.BLACK);
+			labelLogout.setFont(new Font("Andale Mono", Font.PLAIN, 13));
+			labelLogout.setBounds(100, 45, 66, 26);
+			
+			frame.getContentPane().add(labelLogout);
+			labelNickname.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+			labelNickname.setBounds(35, 18, 127, 19);
+			
+			frame.getContentPane().add(labelNickname);
+			lblogo.setIcon(new ImageIcon(AdminMain.class.getResource("/com/javalec/resources/main1.png")));
+			lblogo.setBounds(260, 140, 330, 200);
+			
+			frame.getContentPane().add(lblogo);
+			lblength.setIcon(new ImageIcon(AdminMain.class.getResource("/com/javalec/resources/length.png")));
+			lblength.setBounds(165, 10, 20, 420);
+			
+			frame.getContentPane().add(lblength);
+			widh.setIcon(new ImageIcon(AdminMain.class.getResource("/com/javalec/resources/width.png")));
+			widh.setBounds(12, 70, 147, 15);
+			
+			frame.getContentPane().add(widh);
 			frame.setVisible(true);
 	}
 
@@ -73,7 +133,7 @@ public class AdminMain extends JDialog {
 					
 				}
 			});
-			btnManageUser.setBounds(30, 84, 120, 35);
+			btnManageUser.setBounds(30, 110, 120, 35);
 		}
 		return btnManageUser;
 	}
@@ -87,7 +147,7 @@ public class AdminMain extends JDialog {
 				
 				}
 			});
-			btnManageQuiz.setBounds(30, 203, 120, 35);
+			btnManageQuiz.setBounds(30, 220, 120, 35);
 		}
 		return btnManageQuiz;
 	}
@@ -102,7 +162,7 @@ public class AdminMain extends JDialog {
 
 				}
 			});
-			btnManageResult.setBounds(30, 322, 120, 35);
+			btnManageResult.setBounds(30, 330, 120, 35);
 		}
 		return btnManageResult;
 	}

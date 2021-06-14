@@ -6,26 +6,28 @@ public class UM_Bean {
 	
 	int mqNum;
 	int countNum;
-
+	
+	String mrExName;
 	String mqQuiestion;
 	String mqType;
 	String mqAnswer1;
 	String mqAnswer2;
-	String mqScroe1;
-	String m1Score2;
+	int mqScore1;
+	int mqScore2;
 	
 	//Constructor
 	public UM_Bean() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public int getCountNum() {
-		return countNum;
+
+	public UM_Bean(String mqType, int mqScore1, int mqScore2) {
+		super();
+		this.mqType = mqType;
+		this.mqScore1 = mqScore1;
+		this.mqScore2 = mqScore2;
 	}
 
-	public void setCountNum(int countNum) {
-		this.countNum = countNum;
-	}
 
 	public UM_Bean(String mqQuiestion, String mqAnswer1, String mqAnswer2) {
 		super();
@@ -40,6 +42,14 @@ public class UM_Bean {
 		this.countNum = countNum;
 	}
 	
+	public UM_Bean(String mrExName) {
+		super();
+		this.mrExName = mrExName;
+
+	}
+
+
+
 	//Method
 
 
@@ -83,27 +93,40 @@ public class UM_Bean {
 		this.mqAnswer2 = mqAnswer2;
 	}
 
-	public String getMqScroe1() {
-		return mqScroe1;
+	public int getMqScroe1() {
+		return mqScore1;
 	}
 
 	public void setMqScroe1(String mqScroe1) {
-		this.mqScroe1 = mqScroe1;
+		this.mqScore1 = mqScore1;
 	}
 
-	public String getM1Score2() {
-		return m1Score2;
+	public int getM1Score2() {
+		return mqScore2;
 	}
 
 	public void setM1Score2(String m1Score2) {
-		this.m1Score2 = m1Score2;
+		this.mqScore2 = mqScore2;
 	}
 	
+	public int getCountNum() {
+		return countNum;
+	}
 	
-	
-	
-	
-	
-	
+	public void setCountNum(int countNum) {
+		this.countNum = countNum;
+	}
 
-}
+
+	public String getMrExName() {
+		return mrExName;
+	}
+
+
+	public void setMrExName(String mrExName) {
+		this.mrExName = mrExName;
+	}
+
+	
+	
+}///////////////////////

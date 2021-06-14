@@ -10,12 +10,15 @@ import com.javalec.PanelManageMbtiResult.PanelManageMbtiResult;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class PanelManageResult extends JPanel {
 	private JButton btnManageMbtiResult;
 	private JButton btnManageAptitudeResult;
 	PanelManageMbtiResult panelManageMbtiResult = new PanelManageMbtiResult();
 	PanelManageAptitudeResult panelManageAptitudeResult = new PanelManageAptitudeResult();
+	private final JLabel lblogo = new JLabel("");
 	/**
 	 * Create the panel.
 	 */
@@ -27,6 +30,11 @@ public class PanelManageResult extends JPanel {
 		add(getBtnManageAptitudeResult());
 		add(panelManageMbtiResult);
 		add(panelManageAptitudeResult);
+		{
+			lblogo.setIcon(new ImageIcon(PanelManageResult.class.getResource("/com/javalec/resources/main1.png")));
+			lblogo.setBounds(80, 130, 330, 200);
+			add(lblogo);
+		}
 	}
 	private JButton getBtnManageMbtiResult() {
 		if (btnManageMbtiResult == null) {
@@ -36,6 +44,10 @@ public class PanelManageResult extends JPanel {
 					ResetReulstPanel();
 					panelManageMbtiResult.setVisible(true);
 					panelManageAptitudeResult.setVisible(false);
+					panelManageMbtiResult.MMR_TableInit();
+					panelManageMbtiResult.MMR_selectList();
+					panelManageMbtiResult.MMR_ClearColumn();
+					
 				}
 			});
 			btnManageMbtiResult.setBounds(86, 10, 120, 35);
@@ -50,6 +62,9 @@ public class PanelManageResult extends JPanel {
 					ResetReulstPanel();
 					panelManageMbtiResult.setVisible(false);
 					panelManageAptitudeResult.setVisible(true);
+					panelManageAptitudeResult.MAR_TableInit();
+					panelManageAptitudeResult.MAR_selectList();
+					panelManageAptitudeResult.MAR_ClearColumn();
 				}
 			});
 			btnManageAptitudeResult.setBounds(300, 10, 120, 35);

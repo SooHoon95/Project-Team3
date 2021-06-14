@@ -52,7 +52,7 @@ public class PanelManageUser extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelManageUser() {
-		setBackground(Color.YELLOW);
+		setBackground(new Color(238, 238, 238));
 		setBounds(new Rectangle(180, 10, 512, 420));
 		setLayout(null);
 		setVisible(false);
@@ -81,7 +81,7 @@ public class PanelManageUser extends JPanel {
 	private JScrollPane getScrollPane_AdUser() {
 		if (scrollPane_AdUser == null) {
 			scrollPane_AdUser = new JScrollPane();
-			scrollPane_AdUser.setBounds(20, 17, 484, 122);
+			scrollPane_AdUser.setBounds(12, 17, 488, 135);
 			scrollPane_AdUser.setViewportView(getInner_table_AdUser());
 		}
 		return scrollPane_AdUser;
@@ -103,21 +103,21 @@ public class PanelManageUser extends JPanel {
 	private JLabel getLblAdUserNum() {
 		if (lblAdUserNum == null) {
 			lblAdUserNum = new JLabel("번호");
-			lblAdUserNum.setBounds(20, 193, 61, 16);
+			lblAdUserNum.setBounds(23, 206, 61, 16);
 		}
 		return lblAdUserNum;
 	}
 	private JLabel getLblAdUserName() {
 		if (lblAdUserName == null) {
 			lblAdUserName = new JLabel("이름");
-			lblAdUserName.setBounds(20, 230, 61, 16);
+			lblAdUserName.setBounds(23, 243, 61, 16);
 		}
 		return lblAdUserName;
 	}
 	private JLabel getLblAdUserId() {
 		if (lblAdUserId == null) {
 			lblAdUserId = new JLabel("Id");
-			lblAdUserId.setBounds(20, 263, 61, 16);
+			lblAdUserId.setBounds(23, 276, 61, 16);
 		}
 		return lblAdUserId;
 	}
@@ -125,7 +125,7 @@ public class PanelManageUser extends JPanel {
 		if (tfAdUserNum == null) {
 			tfAdUserNum = new JTextField();
 			tfAdUserNum.setEditable(false);
-			tfAdUserNum.setBounds(93, 189, 86, 26);
+			tfAdUserNum.setBounds(96, 202, 86, 26);
 			tfAdUserNum.setColumns(10);
 		}
 		return tfAdUserNum;
@@ -134,7 +134,7 @@ public class PanelManageUser extends JPanel {
 		if (tfAdUserName == null) {
 			tfAdUserName = new JTextField();
 			tfAdUserName.setColumns(10);
-			tfAdUserName.setBounds(93, 225, 411, 26);
+			tfAdUserName.setBounds(96, 238, 411, 26);
 		}
 		return tfAdUserName;
 	}
@@ -142,7 +142,7 @@ public class PanelManageUser extends JPanel {
 		if (tfAdUserId == null) {
 			tfAdUserId = new JTextField();
 			tfAdUserId.setColumns(10);
-			tfAdUserId.setBounds(93, 258, 411, 26);
+			tfAdUserId.setBounds(96, 271, 411, 26);
 		}
 		return tfAdUserId;
 	}
@@ -174,7 +174,7 @@ public class PanelManageUser extends JPanel {
 	private JLabel getLblAdUserEmail() {
 		if (lblAdUserEmail == null) {
 			lblAdUserEmail = new JLabel("E-mail");
-			lblAdUserEmail.setBounds(20, 301, 61, 16);
+			lblAdUserEmail.setBounds(23, 314, 61, 16);
 		}
 		return lblAdUserEmail;
 	}
@@ -182,14 +182,14 @@ public class PanelManageUser extends JPanel {
 		if (tfAdUserEmail == null) {
 			tfAdUserEmail = new JTextField();
 			tfAdUserEmail.setColumns(10);
-			tfAdUserEmail.setBounds(93, 296, 411, 26);
+			tfAdUserEmail.setBounds(96, 309, 411, 26);
 		}
 		return tfAdUserEmail;
 	}
 	private JLabel getLblAdUserState() {
 		if (lblAdUserState == null) {
 			lblAdUserState = new JLabel("상태");
-			lblAdUserState.setBounds(232, 194, 61, 16);
+			lblAdUserState.setBounds(235, 207, 61, 16);
 		}
 		return lblAdUserState;
 	}
@@ -202,7 +202,7 @@ public class PanelManageUser extends JPanel {
 					ConditionQuery();
 				}
 			});
-			btnAdUserSearch.setBounds(399, 147, 105, 29);
+			btnAdUserSearch.setBounds(402, 160, 98, 29);
 		}
 		return btnAdUserSearch;
 	}
@@ -210,7 +210,7 @@ public class PanelManageUser extends JPanel {
 		if (tfAdUserSearch == null) {
 			tfAdUserSearch = new JTextField();
 			tfAdUserSearch.setColumns(10);
-			tfAdUserSearch.setBounds(93, 149, 294, 26);
+			tfAdUserSearch.setBounds(96, 162, 294, 26);
 		}
 		return tfAdUserSearch;
 	}
@@ -218,7 +218,7 @@ public class PanelManageUser extends JPanel {
 		if (cbadUserSearch == null) {
 			cbadUserSearch = new JComboBox();
 			cbadUserSearch.setModel(new DefaultComboBoxModel(new String[] {"상태", "이름", "Id", "E-mail"}));
-			cbadUserSearch.setBounds(17, 149, 64, 23);
+			cbadUserSearch.setBounds(10, 167, 90, 23);
 		}
 		return cbadUserSearch;
 	}
@@ -227,7 +227,7 @@ public class PanelManageUser extends JPanel {
 		if (tfAdUserState == null) {
 			tfAdUserState = new JTextField();
 			tfAdUserState.setEditable(false);
-			tfAdUserState.setBounds(271, 191, 49, 21);
+			tfAdUserState.setBounds(274, 204, 49, 21);
 			tfAdUserState.setColumns(10);
 		}
 		return tfAdUserState;
@@ -282,12 +282,12 @@ public class PanelManageUser extends JPanel {
 		
 		vColIndex = 5; // 6번째 행
 		col = inner_table_AdUser.getColumnModel().getColumn(vColIndex);
-		width = 100; // 6번째 행 가로
+		width = 95; // 6번째 행 가로
 		col.setPreferredWidth(width);; // 6번째 행 가로크기 설정
 		
 		vColIndex = 6; // 7번째 행
 		col = inner_table_AdUser.getColumnModel().getColumn(vColIndex);
-		width = 100; // 7번째 행 가로
+		width = 95; // 7번째 행 가로
 		col.setPreferredWidth(width);; // 7번째 행 가로크기 설정
 	}
 	//Dowoo 2021.04.28  탈퇴 복원

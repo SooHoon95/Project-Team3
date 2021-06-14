@@ -54,8 +54,8 @@ public class PanelManageAptitudeQuiz extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelManageAptitudeQuiz() {
-		setBackground(Color.ORANGE);
-		setBounds(new Rectangle(65, 57, 370, 350));
+		setBackground(new Color(238, 238, 238));
+		setBounds(new Rectangle(0, 57, 500, 350));
 		setLayout(null);
 		setVisible(false);
 		add(getScrollPane_AdAptitideQA());
@@ -80,7 +80,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 	private JScrollPane getScrollPane_AdAptitideQA() {
 		if (scrollPane_AdAptitideQA == null) {
 			scrollPane_AdAptitideQA = new JScrollPane();
-			scrollPane_AdAptitideQA.setBounds(20, 17, 338, 156);
+			scrollPane_AdAptitideQA.setBounds(12, 17, 476, 156);
 			scrollPane_AdAptitideQA.setViewportView(getInner_table_AdMBTIQA());
 			
 		}
@@ -108,28 +108,28 @@ public class PanelManageAptitudeQuiz extends JPanel {
 	private JLabel getLblAdAptitideNum() {
 		if (lblAdAptitideNum == null) {
 			lblAdAptitideNum = new JLabel("번호");
-			lblAdAptitideNum.setBounds(20, 194, 61, 16);
+			lblAdAptitideNum.setBounds(12, 191, 27, 16);
 		}
 		return lblAdAptitideNum;
 	}
 	private JLabel getLblAdAptitideQA() {
 		if (lblAdAptitideQA == null) {
 			lblAdAptitideQA = new JLabel("질문");
-			lblAdAptitideQA.setBounds(20, 230, 61, 16);
+			lblAdAptitideQA.setBounds(12, 227, 27, 16);
 		}
 		return lblAdAptitideQA;
 	}
 	private JLabel getLblAdAptitideAnswer1() {
 		if (lblAdAptitideAnswer1 == null) {
 			lblAdAptitideAnswer1 = new JLabel("답1");
-			lblAdAptitideAnswer1.setBounds(20, 263, 61, 16);
+			lblAdAptitideAnswer1.setBounds(12, 260, 27, 16);
 		}
 		return lblAdAptitideAnswer1;
 	}
 	private JLabel getLblAdAptitideAnswer2() {
 		if (lblAdAptitideAnswer2 == null) {
 			lblAdAptitideAnswer2 = new JLabel("답2");
-			lblAdAptitideAnswer2.setBounds(20, 297, 61, 16);
+			lblAdAptitideAnswer2.setBounds(12, 294, 27, 16);
 		}
 		return lblAdAptitideAnswer2;
 	}
@@ -137,7 +137,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 		if (tfAdAptitideQANum == null) {
 			tfAdAptitideQANum = new JTextField();
 			tfAdAptitideQANum.setEditable(false);
-			tfAdAptitideQANum.setBounds(93, 189, 60, 26);
+			tfAdAptitideQANum.setBounds(51, 187, 60, 26);
 			tfAdAptitideQANum.setColumns(10);
 		}
 		return tfAdAptitideQANum;
@@ -146,7 +146,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 		if (tfAdAptitideQA == null) {
 			tfAdAptitideQA = new JTextField();
 			tfAdAptitideQA.setColumns(10);
-			tfAdAptitideQA.setBounds(93, 225, 265, 26);
+			tfAdAptitideQA.setBounds(51, 223, 437, 26);
 		}
 		return tfAdAptitideQA;
 	}
@@ -154,7 +154,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 		if (tfAdAptitideAnswer1 == null) {
 			tfAdAptitideAnswer1 = new JTextField();
 			tfAdAptitideAnswer1.setColumns(10);
-			tfAdAptitideAnswer1.setBounds(93, 258, 122, 26);
+			tfAdAptitideAnswer1.setBounds(51, 256, 285, 26);
 		}
 		return tfAdAptitideAnswer1;
 	}
@@ -162,7 +162,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 		if (tfAdAptitideAnswer2 == null) {
 			tfAdAptitideAnswer2 = new JTextField();
 			tfAdAptitideAnswer2.setColumns(10);
-			tfAdAptitideAnswer2.setBounds(93, 292, 122, 26);
+			tfAdAptitideAnswer2.setBounds(51, 290, 285, 26);
 		}
 		return tfAdAptitideAnswer2;
 	}
@@ -174,7 +174,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 					ActionPartition_insertAction();
 				}
 			});
-			btnAdAptitideQACreate.setBounds(20, 320, 60, 29);
+			btnAdAptitideQACreate.setBounds(52, 320, 60, 29);
 		}
 		return btnAdAptitideQACreate;
 	}
@@ -186,7 +186,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 					ActionPartition_editAction();
 				}
 			});
-			btnAdAptitideQAEdit.setBounds(155, 320, 60, 29);
+			btnAdAptitideQAEdit.setBounds(164, 320, 60, 29);
 		}
 		return btnAdAptitideQAEdit;
 	}
@@ -198,21 +198,21 @@ public class PanelManageAptitudeQuiz extends JPanel {
 					ActionPartition_delectAction();
 				}
 			});
-			btnAdAptitideQARemove.setBounds(290, 320, 60, 29);
+			btnAdAptitideQARemove.setBounds(276, 320, 60, 29);
 		}
 		return btnAdAptitideQARemove;
 	}
 	private JLabel getLblAdAptitideAnswer1Score() {
 		if (lblAdAptitideAnswer1Score == null) {
 			lblAdAptitideAnswer1Score = new JLabel("답1 점수");
-			lblAdAptitideAnswer1Score.setBounds(223, 263, 61, 16);
+			lblAdAptitideAnswer1Score.setBounds(368, 258, 46, 16);
 		}
 		return lblAdAptitideAnswer1Score;
 	}
 	private JLabel getLblAdAptitideAnswer2Score() {
 		if (lblAdAptitideAnswer2Score == null) {
 			lblAdAptitideAnswer2Score = new JLabel("답2 점수");
-			lblAdAptitideAnswer2Score.setBounds(223, 297, 61, 16);
+			lblAdAptitideAnswer2Score.setBounds(368, 294, 46, 16);
 		}
 		return lblAdAptitideAnswer2Score;
 	}
@@ -220,7 +220,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 		if (cbAptitideAnswer1Score == null) {
 			cbAptitideAnswer1Score = new JComboBox();
 			cbAptitideAnswer1Score.setModel(new DefaultComboBoxModel(new String[] {"선택", "0", "1"}));
-			cbAptitideAnswer1Score.setBounds(296, 258, 62, 26);
+			cbAptitideAnswer1Score.setBounds(415, 256, 73, 26);
 		}
 		return cbAptitideAnswer1Score;
 	}
@@ -228,7 +228,7 @@ public class PanelManageAptitudeQuiz extends JPanel {
 		if (cbAptitideAnswer2Score == null) {
 			cbAptitideAnswer2Score = new JComboBox();
 			cbAptitideAnswer2Score.setModel(new DefaultComboBoxModel(new String[] {"선택", "0", "1"}));
-			cbAptitideAnswer2Score.setBounds(297, 292, 61, 26);
+			cbAptitideAnswer2Score.setBounds(415, 290, 73, 26);
 		}
 		return cbAptitideAnswer2Score;
 	}
@@ -255,12 +255,12 @@ public class PanelManageAptitudeQuiz extends JPanel {
 		
 		int vColIndex = 0; // 첫번째 행
 		TableColumn col = inner_table_AdMBTIQA.getColumnModel().getColumn(vColIndex);
-		int width = 30; // 첫번째 행 가로
+		int width = 10; // 첫번째 행 가로
 		col.setPreferredWidth(width);; // 첫번째 행 가로크기 설정
 		
 		vColIndex = 1; // 2번째 행
 		col = inner_table_AdMBTIQA.getColumnModel().getColumn(vColIndex);
-		width = 100; // 2번째 행 가로
+		width = 110; // 2번째 행 가로
 		col.setPreferredWidth(width);; // 2번째 행 가로크기 설정
 		
 		vColIndex = 2; // 3번째 행

@@ -18,8 +18,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.DoubleSummaryStatistics;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
+import java.awt.SystemColor;
+import java.awt.Color;
+import java.awt.Font;
 
 public class PanelUserAptitudeQuiz extends JPanel {
 	private JButton btnAptitudeNext;
@@ -41,44 +45,53 @@ public class PanelUserAptitudeQuiz extends JPanel {
 		add(getBtnAptitudeNext());
 		add(getRbAptitudeResult2());
 		add(getRbAptitudeResult1());
+		uaq_dbAction.UAQ_CountQuiz();
 		UAQ_ShowQuiz();
 
 	}
 	private JButton getBtnAptitudeNext() {
 		if (btnAptitudeNext == null) {
 			btnAptitudeNext = new JButton("다음");
+			btnAptitudeNext.setFont(new Font("LiHei Pro", Font.PLAIN, 13));
 			btnAptitudeNext.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					UAQ_ShowNextQuiz();
+					UAQ_ShowQuiz();	
+					UAQ_ShowNextQuiz();			
 					UAQ_SendScore();
-					UAQ_ShowQuiz(); //출력
-					UAQ_UpdateResultA_Good();
+//					UAQ_UpdateResultA_SendDbAction();
+
 				}
 			});
-			btnAptitudeNext.setBounds(356, 319, 97, 23);
+			btnAptitudeNext.setBounds(50, 320, 300, 23);
 		}
 		return btnAptitudeNext;
 	}
 	private JRadioButton getRbAptitudeResult2() {
 		if (rbAptitudeResult2 == null) {
 			rbAptitudeResult2 = new JRadioButton("New radio button");
+			rbAptitudeResult2.setFont(new Font("Didot", Font.PLAIN, 14));
 			buttonGroup.add(rbAptitudeResult2);
-			rbAptitudeResult2.setBounds(40, 249, 414, 23);
+			rbAptitudeResult2.setBounds(40, 250, 414, 23);
 		}
 		return rbAptitudeResult2;
 	}
 	private JRadioButton getRbAptitudeResult1() {
 		if (rbAptitudeResult1 == null) {
 			rbAptitudeResult1 = new JRadioButton("New radio button");
+			rbAptitudeResult1.setSelected(true);
+			rbAptitudeResult1.setFont(new Font("Didot", Font.PLAIN, 14));
 			buttonGroup.add(rbAptitudeResult1);
-			rbAptitudeResult1.setBounds(40, 203, 414, 23);
+			rbAptitudeResult1.setBounds(40, 205, 414, 23);
 		}
 		return rbAptitudeResult1;
 	}
 	private JTextArea getTaAptitudeQuiz() {
 		if (taAptitudeQuiz == null) {
 			taAptitudeQuiz = new JTextArea();
-			taAptitudeQuiz.setBounds(30, 65, 437, 113);
+			taAptitudeQuiz.setFont(new Font("Al Bayan", Font.PLAIN, 15));
+			taAptitudeQuiz.setForeground(new Color(0, 0, 0));
+			taAptitudeQuiz.setBackground(new Color(238, 238, 238));
+			taAptitudeQuiz.setBounds(40, 70, 435, 107);
 			taAptitudeQuiz.setLineWrap(true); // 줄바꿔주는 기능
 		}
 		return taAptitudeQuiz;
@@ -87,19 +100,36 @@ public class PanelUserAptitudeQuiz extends JPanel {
 	
 	//------------------------------------------------
 	//문제 출력		
-	private void UAQ_ShowQuiz() { 		
-		uaq_dbAction.UAQ_ShowQuiz();
-		UAQ_Bean bean = uaq_dbAction.UAQ_ShowQuiz();
+	public void UAQ_ShowQuiz() { 				
+		if(uaq_dbAction.countQuizMax>uaq_dbAction.countQuizNum) {
+			uaq_dbAction.countQuizNum++;
+			uaq_dbAction.UAQ_ShowQuiz();
+			UAQ_Bean bean = uaq_dbAction.UAQ_ShowQuiz();
+			taAptitudeQuiz.setText(uaq_dbAction.countQuizNum + ". " + bean.getAqQuestion());
+			rbAptitudeResult1.setText(bean.getAqAnswer1());
+			rbAptitudeResult2.setText(bean.getAqAnswer2());
+			
+			
+		}else {
+			uaq_dbAction.countQuizNum++;
+		}
 		
-		taAptitudeQuiz.setText(bean.getAqQuestion());
-		rbAptitudeResult1.setText(bean.getAqAnswer1());
-		rbAptitudeResult2.setText(bean.getAqAnswer2());
 		
 	}
 	
-	//버튼(다음 문제 출력)
-	private void UAQ_ShowNextQuiz() {
-		uaq_dbAction.UAQ_ShowNextQuiz();
+	//총계점수(sumScore)에 따른 userResultA DB 업데이트
+	public void UAQ_ShowNextQuiz() { 
+		if((uaq_dbAction.countQuizNum>uaq_dbAction.countQuizMax) && uaq_dbAction.sumScore>=7) {	//총계점수(sumScore)에 따른 userResultA DB 업데이트
+			uaq_dbAction.UAQ_UpdateResultA_Good();
+			uaq_dbAction.UAQ_UpdateResultA_SendDB();
+			EndAptitudeQuiz();
+		}else if((uaq_dbAction.countQuizNum>uaq_dbAction.countQuizMax) && uaq_dbAction.sumScore<7) {//총계점수(sumScore)에 따른 userResultA DB 업데이트
+			uaq_dbAction.UAQ_UpdateResultA_Bad();
+			uaq_dbAction.UAQ_UpdateResultA_SendDB();
+			EndAptitudeQuiz();
+		}
+		
+		
 	}
 	
 	
@@ -113,8 +143,15 @@ public class PanelUserAptitudeQuiz extends JPanel {
 		}
 	}
 	
-	private void UAQ_UpdateResultA_Good() {
-		uaq_dbAction.UAQ_UpdateResultA_Good();	
+	//모든 문제를 다 푼 후 메세지 출력
+	private void EndAptitudeQuiz() {
+		taAptitudeQuiz.setText("수고하셨습니다.");
+		rbAptitudeResult1.setVisible(false);
+		rbAptitudeResult2.setVisible(false);
+		btnAptitudeNext.setVisible(false);
+		JOptionPane.showMessageDialog(null, "문제가 끝났습니다");
+		JOptionPane.showMessageDialog(null, "당신의 적성검사 결과는 "+ uaq_dbAction.userResultA + "입니다." + "\n" + "자세한 결과는 통계창에서 확인하세요.");
+		
 	}
 
 	

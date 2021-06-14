@@ -12,6 +12,11 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -23,12 +28,11 @@ import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
-public class Login extends JFrame {
+public class Login extends JFrame { 
 	
 	// Field
 	private JFrame frame;
 	private JPanel loginPanel;
-	private JLabel loginLabelTitle;
 	private JLabel loginLabelDiv;
 	private JLabel loginLabelFindId;
 	private JLabel loginLabelFindPw;
@@ -41,18 +45,18 @@ public class Login extends JFrame {
 	private String searchedUserId = "";
 	private String searchedAdminId = "";
 	private String searchedUserState = "";
+	private String searchedUserName = "";
 	
 	BufferedImage img = null;
-	
+	ImageIcon backgrund =new ImageIcon("login.png");
 	// Constructor
 	data_Enviroment_define dataDefine = new data_Enviroment_define(); // DB 환경 정의 
 	SearchId searchID = new SearchId();
 	SearchPW searchPW = new SearchPW();
 	SignUp signUp = new SignUp();
+	private JLabel lblImage;
 
 
-
-	
 	// Method
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -60,6 +64,7 @@ public class Login extends JFrame {
 				try {
 					Login window = new Login();
 					window.frame.setVisible(true);
+					window.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); // 종료 버튼 기능 구현 위해 X 버튼 원래 기능을 막아놓는다. 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -71,21 +76,29 @@ public class Login extends JFrame {
 	 * Create the application.
 	 */
 	public Login() {
+		
 		initialize();
 		frame.setLocationRelativeTo(null); // 화면이 가운데에서 출력
-		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) { // 새롭게 만든 윈도우 종료버튼 클릭 이벤트 
+				panelClean();
+				e.getWindow().dispose();
+			}
+		});
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public void initialize() {
+	
 		frame = new JFrame();
 		frame.setTitle("로그인 화면");
 		frame.setBounds(100, 100, 430, 530);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(getLoginPanel());
+		frame.setVisible(true);
 	}
 	
 	private JPanel getLoginPanel() { // frame 위에 올라간 LoginMain의 loginPanel
@@ -95,20 +108,13 @@ public class Login extends JFrame {
 			loginPanel.add(getLoginLabelDiv());
 			loginPanel.add(getLoginLabelFindId());
 			loginPanel.add(getLoginLabelFindPw());
-			loginPanel.add(getLoginLabelTitle());
 			loginPanel.add(getLoginTextClick());
 			loginPanel.add(getTfLoginId());
 			loginPanel.add(getLoginTextLogin());
 			loginPanel.add(getLoginTextNoId());
 			loginPanel.add(getTfLoginPw());
 			loginPanel.setLayout(null);
-			
-			JLabel lblMBT = new JLabel("M    B   T    I");
-			lblMBT.setHorizontalAlignment(SwingConstants.CENTER);
-			lblMBT.setForeground(new Color(0, 0, 51));
-			lblMBT.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 20));
-			lblMBT.setBounds(70, 100, 280, 57);
-			loginPanel.add(lblMBT);
+			loginPanel.add(getLblImage());
 			
 			setResizable(false); // 창 크기 변경 불가 
 			setLocationRelativeTo(null); // 창 크기를 변경하지 못하게 함 
@@ -116,22 +122,9 @@ public class Login extends JFrame {
 		}
 		return loginPanel;
 	}
-	
-	//----------- Loginpanel
-		private JLabel getLoginLabelTitle() {
-			if (loginLabelTitle == null) {
-				loginLabelTitle = new JLabel("서로를 알아가는");
-				loginLabelTitle.setForeground(new Color(0, 0, 0));
-				loginLabelTitle.setBounds(70, 20, 280, 85);
-				loginLabelTitle.setHorizontalAlignment(SwingConstants.CENTER);
-				loginLabelTitle.setFont(new Font("LiSong Pro", Font.BOLD, 28));
-			}
-			return loginLabelTitle;
-		}
 		private JTextField getTfLoginId() {
 			if (tfLoginId == null) {
 				tfLoginId = new JTextField();
-				tfLoginId.setEnabled(false);
 				tfLoginId.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -151,7 +144,6 @@ public class Login extends JFrame {
 		private JPasswordField getTfLoginPw() {
 			if (pfLoginPw == null) {
 			pfLoginPw = new JPasswordField();
-			pfLoginPw.setEnabled(false);
 			pfLoginPw.setBounds(70, 240, 280, 43);
 			pfLoginPw.addMouseListener(new MouseAdapter() {
 				@Override
@@ -211,23 +203,25 @@ public class Login extends JFrame {
 									pfLoginPw.setText("");
 								}
 							} else { // 아이디가 유저일 때 
-								String query = "SELECT userId, userNum, userState FROM user where userId = '" + id + "' and userPw = '" + pwString + "';"; // ' 사용에 유의!!
+								String query = "SELECT userId, userNum, userState, userName FROM user where userId = '" + id + "' and userPw = '" + pwString + "';"; // ' 사용에 유의!!
 								ResultSet rs = stmt_mysql.executeQuery(query); // 쿼리문장을 실행해서 ResultSet타입으로 변환.
 								
 								while(rs.next()) {
 									searchedUserId = (rs.getString(1));
 									searchedUserNum = Integer.parseInt(rs.getString(2));
 									searchedUserState = (rs.getString(3));
+									searchedUserName= (rs.getString(4));
 								}
 								if(searchedUserId.equals(id)) { // UserNum이 0이 아닐 때 
-									if(searchedUserState == "회원") {
+									if(searchedUserState.equals("회원")) {
 										JOptionPane.showMessageDialog(null, "유저 " + id + " 님 로그인 하셨습니다.");
 										data_Enviroment_define.userNum = searchedUserNum;
+										data_Enviroment_define.userName= searchedUserName;
 				                        UserMain loginuserMain = new UserMain();
 										frame.setVisible(false);
 									} else {
 										JOptionPane.showMessageDialog(null, "유저 " + id + " 님은 현재 [탈퇴] 상태입니다. 새로 가입해 주세요! ", "에러 메세지", JOptionPane.ERROR_MESSAGE);
-									}
+									} 
 								}else {
 									JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 올바르지 않습니다.");
 									tfLoginId.setText("");
@@ -281,7 +275,7 @@ public class Login extends JFrame {
 						loginLabelClick.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 					}
 				});
-				loginLabelClick.setBounds(200, 291, 126, 16);
+				loginLabelClick.setBounds(210, 291, 126, 16);
 				loginLabelClick.setForeground(new Color(0, 51, 255));
 			}
 			return loginLabelClick;
@@ -346,5 +340,22 @@ public class Login extends JFrame {
 			}
 			return loginLabelDiv;
 		}
+		public void panelClean() {
+			tfLoginId.setText("");
+			pfLoginPw.setText("");
+		}
+	
+		
+		
+		
+		private JLabel getLblImage() {
+		if (lblImage == null) {
+			lblImage = new JLabel("");
+			lblImage.setIcon(new ImageIcon(Login.class.getResource("/com/javalec/resources/login.png")));
+			lblImage.setHorizontalAlignment(SwingConstants.CENTER);
+			lblImage.setBounds(0, 0, 412, 490);
+		}
+		return lblImage;
+	}
 }
 
